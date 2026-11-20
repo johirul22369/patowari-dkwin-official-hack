@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>PATOWARI'S HACK</title>
+  <title>PATOWARI'S HACK • PREDICTOR V2</title>
   <style>
     * {
       box-sizing: border-box;
@@ -21,7 +21,7 @@
       overflow: hidden;
     }
 
-    /* লক / ভেরিফিকেশন স্ক্রিন */
+    /* লক ও রেফারেল গেট স্ক্রিন */
     .lock-backdrop {
       position: fixed;
       inset: 0;
@@ -36,7 +36,7 @@
 
     .lock-card {
       width: 100%;
-      max-width: 370px;
+      max-width: 375px;
       background: linear-gradient(165deg, #102447 0%, #070e1c 100%);
       border: 1.5px solid rgba(56, 189, 248, 0.55);
       border-radius: 20px;
@@ -133,7 +133,7 @@
       text-align: center;
     }
 
-    /* ফ্লোটিং আইকন (মিনিমাইজ অবস্থায় + ড্র্যাগেবল) */
+    /* মিনিমাইজ অবস্থায় ভাসমান আইকন (ড্র্যাগেবল) */
     .floating-icon-btn {
       position: fixed;
       top: 110px;
@@ -483,7 +483,7 @@
       </div>
 
       <div class="lock-note">
-        অ্যাকাউন্ট না থাকলে নিচের লিংকে ক্লিক করে রেজিস্ট্রেশন করুন, তারপর পাসওয়ার্ড দিয়ে <b>PATOWARI'S HACK</b> চালু করুন।
+        অ্যাকাউন্ট না থাকলে নিচের লিংক থেকে রেজিস্ট্রেশন করুন, তারপর পাসওয়ার্ড দিয়ে <b>PATOWARI'S HACK</b> আনলক করুন।
       </div>
 
       <a
@@ -515,7 +515,7 @@
     />
   </button>
 
-  <!-- মূল হ্যাক পপআপ কার্ড (উপরের বারে ধরে যেকোনো জায়গায় ড্র্যাগ করা যাবে) -->
+  <!-- মূল হ্যাক পপআপ কার্ড (ড্র্যাগেবল) -->
   <div class="hack-popup" id="hackPopup">
     <div class="popup-top-bar" id="dragHandle">
       <div class="popup-badge-left">
@@ -732,7 +732,6 @@
       renderRecentWheels(info);
     }
 
-    // পপআপ ও ফ্লোটিং আইকন উভয়ের জন্য স্মুথ ড্র্যাগ ফাংশন
     function attachSmoothDrag(targetEl, handleEl, onTapCallback = null) {
       let dragging = false;
       let movedDistance = 0;
@@ -793,7 +792,6 @@
       handleEl.addEventListener("pointerup", onEnd);
       handleEl.addEventListener("pointercancel", onEnd);
 
-      // পুরনো ব্রাউজার বা বিশেষ টাচ ডিভাইসের জন্য ফলব্যাক
       handleEl.addEventListener("touchstart", (e) => {
         if (e.target.closest("button") || e.target.closest("a")) return;
         if (e.touches.length === 1) {
@@ -810,10 +808,7 @@
       handleEl.addEventListener("touchend", onEnd);
     }
 
-    // পপআপের ওপরের বারে ধরে যেকোনো জায়গায় নড়াচড়া করা যাবে
     attachSmoothDrag(hackPopup, document.getElementById("dragHandle"));
-
-    // মিনিমাইজ আইকনও টেনে যেকোনো জায়গায় নেওয়া যাবে, আর জাস্ট ট্যাপ করলে পপআপ খুলবে
     attachSmoothDrag(floatingIcon, floatingIcon, () => {
       floatingIcon.style.display = "none";
       hackPopup.style.display = "block";

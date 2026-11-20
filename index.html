@@ -21,69 +21,105 @@
       overflow: hidden;
     }
 
-    /* লক ও রেফারেল গেট স্ক্রিন */
-    .lock-backdrop {
+    /* শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন (ড্র্যাগেবল + ক্লিকেবল) */
+    .start-orb-btn {
+      position: fixed;
+      top: 120px;
+      left: 20px;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2.5px solid #facc15;
+      background: #081224;
+      box-shadow: 0 0 24px rgba(34, 211, 238, 0.7), 0 0 12px rgba(250, 204, 21, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      touch-action: none;
+      z-index: 9500;
+      overflow: hidden;
+    }
+
+    .start-orb-btn:active {
+      cursor: grabbing;
+    }
+
+    .start-orb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    /* আইকনে ক্লিক করলে ওপেন হওয়া পাসওয়ার্ড বক্স */
+    .pass-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(5, 9, 18, 0.92);
-      backdrop-filter: blur(8px);
-      display: flex;
+      background: rgba(5, 9, 18, 0.82);
+      backdrop-filter: blur(6px);
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 18px;
       z-index: 9999;
     }
 
-    .lock-card {
+    .pass-modal-card {
       width: 100%;
-      max-width: 375px;
+      max-width: 350px;
       background: linear-gradient(165deg, #102447 0%, #070e1c 100%);
-      border: 1.5px solid rgba(56, 189, 248, 0.55);
+      border: 1.5px solid rgba(56, 189, 248, 0.65);
       border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 36px rgba(34, 211, 238, 0.25);
+      padding: 18px;
+      box-shadow: 0 0 36px rgba(34, 211, 238, 0.28);
     }
 
-    .lock-header {
+    .pass-modal-top {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
+      justify-content: space-between;
+      margin-bottom: 12px;
     }
 
-    .lock-avatar {
-      width: 54px;
-      height: 54px;
+    .pass-modal-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pass-modal-brand img {
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #facc15;
-      box-shadow: 0 0 16px rgba(250, 204, 21, 0.45);
     }
 
-    .lock-title {
-      font-size: 16px;
+    .pass-title {
+      font-size: 14.5px;
       font-weight: 900;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       background: linear-gradient(90deg, #fde047, #fb923c, #fde047);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .lock-sub {
-      font-size: 12px;
+    .pass-sub {
+      font-size: 11px;
       color: #94a3b8;
-      margin-top: 2px;
+      margin-top: 1px;
     }
 
-    .lock-note {
-      background: rgba(8, 17, 34, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      border-radius: 12px;
-      padding: 11px 12px;
-      font-size: 12.5px;
-      line-height: 1.55;
+    .close-pass-btn {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       color: #e2e8f0;
-      margin-bottom: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
     .ref-go-btn {
@@ -94,11 +130,10 @@
       background: linear-gradient(90deg, #facc15, #f97316);
       color: #090d16;
       font-weight: 900;
-      font-size: 13px;
-      padding: 11px 12px;
-      border-radius: 11px;
+      font-size: 12.5px;
+      padding: 10px 12px;
+      border-radius: 10px;
       margin-bottom: 12px;
-      box-shadow: 0 6px 18px rgba(249, 115, 22, 0.3);
     }
 
     .pass-input {
@@ -133,38 +168,7 @@
       text-align: center;
     }
 
-    /* মিনিমাইজ অবস্থায় ভাসমান আইকন (ড্র্যাগেবল) */
-    .floating-icon-btn {
-      position: fixed;
-      top: 110px;
-      left: 16px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #facc15;
-      background: #081224;
-      box-shadow: 0 0 22px rgba(34, 211, 238, 0.65);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
-      touch-action: none;
-      z-index: 9500;
-      overflow: hidden;
-    }
-
-    .floating-icon-btn:active {
-      cursor: grabbing;
-    }
-
-    .floating-icon-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-    }
-
-    /* মূল ভাসমান পপআপ কার্ড (ড্র্যাগেবল) */
+    /* মূল ভাসমান হ্যাক পপআপ কার্ড (ড্র্যাগেবল) */
     .hack-popup {
       position: fixed;
       top: 100px;
@@ -467,23 +471,29 @@
 </head>
 <body>
 
-  <!-- পাসওয়ার্ড ও অফিশিয়াল রেজিস্ট্রেশন লক স্ক্রিন -->
-  <div class="lock-backdrop" id="lockScreen">
-    <div class="lock-card">
-      <div class="lock-header">
-        <img
-          src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
-          alt="PATOWARI'S HACK"
-          class="lock-avatar"
-        />
-        <div>
-          <div class="lock-title">PATOWARI'S HACK</div>
-          <div class="lock-sub">Contact: @patowari_vai_69x</div>
-        </div>
-      </div>
+  <!-- শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন ছবি (ক্লিক করলে পাসওয়ার্ড বক্স খুলবে) -->
+  <button type="button" class="start-orb-btn" id="startOrbBtn" title="Tap to Open Password Box">
+    <img
+      src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
+      alt="PATOWARI'S HACK Icon"
+    />
+  </button>
 
-      <div class="lock-note">
-        অ্যাকাউন্ট না থাকলে নিচের লিংক থেকে রেজিস্ট্রেশন করুন, তারপর পাসওয়ার্ড দিয়ে <b>PATOWARI'S HACK</b> আনলক করুন।
+  <!-- আইকনে ক্লিক করার পর ওপেন হওয়া পাসওয়ার্ড বক্স -->
+  <div class="pass-modal-backdrop" id="passModal">
+    <div class="pass-modal-card">
+      <div class="pass-modal-top">
+        <div class="pass-modal-brand">
+          <img
+            src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
+            alt="Icon"
+          />
+          <div>
+            <div class="pass-title">PATOWARI'S HACK</div>
+            <div class="pass-sub">@patowari_vai_69x</div>
+          </div>
+        </div>
+        <button type="button" class="close-pass-btn" id="closePassBtn">✕</button>
       </div>
 
       <a
@@ -502,20 +512,12 @@
         placeholder="পাসওয়ার্ড লিখুন..."
         autocomplete="off"
       />
-      <button type="button" class="unlock-btn" id="unlockBtn">🔓 UNLOCK</button>
+      <button type="button" class="unlock-btn" id="unlockBtn">🔓 UNLOCK POPUP</button>
       <div class="error-msg" id="errorMsg"></div>
     </div>
   </div>
 
-  <!-- মিনিমাইজ অবস্থায় ভাসমান আইকন (ড্র্যাগেবল + ক্লিকেবল) -->
-  <button type="button" class="floating-icon-btn" id="floatingIcon" title="Drag or Tap to Open PATOWARI'S HACK">
-    <img
-      src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
-      alt="Floating Icon"
-    />
-  </button>
-
-  <!-- মূল হ্যাক পপআপ কার্ড (ড্র্যাগেবল) -->
+  <!-- মূল ভাসমান হ্যাক পপআপ কার্ড (ড্র্যাগেবল) -->
   <div class="hack-popup" id="hackPopup">
     <div class="popup-top-bar" id="dragHandle">
       <div class="popup-badge-left">
@@ -594,19 +596,32 @@
 
     let currentMode = "30S";
 
-    const lockScreen = document.getElementById("lockScreen");
+    const startOrbBtn = document.getElementById("startOrbBtn");
+    const passModal = document.getElementById("passModal");
+    const closePassBtn = document.getElementById("closePassBtn");
     const passInput = document.getElementById("passInput");
     const unlockBtn = document.getElementById("unlockBtn");
     const errorMsg = document.getElementById("errorMsg");
     const hackPopup = document.getElementById("hackPopup");
-    const floatingIcon = document.getElementById("floatingIcon");
     const hideBtn = document.getElementById("hideBtn");
+
+    function openPasswordBox() {
+      errorMsg.textContent = "";
+      passInput.value = "";
+      passModal.style.display = "flex";
+      setTimeout(() => passInput.focus(), 50);
+    }
+
+    closePassBtn.addEventListener("click", () => {
+      passModal.style.display = "none";
+    });
 
     function unlockPopup() {
       const entered = passInput.value.trim();
       if (entered === ACCESS_PASS) {
         errorMsg.textContent = "";
-        lockScreen.style.display = "none";
+        passModal.style.display = "none";
+        startOrbBtn.style.display = "none";
         hackPopup.style.display = "block";
         syncAll();
       } else {
@@ -621,7 +636,7 @@
 
     hideBtn.addEventListener("click", () => {
       hackPopup.style.display = "none";
-      floatingIcon.style.display = "flex";
+      startOrbBtn.style.display = "flex";
     });
 
     document.querySelectorAll(".mode-pill").forEach((btn) => {
@@ -808,12 +823,8 @@
       handleEl.addEventListener("touchend", onEnd);
     }
 
+    attachSmoothDrag(startOrbBtn, startOrbBtn, openPasswordBox);
     attachSmoothDrag(hackPopup, document.getElementById("dragHandle"));
-    attachSmoothDrag(floatingIcon, floatingIcon, () => {
-      floatingIcon.style.display = "none";
-      hackPopup.style.display = "block";
-      syncAll();
-    });
 
     setInterval(syncAll, 1000);
     syncAll();

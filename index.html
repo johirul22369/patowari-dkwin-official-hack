@@ -37,17 +37,16 @@
         /* ৩ডি ফ্লোটিং আইকন */
         #floating-icon-btn {
             position: fixed;
-            top: 90px;
-            right: 18px;
-            width: 58px;
-            height: 58px;
+            top: 80px;
+            right: 14px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             border: 2px solid #fde047;
             box-shadow:
-                0 10px 24px rgba(0, 0, 0, 0.85),
-                0 0 22px rgba(250, 204, 21, 0.7),
-                0 0 14px rgba(34, 211, 238, 0.55),
-                inset 0 2px 6px rgba(255, 255, 255, 0.35);
+                0 8px 18px rgba(0, 0, 0, 0.85),
+                0 0 16px rgba(250, 204, 21, 0.65),
+                inset 0 2px 5px rgba(255, 255, 255, 0.35);
             cursor: grab;
             z-index: 9999;
             overflow: hidden;
@@ -56,7 +55,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.18s ease;
+            transition: transform 0.16s ease;
         }
 
         #floating-icon-btn:active {
@@ -71,21 +70,18 @@
             pointer-events: none;
         }
 
-        /* ৩ডি পাসওয়ার্ড পপআপ */
+        /* পাসওয়ার্ড পপআপ */
         #auth-overlay {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 286px;
-            background: linear-gradient(155deg, rgba(22, 48, 94, 0.97) 0%, rgba(5, 11, 24, 0.99) 100%);
+            width: 230px;
+            background: linear-gradient(155deg, rgba(22, 48, 94, 0.98) 0%, rgba(5, 11, 24, 0.99) 100%);
             border: 1.5px solid rgba(253, 224, 71, 0.85);
-            border-radius: 20px;
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.92),
-                0 0 28px rgba(34, 211, 238, 0.28),
-                inset 0 1px 1px rgba(255, 255, 255, 0.25);
-            padding: 16px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.92), 0 0 22px rgba(34, 211, 238, 0.25);
+            padding: 12px;
             display: none;
             z-index: 10000;
             text-align: center;
@@ -94,39 +90,37 @@
 
         .auth-title {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 700;
             color: #fde047;
-            margin-bottom: 10px;
-            letter-spacing: 0.7px;
-            text-shadow: 0 2px 10px rgba(253, 224, 71, 0.45);
+            margin-bottom: 8px;
+            letter-spacing: 0.6px;
         }
 
         .auth-input {
             width: 100%;
-            padding: 9px 11px;
+            padding: 7px 9px;
             background: rgba(3, 8, 18, 0.92);
             border: 1px solid rgba(56, 189, 248, 0.7);
-            border-radius: 10px;
+            border-radius: 8px;
             color: #ffffff;
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             outline: none;
             font-weight: 700;
             user-select: text;
             -webkit-user-select: text;
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7);
         }
 
         .remember-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            font-size: 10.5px;
+            gap: 5px;
+            font-size: 9px;
             color: #cbd5e1;
-            margin-bottom: 11px;
+            margin-bottom: 9px;
             cursor: pointer;
             font-weight: 600;
         }
@@ -134,70 +128,68 @@
         .auth-btn {
             font-family: 'Chakra Petch', sans-serif;
             width: 100%;
-            padding: 9px;
+            padding: 7px;
             background: linear-gradient(135deg, #fde047, #f97316);
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             color: #050912;
-            font-size: 12px;
+            font-size: 10.5px;
             font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+            letter-spacing: 0.7px;
         }
 
         #error-msg {
             color: #fb7185;
-            font-size: 10px;
-            margin-top: 7px;
+            font-size: 9px;
+            margin-top: 6px;
             display: none;
             font-weight: 700;
         }
 
-        /* মূল ৩ডি নিয়নের পপআপ উইন্ডো */
+        /* ছোট ও কমপ্যাক্ট ৩ডি পপআপ কার্ড (~218px) */
         .overlay-box {
             position: fixed;
-            top: 108px;
-            left: 14px;
-            width: 332px;
-            max-width: calc(100vw - 20px);
+            top: 95px;
+            left: 12px;
+            width: 218px;
+            max-width: calc(100vw - 16px);
             display: none;
             z-index: 9999;
-            perspective: 900px;
-            background: radial-gradient(circle at 50% -10%, #1d4282 0%, #09152b 48%, #040914 100%);
-            border-radius: 22px;
-            padding: 10px;
+            background: radial-gradient(circle at 50% -10%, #1d4282 0%, #09152b 52%, #040914 100%);
+            border-radius: 16px;
+            padding: 7px;
             box-shadow:
-                0 24px 52px rgba(0, 0, 0, 0.92),
-                0 0 28px rgba(34, 211, 238, 0.35),
-                0 0 14px rgba(168, 85, 247, 0.22),
-                inset 0 1px 1px rgba(255, 255, 255, 0.28);
-            border: 1.5px solid rgba(56, 189, 248, 0.75);
-            backdrop-filter: blur(12px);
+                0 16px 36px rgba(0, 0, 0, 0.92),
+                0 0 20px rgba(34, 211, 238, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.25);
+            border: 1.5px solid rgba(56, 189, 248, 0.72);
+            backdrop-filter: blur(10px);
         }
 
-        /* ১ সেকেন্ড আগে ভাইব্রেশন অ্যানিমেশন */
-        .vibrate-pulse {
-            animation: popupVibrate 0.36s ease-in-out;
+        /* পপআপের ২-৩ বার ঝাঁকি */
+        .popup-shake-once {
+            animation: popupThreeShakes 0.75s ease-in-out;
         }
 
-        @keyframes popupVibrate {
+        @keyframes popupThreeShakes {
             0%   { transform: translate(0, 0) rotate(0deg); }
-            18%  { transform: translate(-4px, -2px) rotate(-0.8deg); }
-            36%  { transform: translate(4px, 2px) rotate(0.8deg); }
-            54%  { transform: translate(-4px, 2px) rotate(-0.6deg); }
-            72%  { transform: translate(3px, -2px) rotate(0.6deg); }
-            90%  { transform: translate(-2px, 1px) rotate(-0.3deg); }
+            12%  { transform: translate(-4px, -2px) rotate(-1deg); }
+            25%  { transform: translate(4px, 2px) rotate(1deg); }
+            38%  { transform: translate(-4px, 2px) rotate(-1deg); }
+            50%  { transform: translate(4px, -2px) rotate(1deg); }
+            65%  { transform: translate(-3px, 1px) rotate(-0.7deg); }
+            80%  { transform: translate(3px, -1px) rotate(0.7deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
         .popup-header {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
-            gap: 6px;
-            margin-bottom: 7px;
+            gap: 4px;
+            margin-bottom: 5px;
             cursor: grab;
             touch-action: none;
         }
@@ -210,13 +202,12 @@
             font-family: 'Chakra Petch', sans-serif;
             background: linear-gradient(135deg, #4ade80, #16a34a);
             color: #042812;
-            font-size: 8px;
+            font-size: 6.5px;
             font-weight: 700;
-            padding: 3px 6px;
-            border-radius: 7px;
-            line-height: 1.1;
+            padding: 2px 4px;
+            border-radius: 5px;
+            line-height: 1.05;
             text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.35);
             pointer-events: none;
         }
 
@@ -226,101 +217,87 @@
             pointer-events: none;
         }
 
-        .crown-mark {
-            font-size: 11px;
-            line-height: 1;
-            color: #fde047;
-            filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.8));
-        }
-
         .brand-main {
             font-family: 'Chakra Petch', sans-serif;
             font-style: italic;
-            font-size: 14.5px;
+            font-size: 10.5px;
             font-weight: 700;
-            letter-spacing: 0.7px;
+            letter-spacing: 0.4px;
             background: linear-gradient(90deg, #fef08a, #fb923c, #fde047);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1.15;
-            filter: drop-shadow(0 2px 6px rgba(251, 146, 60, 0.35));
+            line-height: 1.1;
         }
 
         .brand-sub {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 8.5px;
+            font-size: 6.5px;
             font-weight: 700;
             color: #38bdf8;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+            letter-spacing: 0.3px;
+            margin-top: 1px;
         }
 
         .hide-btn {
             font-family: 'Chakra Petch', sans-serif;
-            background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+            background: rgba(15, 23, 42, 0.92);
             color: #f8fafc;
-            border: 1px solid rgba(56, 189, 248, 0.5);
-            padding: 3px 7px;
-            border-radius: 7px;
-            font-size: 8.5px;
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-size: 6.5px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
         }
 
         /* ৪টি মার্কেট ট্যাব: 30S, 1M, 3M, 5M */
         .market-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 4px;
-            margin-bottom: 8px;
+            gap: 2.5px;
+            margin-bottom: 5px;
             background: rgba(4, 9, 19, 0.92);
-            padding: 3px;
-            border-radius: 11px;
-            border: 1px solid rgba(56, 189, 248, 0.34);
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.75);
+            padding: 2px;
+            border-radius: 7px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
         .market-btn {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 9px;
+            font-size: 7px;
             font-weight: 700;
-            padding: 4px 2px;
-            border-radius: 8px;
+            padding: 2.5px 1px;
+            border-radius: 5px;
             border: 1px solid transparent;
             background: rgba(15, 23, 42, 0.85);
             color: #cbd5e1;
             cursor: pointer;
             text-align: center;
-            transition: all 0.16s ease;
         }
 
         .market-btn.active {
             background: linear-gradient(135deg, #06b6d4, #2563eb);
             color: #ffffff;
             border-color: #a5f3fc;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.55), 0 0 10px rgba(34, 211, 238, 0.45);
-            transform: translateY(-1px);
         }
 
-        /* ৩ডি গ্রিড: বামে SMALL, মাঝে PERIOD + 3D ORB + WIN/LOSS, ডানে BIG */
+        /* বামে SMALL, মাঝে PERIOD + 3D ORB, ডানে BIG */
         .pred-grid {
             display: grid;
-            grid-template-columns: 1fr 1.26fr 1fr;
-            gap: 6px;
+            grid-template-columns: 0.92fr 1.26fr 0.92fr;
+            gap: 4px;
             align-items: stretch;
         }
 
         .side-panel {
-            border-radius: 14px;
-            padding: 8px 5px;
+            border-radius: 10px;
+            padding: 5px 3px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.22);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
         }
 
         .panel-small {
@@ -333,34 +310,32 @@
 
         .side-panel.is-predicted {
             border-color: #fde047;
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.7), 0 0 16px rgba(253, 224, 71, 0.5);
+            box-shadow: 0 0 12px rgba(253, 224, 71, 0.45);
         }
 
         .panel-title {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 13px;
+            font-size: 9px;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+            letter-spacing: 0.3px;
         }
 
         .panel-range {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 9.5px;
+            font-size: 7px;
             color: #e2e8f0;
-            opacity: 0.92;
-            margin-top: 2px;
+            opacity: 0.9;
+            margin-top: 1px;
             font-weight: 700;
         }
 
         .panel-tag {
             font-family: 'Chakra Petch', sans-serif;
-            margin-top: 8px;
-            font-size: 8px;
+            margin-top: 5px;
+            font-size: 6px;
             font-weight: 700;
-            padding: 3px 4px;
-            border-radius: 6px;
+            padding: 2px 2px;
+            border-radius: 4px;
             background: rgba(15, 23, 42, 0.88);
             color: #94a3b8;
         }
@@ -368,142 +343,136 @@
         .panel-tag.active-tag {
             background: linear-gradient(135deg, #4ade80, #16a34a);
             color: #052e16;
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.55);
         }
 
         .center-panel {
             background: linear-gradient(180deg, rgba(10, 22, 44, 0.96) 0%, rgba(4, 9, 20, 0.98) 100%);
             border: 1px solid rgba(56, 189, 248, 0.65);
-            border-radius: 14px;
-            padding: 6px 4px;
+            border-radius: 10px;
+            padding: 4px 3px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 8px 18px rgba(0, 0, 0, 0.6);
-        }
-
-        .period-caption {
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: 7.5px;
-            color: #38bdf8;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            position: relative;
         }
 
         .period-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 3px;
+            gap: 2px;
             background: rgba(15, 23, 42, 0.85);
-            padding: 2px 5px;
-            border-radius: 6px;
-            border: 1px solid rgba(148, 163, 184, 0.22);
+            padding: 1.5px 4px;
+            border-radius: 4px;
+            width: 100%;
         }
 
         .period-display {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 8.5px;
+            font-size: 6.2px;
             font-weight: 700;
             color: #f8fafc;
             cursor: pointer;
             text-decoration: underline;
             text-decoration-style: dotted;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .live-dot {
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             background-color: #22c55e;
             border-radius: 50%;
-            box-shadow: 0 0 7px #22c55e;
-            animation: liveBlink 1s infinite alternate;
+            box-shadow: 0 0 5px #22c55e;
             flex-shrink: 0;
-        }
-
-        @keyframes liveBlink {
-            0% { opacity: 0.35; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.25); }
         }
 
         /* ৩ডি গ্লোয়িং নাম্বার অর্ব */
         .glow-orb {
             font-family: 'Chakra Petch', sans-serif;
-            width: 48px;
-            height: 48px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 14px;
             font-weight: 700;
             color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.78);
+            border: 1.5px solid rgba(255, 255, 255, 0.78);
             box-shadow:
-                0 10px 18px rgba(0, 0, 0, 0.75),
-                0 0 20px rgba(34, 211, 238, 0.8),
-                inset 0 3px 8px rgba(255, 255, 255, 0.55),
-                inset 0 -4px 8px rgba(0, 0, 0, 0.45);
+                0 6px 12px rgba(0, 0, 0, 0.75),
+                0 0 14px rgba(34, 211, 238, 0.75),
+                inset 0 2px 5px rgba(255, 255, 255, 0.5);
             margin: 2px 0;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
         }
 
         .orb-green { background: radial-gradient(circle at 30% 25%, #86efac, #16a34a 58%, #052e16 100%); }
         .orb-red { background: radial-gradient(circle at 30% 25%, #fca5a5, #dc2626 58%, #450a0a 100%); }
         .orb-violet { background: radial-gradient(circle at 30% 25%, #d8b4fe, #9333ea 58%, #2e1065 100%); }
 
-        /* ছোট ও সুন্দর WIN (সবুজ লেখা) / LOSS (লাল লেখা) ব্যাজ */
+        /* ২-৩ বার ঝাঁকি দিয়ে চলে যাওয়া ছোট WIN / LOSS ব্যাজ */
         .outcome-badge {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 8.5px;
+            font-size: 7px;
             font-weight: 700;
-            letter-spacing: 0.7px;
-            padding: 1.5px 7px;
-            border-radius: 6px;
-            margin-top: 1px;
-            background: rgba(3, 8, 18, 0.9);
-            animation: badgePop 0.3s ease;
+            letter-spacing: 0.5px;
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: rgba(3, 8, 18, 0.92);
+            display: none;
         }
 
         .outcome-win {
             color: #4ade80;
-            border: 1px solid rgba(74, 222, 128, 0.55);
-            text-shadow: 0 0 8px rgba(74, 222, 128, 0.65);
+            border: 1px solid rgba(74, 222, 128, 0.6);
+            text-shadow: 0 0 6px rgba(74, 222, 128, 0.65);
         }
 
         .outcome-loss {
             color: #ff4d6d;
-            border: 1px solid rgba(255, 77, 109, 0.55);
-            text-shadow: 0 0 8px rgba(255, 77, 109, 0.65);
+            border: 1px solid rgba(255, 77, 109, 0.6);
+            text-shadow: 0 0 6px rgba(255, 77, 109, 0.65);
         }
 
-        @keyframes badgePop {
-            0% { transform: scale(0.75); opacity: 0.4; }
-            100% { transform: scale(1); opacity: 1; }
+        .badge-shake-exit {
+            display: inline-block;
+            animation: badgeShakeThenFade 0.85s ease forwards;
+        }
+
+        @keyframes badgeShakeThenFade {
+            0%   { opacity: 1; transform: translateX(0) scale(0.85); }
+            15%  { opacity: 1; transform: translateX(-3px) scale(1.05); }
+            30%  { opacity: 1; transform: translateX(3px) scale(1.05); }
+            45%  { opacity: 1; transform: translateX(-3px) scale(1.02); }
+            60%  { opacity: 1; transform: translateX(3px) scale(1.02); }
+            78%  { opacity: 0.75; transform: translateY(-2px) scale(0.96); }
+            100% { opacity: 0; transform: translateY(-5px) scale(0.85); }
         }
 
         .timer-pill {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 8px;
+            font-size: 6.5px;
             font-weight: 700;
             color: #fde047;
-            background: rgba(250, 204, 21, 0.15);
-            border: 1px solid rgba(250, 204, 21, 0.35);
-            padding: 2px 6px;
+            background: rgba(250, 204, 21, 0.14);
+            border: 1px solid rgba(250, 204, 21, 0.32);
+            padding: 1.5px 5px;
             border-radius: 999px;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
-        /* নিচের RECENT RESULTS ৩ডি চক্কর বাবল লাইন */
+        /* নিচের RECENT RESULTS চক্কর বাবল লাইন */
         .recent-box {
-            margin-top: 7px;
+            margin-top: 5px;
             background: rgba(4, 10, 20, 0.94);
-            border: 1px solid rgba(148, 163, 184, 0.26);
-            border-radius: 12px;
-            padding: 6px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 8px;
+            padding: 4px;
         }
 
         .recent-head {
@@ -511,32 +480,31 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 8px;
+            font-size: 6.2px;
             font-weight: 700;
             color: #cbd5e1;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
 
         .wheel-strip {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 3px;
+            gap: 2px;
             align-items: center;
         }
 
         .color-wheel {
             font-family: 'Chakra Petch', sans-serif;
-            width: 21px;
-            height: 21px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 9.5px;
+            font-size: 7px;
             font-weight: 700;
             color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.65), inset 0 1px 3px rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.45);
         }
 
         .w-green { background: conic-gradient(#16a34a 0deg 270deg, #22c55e 270deg 360deg); }
@@ -545,7 +513,7 @@
         .w-violet-red { background: conic-gradient(#9333ea 0deg 180deg, #dc2626 180deg 360deg); }
 
         .bottom-action-bar {
-            margin-top: 7px;
+            margin-top: 5px;
             width: 100%;
         }
 
@@ -554,34 +522,32 @@
             width: 100%;
             background: linear-gradient(135deg, #fde047, #f97316);
             color: #050912;
-            border-radius: 11px;
-            padding: 7px 10px;
-            font-size: 9.5px;
+            border-radius: 7px;
+            padding: 4.5px 7px;
+            font-size: 7px;
             font-weight: 700;
             text-decoration: none;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.4px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
             text-transform: uppercase;
-            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
         }
 
         #copy-toast {
             position: fixed;
-            bottom: 18px;
+            bottom: 14px;
             left: 50%;
             transform: translateX(-50%);
             background: #22c55e;
             color: #ffffff;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 3px 8px;
+            border-radius: 5px;
             display: none;
             z-index: 10002;
-            box-shadow: 0 6px 16px rgba(34, 197, 94, 0.45);
         }
     </style>
 </head>
@@ -595,7 +561,7 @@
         <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon" />
     </div>
 
-    <!-- ৩ডি পাসওয়ার্ড পপআপ -->
+    <!-- পাসওয়ার্ড পপআপ -->
     <div id="auth-overlay">
         <div class="auth-title">🔐 PATOWARI'S HACK</div>
         <input type="password" id="pass-input" class="auth-input" placeholder="Enter Password" />
@@ -606,12 +572,11 @@
         <div id="error-msg">Wrong Password!</div>
     </div>
 
-    <!-- ৩ডি ভিআইপি পপআপ উইন্ডো -->
+    <!-- ছোট ৩ডি পপআপ উইন্ডো (~218px) -->
     <div class="overlay-box" id="main-content">
         <div class="popup-header" id="main-content-header">
-            <div class="badge-left">3D VIP<br />ENGINE</div>
+            <div class="badge-left">3D<br />VIP</div>
             <div class="brand-center">
-                <div class="crown-mark">👑</div>
                 <div class="brand-main">PATOWARI'S HACK</div>
                 <div class="brand-sub" id="mode-subtitle">30 SEC PREDICTOR V2</div>
             </div>
@@ -636,7 +601,6 @@
             </div>
 
             <div class="center-panel">
-                <div class="period-caption">PERIOD NO.</div>
                 <div class="period-row">
                     <div class="period-display" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
                     <div class="live-dot"></div>
@@ -657,7 +621,7 @@
 
         <div class="recent-box">
             <div class="recent-head">
-                <span>RECENT RESULTS</span>
+                <span>RECENT</span>
                 <span id="color-label">GREEN</span>
             </div>
             <div class="wheel-strip" id="recent-wheels"></div>
@@ -665,7 +629,7 @@
 
         <div class="bottom-action-bar">
             <a href="https://t.me/patowari_vai_69x" target="_blank" rel="noopener noreferrer" class="telegram-join-btn">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#050912"/>
                 </svg>
                 JOIN TELEGRAM
@@ -688,7 +652,8 @@
         let cachedPeriod = "";
         let cachedPrediction = { type: "BIG", num: 7 };
         let signalTimerStarted = false;
-        let lastVibratedKey = "";
+        let lastShakeKey = "";
+        let badgeHideTimeout = null;
 
         document.querySelectorAll(".market-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
@@ -787,31 +752,44 @@
             return { type, num, orbClass, wheelClass, colorName };
         }
 
-        function triggerEndVibration(periodKey) {
-            if (lastVibratedKey === periodKey) return;
-            lastVibratedKey = periodKey;
-
-            const popup = document.getElementById('main-content');
-            if (popup) {
-                popup.classList.remove('vibrate-pulse');
-                void popup.offsetWidth;
-                popup.classList.add('vibrate-pulse');
-            }
-
-            if (navigator.vibrate) {
-                try {
-                    navigator.vibrate(80);
-                } catch (_) {}
-            }
-        }
-
         function computeOutcomeStatus(cfg, periodIndexToday, currentPredType) {
             const prevIdx = Math.max(1, periodIndexToday - 1);
             const prevSeq = String(cfg.offset + prevIdx).padStart(5, '0');
             const prevTail = parseInt(prevSeq, 10) || (cfg.offset + 1);
-            const prevSig = computeSignalFromTail(prevTail, prevIdx);
             const checkScore = (prevTail + periodIndexToday + currentPredType.length) % 7;
             return checkScore !== 3 ? "WIN" : "LOSS";
+        }
+
+        /* মার্কেট শেষ হওয়ার ১ সেকেন্ড আগে পপআপ + WIN/LOSS ব্যাজ ২-৩ বার ঝাঁকি দিয়ে চলে যাবে */
+        function triggerEndShakeAndBadge(shakeKey, outcome) {
+            if (lastShakeKey === shakeKey) return;
+            lastShakeKey = shakeKey;
+
+            const popup = document.getElementById('main-content');
+            if (popup) {
+                popup.classList.remove('popup-shake-once');
+                void popup.offsetWidth;
+                popup.classList.add('popup-shake-once');
+            }
+
+            if (navigator.vibrate) {
+                try {
+                    navigator.vibrate([70, 50, 70]);
+                } catch (_) {}
+            }
+
+            const badge = document.getElementById('outcome-badge');
+            if (badge) {
+                badge.innerText = outcome;
+                badge.className = `outcome-badge ${outcome === "WIN" ? "outcome-win" : "outcome-loss"} badge-shake-exit`;
+                badge.style.display = "inline-block";
+
+                if (badgeHideTimeout) clearTimeout(badgeHideTimeout);
+                badgeHideTimeout = setTimeout(() => {
+                    badge.style.display = "none";
+                    badge.className = `outcome-badge ${outcome === "WIN" ? "outcome-win" : "outcome-loss"}`;
+                }, 860);
+            }
         }
 
         function renderRecentWheels(cfg, periodIndexToday) {
@@ -853,9 +831,9 @@
                 cachedPrediction = computeSignalFromTail(seedVal, Math.floor(Date.now() / (cfg.duration * 1000)));
             }
 
-            /* মার্কেট শেষ হওয়ার ১ সেকেন্ড আগে ভাইব্রেশন */
             if (timeLeft === 1) {
-                triggerEndVibration(`${currentMarket}-${fullPeriod}`);
+                const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction.type);
+                triggerEndShakeAndBadge(`${currentMarket}-${fullPeriod}`, outcome);
             }
 
             const orb = document.getElementById('main-orb');
@@ -863,11 +841,6 @@
             const bigPanel = document.getElementById('big-panel');
             const smallTag = document.getElementById('small-tag');
             const bigTag = document.getElementById('big-tag');
-            const outcomeEl = document.getElementById('outcome-badge');
-
-            const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction.type);
-            outcomeEl.innerText = outcome;
-            outcomeEl.className = `outcome-badge ${outcome === "WIN" ? "outcome-win" : "outcome-loss"}`;
 
             if (timeLeft >= cfg.duration - 2) {
                 orb.innerText = "...";

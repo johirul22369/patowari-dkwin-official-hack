@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>PATOWARI'S HACK - VIP Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap');
@@ -12,53 +12,56 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body, html {
+        html, body {
             width: 100%;
             height: 100%;
             overflow: hidden;
             background-color: #03050b;
-            user-select: none;
-            -webkit-user-select: none;
+            color: #ffffff;
         }
 
         #game-iframe {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             border: none;
             z-index: 1;
-            pointer-events: auto;
         }
 
         /* ফ্লোটিং আইকন */
         #floating-icon-btn {
             position: fixed;
-            top: 40px;
-            right: 20px;
-            width: 48px;
-            height: 48px;
+            top: 90px;
+            right: 18px;
+            width: 54px;
+            height: 54px;
             border-radius: 50%;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
-            cursor: move;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 14px rgba(34, 211, 238, 0.55);
+            cursor: grab;
             z-index: 9999;
             overflow: hidden;
             touch-action: none;
-            background: #0f172a;
+            background: #070e1c;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #floating-icon-btn:active {
+            cursor: grabbing;
         }
 
         #floating-icon-btn img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
             pointer-events: none;
         }
 
@@ -68,11 +71,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 270px;
-            background: rgba(8, 12, 24, 0.98);
+            width: 280px;
+            background: linear-gradient(165deg, #102447 0%, #070e1c 100%);
             border: 2px solid #ffd700;
-            border-radius: 16px;
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.7);
+            border-radius: 18px;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.55), 0 0 24px rgba(34, 211, 238, 0.25);
             padding: 16px;
             display: none;
             z-index: 10000;
@@ -80,25 +83,27 @@
         }
 
         .auth-title {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 900;
             color: #ffd700;
             margin-bottom: 10px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
         }
 
         .auth-input {
             width: 100%;
-            padding: 8px;
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid #ffd700;
-            border-radius: 8px;
+            padding: 9px;
+            background: rgba(4, 9, 20, 0.9);
+            border: 1px solid #38bdf8;
+            border-radius: 9px;
             color: #fff;
-            font-size: 11px;
+            font-size: 12px;
             text-align: center;
             margin-bottom: 10px;
             outline: none;
             font-weight: 800;
+            user-select: text;
+            -webkit-user-select: text;
         }
 
         .remember-row {
@@ -106,280 +111,399 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            font-size: 9px;
+            font-size: 10px;
             color: #cbd5e1;
             margin-bottom: 10px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .auth-btn {
             width: 100%;
-            padding: 8px;
-            background: linear-gradient(135deg, #ffd700, #b8860b);
+            padding: 9px;
+            background: linear-gradient(135deg, #ffd700, #f59e0b);
             border: none;
-            border-radius: 8px;
-            color: #000;
-            font-size: 10px;
+            border-radius: 9px;
+            color: #060a14;
+            font-size: 11px;
             font-weight: 900;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
 
         #error-msg {
-            color: #ff3366;
-            font-size: 9px;
-            margin-top: 6px;
+            color: #ff4d6d;
+            font-size: 10px;
+            margin-top: 7px;
             display: none;
             font-weight: 800;
         }
 
-        /* মূল পপআপ উইন্ডো (সম্পূর্ণ পপআপে ডার্ক ব্লার শ্যাডো সহ) */
+        /* স্ক্রিনশট স্টাইল ডার্ক গ্লোয়িং পপআপ কার্ড */
         .overlay-box {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 285px;
+            top: 115px;
+            left: 16px;
+            width: 318px;
+            max-width: calc(100vw - 24px);
             display: none;
             z-index: 9999;
-            touch-action: none;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.75);
+            background: radial-gradient(circle at 50% 0%, #132a52 0%, #060c18 78%);
             border-radius: 18px;
-            padding: 8px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.2);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 215, 0, 0.35);
-            pointer-events: auto;
+            padding: 9px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 24px rgba(34, 211, 238, 0.35);
+            border: 1.5px solid rgba(56, 189, 248, 0.7);
         }
 
-        .popup-relative-wrapper {
-            position: relative;
-            width: 100%;
+        .popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            margin-bottom: 8px;
+            cursor: grab;
+            touch-action: none;
         }
 
-        .popup-main-bg-img {
-            width: 100%;
-            display: block;
+        .popup-header:active {
+            cursor: grabbing;
+        }
+
+        .badge-left {
+            background: linear-gradient(90deg, #facc15, #f97316);
+            color: #070d19;
+            font-size: 8px;
+            font-weight: 900;
+            padding: 3px 6px;
+            border-radius: 6px;
+            line-height: 1.1;
+            text-transform: uppercase;
             pointer-events: none;
-            border-radius: 12px;
+        }
+
+        .brand-center {
+            text-align: center;
+            flex: 1;
+            pointer-events: none;
+        }
+
+        .brand-main {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #fde047, #fb923c, #fde047);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.15;
+        }
+
+        .brand-sub {
+            font-size: 8.5px;
+            font-weight: 800;
+            color: #38bdf8;
+            letter-spacing: 0.4px;
+            margin-top: 2px;
         }
 
         .close-btn {
-            position: absolute;
-            top: 6px;
-            right: 10px;
-            background: #ef4444;
-            color: white;
-            border: none;
-            width: 18px;
-            height: 18px;
+            background: rgba(239, 68, 68, 0.9);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 900;
             cursor: pointer;
-            z-index: 25;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 8px #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
         }
 
-        /* 🎯 প্রেডিকশন এরিয়া ওপরের দিকে এবং বাম দিকে শিফট করা */
-        .center-prediction-area {
-            position: absolute;
-            top: 122px;
-            left: 71.5%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 90px;
+        /* বামে SMALL, মাঝে PERIOD/ORB, ডানে BIG */
+        .pred-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.18fr 1fr;
+            gap: 6px;
+            align-items: stretch;
+        }
+
+        .side-panel {
+            border-radius: 12px;
+            padding: 8px 5px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+        }
+
+        .panel-small {
+            background: linear-gradient(180deg, rgba(14, 116, 144, 0.55), rgba(7, 38, 60, 0.9));
+        }
+
+        .panel-big {
+            background: linear-gradient(180deg, rgba(190, 24, 93, 0.52), rgba(68, 5, 24, 0.9));
+        }
+
+        .side-panel.is-predicted {
+            border-color: #fde047;
+            box-shadow: 0 0 14px rgba(253, 224, 71, 0.45);
+        }
+
+        .panel-title {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.4px;
+        }
+
+        .panel-range {
+            font-size: 9px;
+            color: #e2e8f0;
+            opacity: 0.9;
+            margin-top: 2px;
+            font-weight: 700;
+        }
+
+        .panel-tag {
+            margin-top: 8px;
+            font-size: 8px;
+            font-weight: 900;
+            padding: 3px 4px;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.8);
+            color: #94a3b8;
+        }
+
+        .panel-tag.active-tag {
+            background: #22c55e;
+            color: #052e16;
+        }
+
+        .center-panel {
+            background: rgba(5, 11, 24, 0.94);
+            border: 1px solid rgba(34, 211, 238, 0.55);
+            border-radius: 12px;
+            padding: 6px 4px;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 3px;
-            z-index: 10;
-            background: transparent;
+            justify-content: space-between;
+            position: relative;
         }
 
-        .period-container {
+        .period-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 3px;
         }
 
-        /* ✨ রুবি ফন্ট ও আরজিবি (RGB) লাইট অ্যানিমেশন টেক্সট */
         .period-display {
-            font-size: 6px;
-            font-weight: 900;
-            animation: rgbGlowText 3s infinite;
-            letter-spacing: 0.1px;
+            font-size: 8.5px;
+            font-weight: 800;
+            color: #f8fafc;
             cursor: pointer;
             text-decoration: underline;
             text-decoration-style: dotted;
         }
 
         .live-dot {
-            width: 3px;
-            height: 3px;
+            width: 5px;
+            height: 5px;
             background-color: #22c55e;
             border-radius: 50%;
-            box-shadow: 0 0 5px #22c55e;
+            box-shadow: 0 0 6px #22c55e;
             animation: liveBlink 1s infinite alternate;
         }
 
         @keyframes liveBlink {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.3); }
+            0% { opacity: 0.35; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.25); }
         }
 
-        .timer-display {
-            font-size: 7px;
-            font-weight: 900;
-            animation: rgbGlowText 2.5s infinite;
-            background: rgba(0, 0, 0, 0.75);
-            padding: 1px 5px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            letter-spacing: 0.4px;
-        }
-
-        /* 🔥 বিগ / স্মল এর জন্য অলটাইম আরজিবি কালার মিক্স গ্লোয়িং ইফেক্ট */
-        .solid-big-small {
-            font-size: 14px;
-            font-weight: 900;
-            animation: rgbGlowText 2s infinite;
-            letter-spacing: 1.2px;
-            line-height: 1;
-            padding: 2px 6px;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-        }
-
-        @keyframes rgbGlowText {
-            0% { color: #ff3366; text-shadow: 0 0 8px #ff3366, 0 0 15px #ff3366; }
-            20% { color: #ff9900; text-shadow: 0 0 8px #ff9900, 0 0 15px #ff9900; }
-            40% { color: #ffff00; text-shadow: 0 0 8px #ffff00, 0 0 15px #ffff00; }
-            60% { color: #00ff88; text-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88; }
-            80% { color: #00ffff; text-shadow: 0 0 8px #00ffff, 0 0 15px #00ffff; }
-            100% { color: #da70d6; text-shadow: 0 0 8px #da70d6, 0 0 15px #da70d6; }
-        }
-
-        .official-num-badge {
-            width: 15px;
-            height: 15px;
+        .glow-orb {
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8px;
+            font-size: 19px;
             font-weight: 900;
             color: #ffffff;
-            text-shadow: 1px 1px 2px #000;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.68);
+            box-shadow: 0 0 16px rgba(34, 211, 238, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.35);
+            margin: 3px 0;
         }
 
-        .bg-red { background: linear-gradient(135deg, #ef4444, #991b1b); border: 1.5px solid #fca5a5; }
-        .bg-green { background: linear-gradient(135deg, #22c55e, #15803d); border: 1.5px solid #86efac; }
-        .bg-violet { background: linear-gradient(135deg, #a855f7, #6b21a8); border: 1.5px solid #d8b4fe; }
+        .orb-green { background: radial-gradient(circle at 30% 30%, #4ade80, #15803d); }
+        .orb-red { background: radial-gradient(circle at 30% 30%, #f87171, #b91c1c); }
+        .orb-violet { background: radial-gradient(circle at 30% 30%, #c084fc, #6d28d9); }
 
-        /* 🎯 টেলিগ্রাম লোগো বাটন পপআপের ভেতরে নির্দিষ্ট স্থানে সেট করা */
-        .bottom-action-bar {
-            margin-top: 6px;
-            width: 100%;
+        .timer-pill {
+            font-size: 8px;
+            font-weight: 900;
+            color: #fde047;
+            background: rgba(250, 204, 21, 0.14);
+            padding: 2px 6px;
+            border-radius: 999px;
+        }
+
+        /* নিচের RECENT RESULTS চক্কর বাবল লাইন */
+        .recent-box {
+            margin-top: 7px;
+            background: rgba(5, 11, 22, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            border-radius: 10px;
+            padding: 6px;
+        }
+
+        .recent-head {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 8px;
+            font-weight: 800;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .wheel-strip {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 3px;
+            align-items: center;
+        }
+
+        .color-wheel {
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            z-index: 25;
+            font-size: 9px;
+            font-weight: 900;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+        }
+
+        .w-green { background: conic-gradient(#16a34a 0deg 270deg, #22c55e 270deg 360deg); }
+        .w-red { background: conic-gradient(#dc2626 0deg 270deg, #f87171 270deg 360deg); }
+        .w-violet-green { background: conic-gradient(#9333ea 0deg 180deg, #16a34a 180deg 360deg); }
+        .w-violet-red { background: conic-gradient(#9333ea 0deg 180deg, #dc2626 180deg 360deg); }
+
+        .bottom-action-bar {
+            margin-top: 7px;
+            width: 100%;
         }
 
         .telegram-join-btn {
             width: 100%;
-            background: linear-gradient(135deg, #ffd700, #b8860b);
+            background: linear-gradient(135deg, #ffd700, #f59e0b);
             color: #000;
-            border-radius: 8px;
+            border-radius: 9px;
             padding: 6px 10px;
             font-size: 9px;
             font-weight: 900;
             text-decoration: none;
-            letter-spacing: 0.8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6);
+            letter-spacing: 0.6px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             text-transform: uppercase;
-            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         #copy-toast {
-            position: absolute;
-            bottom: 4px;
+            position: fixed;
+            bottom: 18px;
             left: 50%;
             transform: translateX(-50%);
             background: #22c55e;
-            color: #fff;
-            font-size: 7px;
+            color: #ffffff;
+            font-size: 10px;
             font-weight: 900;
-            padding: 2px 6px;
-            border-radius: 3px;
+            padding: 4px 10px;
+            border-radius: 6px;
             display: none;
-            z-index: 30;
+            z-index: 10002;
         }
     </style>
 </head>
 <body>
 
     <!-- DKWIN গেম রেফারেল লিংক iframe -->
-    <iframe id="game-iframe" src="https://dkwin9.com/#/register?invitationCode=932152417441" loading="lazy" style="pointer-events: auto;"></iframe>
+    <iframe id="game-iframe" src="https://dkwin9.com/#/register?invitationCode=932152417441" loading="lazy"></iframe>
 
     <!-- ফ্লোটিং আইকন -->
-    <div id="floating-icon-btn" onclick="handleIconClick()">
-        <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon">
+    <div id="floating-icon-btn">
+        <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon" />
     </div>
 
     <!-- পাসওয়ার্ড পপআপ -->
     <div id="auth-overlay">
         <div class="auth-title">🔐 PATOWARI'S HACK</div>
-        <input type="password" id="pass-input" class="auth-input" placeholder="Enter Password">
+        <input type="password" id="pass-input" class="auth-input" placeholder="Enter Password" />
         <label class="remember-row">
-            <input type="checkbox" id="remember-pass"> Remember Password
+            <input type="checkbox" id="remember-pass" /> Remember Password
         </label>
-        <button class="auth-btn" onclick="checkPassword()">Submit</button>
+        <button type="button" class="auth-btn" onclick="checkPassword()">Submit</button>
         <div id="error-msg">Wrong Password!</div>
     </div>
 
-    <!-- মূল পপআপ উইন্ডো (সম্পূর্ণ বক্সে শ্যাডো সহ) -->
+    <!-- স্ক্রিনশট স্টাইল পপআপ উইন্ডো -->
     <div class="overlay-box" id="main-content">
-        <div class="popup-relative-wrapper">
-            <button class="close-btn" onclick="hidePopup()">×</button>
+        <div class="popup-header" id="main-content-header">
+            <div class="badge-left">PLAY<br />SMARTER</div>
+            <div class="brand-center">
+                <div class="brand-main">PATOWARI'S HACK</div>
+                <div class="brand-sub">30 SEC PREDICTOR V2</div>
+            </div>
+            <button type="button" class="close-btn" onclick="hidePopup()">×</button>
+        </div>
 
-            <!-- পপআপ ব্যাকগ্রাউন্ড ইমেজ -->
-            <img src="https://cdn.imageurlgenerator.com/uploads/de9a0e87-0c16-4ecf-8e65-14f1fc9e3d98.png" alt="VIP Popup" class="popup-main-bg-img">
+        <div class="pred-grid">
+            <div class="side-panel panel-small" id="small-panel">
+                <div>
+                    <div class="panel-title">SMALL</div>
+                    <div class="panel-range">0 - 4</div>
+                </div>
+                <div class="panel-tag" id="small-tag">STANDBY</div>
+            </div>
 
-            <!-- ডান দিকের ফ্রেমে পিরিয়ড ও সিগন্যাল এরিয়া -->
-            <div class="center-prediction-area">
-                <div class="period-container">
+            <div class="center-panel">
+                <div class="period-row">
                     <div class="period-display" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
                     <div class="live-dot"></div>
                 </div>
-                <!-- ৩০ সেকেন্ডের লাইভ টাইমার -->
-                <div class="timer-display" id="timer-display">TIME: 30s</div>
-                <div class="solid-big-small" id="res-size">WAITING...</div>
-                <div class="official-num-badge bg-green" id="official-num" style="display: none;">7</div>
+                <div class="glow-orb orb-green" id="main-orb">-</div>
+                <div class="timer-pill" id="timer-display">NEXT IN 30s</div>
             </div>
-            <div id="copy-toast">Copied!</div>
+
+            <div class="side-panel panel-big" id="big-panel">
+                <div>
+                    <div class="panel-title">BIG</div>
+                    <div class="panel-range">5 - 9</div>
+                </div>
+                <div class="panel-tag" id="big-tag">STANDBY</div>
+            </div>
         </div>
 
-        <!-- টেলিগ্রাম লোগো বাটন পপআপ ইমেজের ভেতরে নির্দিষ্ট স্থানে সেট করা -->
+        <div class="recent-box">
+            <div class="recent-head">
+                <span>RECENT RESULTS</span>
+                <span id="color-label">GREEN</span>
+            </div>
+            <div class="wheel-strip" id="recent-wheels"></div>
+        </div>
+
         <div class="bottom-action-bar">
-            <a href="https://t.me/patowari_vai_69x" target="_blank" class="telegram-join-btn">
-                <!-- অফিশিয়াল টেলিগ্রাম এসভিজি লোগো -->
+            <a href="https://t.me/patowari_vai_69x" target="_blank" rel="noopener noreferrer" class="telegram-join-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#000"/>
                 </svg>
@@ -388,10 +512,13 @@
         </div>
     </div>
 
+    <div id="copy-toast">Copied!</div>
+
     <script>
         let isUnlocked = localStorage.getItem("patowari_hack_unlocked") === "true";
         let cachedPeriod = "";
         let cachedPrediction = { type: "BIG", num: 7 };
+        let signalTimerStarted = false;
 
         function handleIconClick() {
             if (isUnlocked) {
@@ -399,12 +526,13 @@
                 document.getElementById('floating-icon-btn').style.display = 'none';
                 startPeriodGenerator();
             } else {
+                document.getElementById('error-msg').style.display = 'none';
                 document.getElementById('auth-overlay').style.display = 'block';
             }
         }
 
         function checkPassword() {
-            const pass = document.getElementById('pass-input').value;
+            const pass = document.getElementById('pass-input').value.trim();
             const rememberMe = document.getElementById('remember-pass').checked;
 
             if (pass === "PATOWARI69") {
@@ -412,6 +540,7 @@
                 if (rememberMe) {
                     localStorage.setItem("patowari_hack_unlocked", "true");
                 }
+                document.getElementById('error-msg').style.display = 'none';
                 document.getElementById('auth-overlay').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 document.getElementById('floating-icon-btn').style.display = 'none';
@@ -429,129 +558,201 @@
 
         function startPeriodGenerator() {
             updateSignalLogic();
-            setInterval(updateSignalLogic, 1000);
+            if (!signalTimerStarted) {
+                signalTimerStarted = true;
+                setInterval(updateSignalLogic, 1000);
+            }
         }
 
         function copyPeriodNumber() {
-            const periodText = document.getElementById('period-num').innerText.replace("Period: ", "");
+            const periodText = document.getElementById('period-num').innerText.trim();
             if (periodText && periodText !== "Loading...") {
                 navigator.clipboard.writeText(periodText).then(() => {
-                    let toast = document.getElementById('copy-toast');
+                    const toast = document.getElementById('copy-toast');
                     toast.style.display = 'block';
                     setTimeout(() => {
                         toast.style.display = 'none';
                     }, 1200);
-                });
+                }).catch(() => {});
             }
         }
 
-        // WinGo 30 Seconds Fixed Signal Engine
+        function computeSignalFromTail(tailNum, slotNum) {
+            const trend = (tailNum * 31 + slotNum) % 100;
+            const isBig = trend >= 46;
+            const type = isBig ? "BIG" : "SMALL";
+            const num = isBig
+                ? 5 + ((tailNum + trend) % 5)
+                : (tailNum + trend) % 5;
+
+            let orbClass = "orb-red";
+            let wheelClass = "w-red";
+            let colorName = "RED";
+
+            if (num === 0) {
+                orbClass = "orb-violet";
+                wheelClass = "w-violet-red";
+                colorName = "VIOLET + RED";
+            } else if (num === 5) {
+                orbClass = "orb-violet";
+                wheelClass = "w-violet-green";
+                colorName = "VIOLET + GREEN";
+            } else if ([1, 3, 7, 9].includes(num)) {
+                orbClass = "orb-green";
+                wheelClass = "w-green";
+                colorName = "GREEN";
+            }
+
+            return { type, num, orbClass, wheelClass, colorName };
+        }
+
+        function renderRecentWheels(dateStr, periodIndexToday) {
+            const container = document.getElementById('recent-wheels');
+            container.innerHTML = "";
+            for (let i = 9; i >= 0; i--) {
+                const idx = Math.max(1, periodIndexToday - i);
+                const seq = String(50000 + idx).padStart(5, '0');
+                const tail = parseInt(seq, 10) || 50001;
+                const sig = computeSignalFromTail(tail, idx);
+
+                const el = document.createElement('div');
+                el.className = `color-wheel ${sig.wheelClass}`;
+                el.textContent = String(sig.num);
+                container.appendChild(el);
+            }
+        }
+
         function updateSignalLogic() {
             if (!isUnlocked) return;
 
             const now = new Date();
-            const duration = 30; // 30s Fixed
-
+            const duration = 30;
             const totalSecondsToday = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
-            let elapsedInPeriod = totalSecondsToday % duration; 
-            let periodIndexToday = Math.floor(totalSecondsToday / duration) + 1;
-            
-            let dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
-            let formattedIndex = String(50000 + periodIndexToday).padStart(5, '0');
-            let fullPeriod = `Period: ${dateStr}1000${formattedIndex}`;
-            
-            let timeLeft = duration - elapsedInPeriod;
+            const elapsedInPeriod = totalSecondsToday % duration;
+            const periodIndexToday = Math.floor(totalSecondsToday / duration) + 1;
+
+            const dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
+            const formattedIndex = String(50000 + periodIndexToday).padStart(5, '0');
+            const fullPeriod = `${dateStr}1000${formattedIndex}`;
+            const timeLeft = duration - elapsedInPeriod;
 
             document.getElementById('period-num').innerText = fullPeriod;
-            document.getElementById('timer-display').innerText = `TIME: ${timeLeft < 10 ? '0' + timeLeft : timeLeft}s`;
+            document.getElementById('timer-display').innerText = `NEXT IN ${String(timeLeft).padStart(2, '0')}s`;
 
-            let sizeEl = document.getElementById('res-size');
-            let numEl = document.getElementById('official-num');
-            
             if (fullPeriod !== cachedPeriod) {
                 cachedPeriod = fullPeriod;
-                let rawPeriodNum = fullPeriod.replace("Period: ", "");
-                let seedVal = parseInt(rawPeriodNum.slice(-5)) || 12345;
-                let marketFlowTrend = (seedVal * 31 + Math.floor(Date.now() / 30000)) % 100;
-                
-                let isBig = marketFlowTrend >= 46;
-                let predType = isBig ? "BIG" : "SMALL";
-
-                let luckyNum;
-                if (isBig) {
-                    luckyNum = 5 + ((seedVal + marketFlowTrend) % 5);
-                } else {
-                    luckyNum = (seedVal + marketFlowTrend) % 5;
-                }
-
-                cachedPrediction = { type: predType, num: luckyNum };
+                const seedVal = parseInt(fullPeriod.slice(-5), 10) || 12345;
+                cachedPrediction = computeSignalFromTail(seedVal, Math.floor(Date.now() / 30000));
             }
+
+            const orb = document.getElementById('main-orb');
+            const smallPanel = document.getElementById('small-panel');
+            const bigPanel = document.getElementById('big-panel');
+            const smallTag = document.getElementById('small-tag');
+            const bigTag = document.getElementById('big-tag');
 
             if (timeLeft >= 28) {
-                sizeEl.innerText = "WAITING...";
-                sizeEl.style.fontSize = "9.5px";
-                numEl.style.display = "none";
+                orb.innerText = "...";
+                orb.className = "glow-orb orb-violet";
+                document.getElementById('color-label').innerText = "WAIT";
+                smallPanel.classList.remove('is-predicted');
+                bigPanel.classList.remove('is-predicted');
+                smallTag.innerText = "WAIT";
+                bigTag.innerText = "WAIT";
+                smallTag.className = "panel-tag";
+                bigTag.className = "panel-tag";
             } else {
-                sizeEl.style.fontSize = "14px";
-                sizeEl.innerText = cachedPrediction.type;
+                orb.innerText = String(cachedPrediction.num);
+                orb.className = `glow-orb ${cachedPrediction.orbClass}`;
+                document.getElementById('color-label').innerText = cachedPrediction.colorName;
 
-                let luckyNum = cachedPrediction.num;
-                numEl.innerText = luckyNum;
-                numEl.className = "official-num-badge";
-
-                if (luckyNum === 0 || luckyNum === 5) {
-                    numEl.classList.add("bg-violet");
-                } else if (luckyNum === 1 || luckyNum === 3 || luckyNum === 7 || luckyNum === 9) {
-                    numEl.classList.add("bg-green");
+                if (cachedPrediction.type === "BIG") {
+                    bigPanel.classList.add('is-predicted');
+                    smallPanel.classList.remove('is-predicted');
+                    bigTag.innerText = "PREDICTED";
+                    bigTag.className = "panel-tag active-tag";
+                    smallTag.innerText = "SKIP";
+                    smallTag.className = "panel-tag";
                 } else {
-                    numEl.classList.add("bg-red");
+                    smallPanel.classList.add('is-predicted');
+                    bigPanel.classList.remove('is-predicted');
+                    smallTag.innerText = "PREDICTED";
+                    smallTag.className = "panel-tag active-tag";
+                    bigTag.innerText = "SKIP";
+                    bigTag.className = "panel-tag";
                 }
-
-                numEl.style.display = "flex";
             }
+
+            renderRecentWheels(dateStr, periodIndexToday);
         }
 
-        makeDraggable(document.getElementById("floating-icon-btn"));
-        makeDraggable(document.getElementById("main-content"));
+        makeDraggable(document.getElementById("floating-icon-btn"), document.getElementById("floating-icon-btn"), handleIconClick);
+        makeDraggable(document.getElementById("main-content"), document.getElementById("main-content-header"), null);
 
-        function makeDraggable(elmnt) {
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-            let header = document.getElementById(elmnt.id + "-header") || elmnt;
-            
-            header.onmousedown = dragMouseDown;
-            header.ontouchstart = dragMouseDown;
+        function makeDraggable(targetEl, handleEl, onTap) {
+            let isDown = false;
+            let moved = false;
+            let startX = 0, startY = 0, origLeft = 0, origTop = 0;
 
-            function dragMouseDown(e) {
-                e = e || window.event;
-                let clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
-                let clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
-                pos3 = clientX;
-                pos4 = clientY;
-                document.onmouseup = closeDragElement;
-                document.ontouchend = closeDragElement;
-                document.onmousemove = elementDrag;
-                document.ontouchmove = elementDrag;
+            function onStart(x, y) {
+                const rect = targetEl.getBoundingClientRect();
+                origLeft = rect.left;
+                origTop = rect.top;
+                startX = x;
+                startY = y;
+                isDown = true;
+                moved = false;
+                targetEl.style.left = `${origLeft}px`;
+                targetEl.style.top = `${origTop}px`;
+                targetEl.style.right = "auto";
+                targetEl.style.bottom = "auto";
+                targetEl.style.transform = "none";
             }
 
-            function elementDrag(e) {
-                e = e || window.event;
-                let clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-                let clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
-                pos1 = pos3 - clientX;
-                pos2 = pos4 - clientY;
-                pos3 = clientX;
-                pos4 = clientY;
-                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
-                elmnt.style.transform = "none";
+            function onMove(x, y) {
+                if (!isDown) return;
+                const dx = x - startX;
+                const dy = y - startY;
+                if (Math.hypot(dx, dy) > 6) moved = true;
+                const maxLeft = Math.max(4, window.innerWidth - targetEl.offsetWidth - 4);
+                const maxTop = Math.max(4, window.innerHeight - targetEl.offsetHeight - 4);
+                targetEl.style.left = `${Math.max(4, Math.min(maxLeft, origLeft + dx))}px`;
+                targetEl.style.top = `${Math.max(4, Math.min(maxTop, origTop + dy))}px`;
             }
 
-            function closeDragElement() {
-                document.onmouseup = null;
-                document.ontouchend = null;
-                document.onmousemove = null;
-                document.ontouchmove = null;
+            function onEnd() {
+                if (!isDown) return;
+                isDown = false;
+                if (!moved && typeof onTap === "function") onTap();
             }
+
+            handleEl.addEventListener("touchstart", (e) => {
+                if (e.target.closest("button") || e.target.closest("a")) return;
+                if (e.touches.length === 1) onStart(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+
+            handleEl.addEventListener("touchmove", (e) => {
+                if (!isDown || e.touches.length !== 1) return;
+                e.preventDefault();
+                onMove(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+
+            handleEl.addEventListener("touchend", onEnd);
+            handleEl.addEventListener("touchcancel", onEnd);
+
+            handleEl.addEventListener("mousedown", (e) => {
+                if (e.button !== 0 || e.target.closest("button") || e.target.closest("a")) return;
+                onStart(e.clientX, e.clientY);
+
+                function mm(ev) { onMove(ev.clientX, ev.clientY); }
+                function mu() {
+                    document.removeEventListener("mousemove", mm);
+                    document.removeEventListener("mouseup", mu);
+                    onEnd();
+                }
+                document.addEventListener("mousemove", mm);
+                document.addEventListener("mouseup", mu);
+            });
         }
     </script>
 </body>

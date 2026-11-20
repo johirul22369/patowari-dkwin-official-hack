@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>PATOWARI'S HACK - 3D VIP Edition</title>
+    <title>PATOWARI'S HACK - 3D RGB Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
@@ -148,7 +148,7 @@
             font-weight: 700;
         }
 
-        /* ছোট ও কমপ্যাক্ট ৩ডি পপআপ কার্ড (~218px) */
+        /* ছোট ও কমপ্যাক্ট ৩ডি + RGB পপআপ কার্ড (~218px) */
         .overlay-box {
             position: fixed;
             top: 95px;
@@ -160,17 +160,41 @@
             background: radial-gradient(circle at 50% -10%, #1d4282 0%, #09152b 52%, #040914 100%);
             border-radius: 16px;
             padding: 7px;
+            border: 1.5px solid #38bdf8;
             box-shadow:
                 0 16px 36px rgba(0, 0, 0, 0.92),
-                0 0 20px rgba(34, 211, 238, 0.3),
+                0 0 18px rgba(0, 255, 255, 0.45),
                 inset 0 1px 1px rgba(255, 255, 255, 0.25);
-            border: 1.5px solid rgba(56, 189, 248, 0.72);
             backdrop-filter: blur(10px);
+            animation: rgbBorderGlow 4.5s linear infinite;
+        }
+
+        @keyframes rgbBorderGlow {
+            0% {
+                border-color: #ff2a85;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.92), 0 0 18px rgba(255, 42, 133, 0.55);
+            }
+            25% {
+                border-color: #00f5d4;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.92), 0 0 18px rgba(0, 245, 212, 0.55);
+            }
+            50% {
+                border-color: #fee440;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.92), 0 0 18px rgba(254, 228, 64, 0.55);
+            }
+            75% {
+                border-color: #9b5de5;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.92), 0 0 18px rgba(155, 93, 229, 0.55);
+            }
+            100% {
+                border-color: #ff2a85;
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.92), 0 0 18px rgba(255, 42, 133, 0.55);
+            }
         }
 
         /* পপআপের ২-৩ বার ঝাঁকি */
         .popup-shake-once {
-            animation: popupThreeShakes 0.75s ease-in-out;
+            animation: popupThreeShakes 0.75s ease-in-out, rgbBorderGlow 4.5s linear infinite;
         }
 
         @keyframes popupThreeShakes {
@@ -223,7 +247,7 @@
             font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 0.4px;
-            background: linear-gradient(90deg, #fef08a, #fb923c, #fde047);
+            background: linear-gradient(90deg, #ff2a85, #fee440, #00f5d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
@@ -281,7 +305,7 @@
             border-color: #a5f3fc;
         }
 
-        /* প্রফেশনাল হ্যাকিং স্টাইল ডেকোরেটিভ টুলস স্ট্রিপ (কোনো বাড়তি ফাংশন নেই) */
+        /* ৩টা সুন্দর ও খতরনাক হ্যাকিং টুলস */
         .hack-tools-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -291,33 +315,43 @@
 
         .hack-tool-chip {
             font-family: 'Chakra Petch', sans-serif;
-            background: rgba(6, 14, 28, 0.94);
-            border: 1px solid rgba(34, 211, 238, 0.28);
-            border-radius: 5px;
-            padding: 2px 3px;
+            background: linear-gradient(180deg, rgba(14, 24, 46, 0.95), rgba(4, 9, 18, 0.98));
+            border: 1px solid rgba(0, 245, 212, 0.38);
+            border-radius: 6px;
+            padding: 2.5px 2px;
             text-align: center;
             cursor: pointer;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.12);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.14);
         }
 
-        .hack-tool-name {
+        .hack-tool-top {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
             font-size: 5.5px;
             font-weight: 700;
-            color: #94a3b8;
-            letter-spacing: 0.3px;
+            color: #e2e8f0;
+            letter-spacing: 0.25px;
             line-height: 1.05;
         }
 
         .hack-tool-state {
             font-size: 5.8px;
             font-weight: 700;
-            color: #4ade80;
+            color: #00f5d4;
             letter-spacing: 0.3px;
-            margin-top: 1px;
+            margin-top: 1.5px;
+            text-shadow: 0 0 6px rgba(0, 245, 212, 0.45);
+        }
+
+        .hack-tool-chip.off-state {
+            border-color: rgba(255, 42, 133, 0.42);
         }
 
         .hack-tool-chip.off-state .hack-tool-state {
-            color: #f87171;
+            color: #ff4d6d;
+            text-shadow: 0 0 6px rgba(255, 77, 109, 0.45);
         }
 
         /* বামে SMALL, মাঝে PERIOD + 3D ORB, ডানে BIG */
@@ -326,6 +360,28 @@
             grid-template-columns: 0.92fr 1.26fr 0.92fr;
             gap: 4px;
             align-items: stretch;
+            position: relative;
+            overflow: hidden;
+            border-radius: 11px;
+        }
+
+        /* প্রেডিকশন বক্সের পেছন দিয়ে ডান থেকে বামে ও বাম থেকে ডানে RGB রকেট লাইট */
+        .pred-grid::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 34%;
+            background: linear-gradient(90deg, transparent, rgba(255, 42, 133, 0.48), rgba(0, 245, 212, 0.58), rgba(254, 228, 64, 0.48), transparent);
+            filter: blur(5px);
+            pointer-events: none;
+            z-index: 0;
+            animation: backHorizontalRocket 2.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes backHorizontalRocket {
+            0%   { left: 68%; }
+            100% { left: -4%; }
         }
 
         .side-panel {
@@ -337,19 +393,50 @@
             justify-content: space-between;
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* দুই প্রেডিকশন বক্সের ভেতরে রকেটের মতো নিচ থেকে উপরে ও উপর থেকে নিচে RGB লাইট */
+        .side-panel::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 16px;
+            background: linear-gradient(180deg, transparent, rgba(0, 245, 212, 0.85), rgba(255, 42, 133, 0.9), rgba(254, 228, 64, 0.85), transparent);
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.75);
+            pointer-events: none;
+            z-index: 1;
+            animation: boxVerticalRocket 1.8s ease-in-out infinite alternate;
+        }
+
+        .panel-big::after {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes boxVerticalRocket {
+            0%   { top: calc(100% - 14px); }
+            100% { top: -2px; }
+        }
+
+        .side-panel > div {
+            position: relative;
+            z-index: 2;
         }
 
         .panel-small {
-            background: linear-gradient(165deg, rgba(14, 165, 233, 0.45) 0%, rgba(7, 38, 60, 0.95) 100%);
+            background: linear-gradient(165deg, rgba(14, 165, 233, 0.55) 0%, rgba(7, 38, 60, 0.92) 100%);
         }
 
         .panel-big {
-            background: linear-gradient(165deg, rgba(236, 72, 153, 0.42) 0%, rgba(68, 5, 24, 0.95) 100%);
+            background: linear-gradient(165deg, rgba(236, 72, 153, 0.52) 0%, rgba(68, 5, 24, 0.92) 100%);
         }
 
         .side-panel.is-predicted {
             border-color: #fde047;
-            box-shadow: 0 0 12px rgba(253, 224, 71, 0.45);
+            box-shadow: 0 0 12px rgba(253, 224, 71, 0.5);
         }
 
         .panel-title {
@@ -385,7 +472,7 @@
         }
 
         .center-panel {
-            background: linear-gradient(180deg, rgba(10, 22, 44, 0.96) 0%, rgba(4, 9, 20, 0.98) 100%);
+            background: linear-gradient(180deg, rgba(10, 22, 44, 0.94) 0%, rgba(4, 9, 20, 0.96) 100%);
             border: 1px solid rgba(56, 189, 248, 0.65);
             border-radius: 10px;
             padding: 4px 3px;
@@ -395,6 +482,7 @@
             align-items: center;
             justify-content: space-between;
             position: relative;
+            z-index: 1;
         }
 
         .period-row {
@@ -611,10 +699,10 @@
         <div id="error-msg">Wrong Password!</div>
     </div>
 
-    <!-- ছোট ৩ডি পপআপ উইন্ডো (~218px) -->
+    <!-- ছোট ৩ডি + RGB পপআপ উইন্ডো (~218px) -->
     <div class="overlay-box" id="main-content">
         <div class="popup-header" id="main-content-header">
-            <div class="badge-left">3D<br />VIP</div>
+            <div class="badge-left">3D<br />RGB</div>
             <div class="brand-center">
                 <div class="brand-main">PATOWARI'S HACK</div>
                 <div class="brand-sub" id="mode-subtitle">30 SEC PREDICTOR V2</div>
@@ -630,19 +718,19 @@
             <button type="button" class="market-btn" data-market="5M">5M</button>
         </div>
 
-        <!-- প্রফেশনাল হ্যাকিং স্টাইল ডেকোরেটিভ টুলস -->
+        <!-- ৩টা সুন্দর ও খতরনাক হ্যাকিং টুলস (শুধু ভিজ্যুয়াল, কোনো বাড়তি ফাংশন নেই) -->
         <div class="hack-tools-bar">
-            <div class="hack-tool-chip" onclick="toggleDummyTool(this)">
-                <div class="hack-tool-name">SEED SYNC</div>
-                <div class="hack-tool-state">LOCKED</div>
+            <div class="hack-tool-chip" onclick="toggleDummyTool(this, 'SNIFF', 'SLEEP')">
+                <div class="hack-tool-top"><span>📡</span><span>WIFI SNIF</span></div>
+                <div class="hack-tool-state">SNIFF</div>
             </div>
-            <div class="hack-tool-chip" onclick="toggleDummyTool(this)">
-                <div class="hack-tool-name">ANTI-LAG</div>
-                <div class="hack-tool-state">ACTIVE</div>
+            <div class="hack-tool-chip" onclick="toggleDummyTool(this, 'INJECT', 'HOLD')">
+                <div class="hack-tool-top"><span>⚡</span><span>PKT INJECT</span></div>
+                <div class="hack-tool-state">INJECT</div>
             </div>
-            <div class="hack-tool-chip" onclick="toggleDummyTool(this)">
-                <div class="hack-tool-name">NODE SCAN</div>
-                <div class="hack-tool-state">ONLINE</div>
+            <div class="hack-tool-chip" onclick="toggleDummyTool(this, 'BREACH', 'IDLE')">
+                <div class="hack-tool-top"><span>💀</span><span>HEX CORE</span></div>
+                <div class="hack-tool-state">BREACH</div>
             </div>
         </div>
 
@@ -710,12 +798,11 @@
         let lastShakeKey = "";
         let badgeHideTimeout = null;
 
-        /* ডেকোরেটিভ হ্যাকিং টুলস—শুধু ভিজ্যুয়াল স্ট্যাটাস বদলায়, কোনো বাড়তি কাজ করে না */
-        function toggleDummyTool(el) {
+        function toggleDummyTool(el, onLabel, offLabel) {
             const stateEl = el.querySelector(".hack-tool-state");
             if (!stateEl) return;
             const isOff = el.classList.toggle("off-state");
-            stateEl.textContent = isOff ? "BYPASS" : "ACTIVE";
+            stateEl.textContent = isOff ? offLabel : onLabel;
         }
 
         document.querySelectorAll(".market-btn").forEach((btn) => {
@@ -786,7 +873,6 @@
             }
         }
 
-        /* 1M, 3M, 5M, 30S মার্কেটের সেকেন্ড কাউন্টডাউন ও পিরিয়ড সিঙ্ক */
         function getSyncedMarketClock(marketKey, cfg, now) {
             const secInDay = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
 
@@ -852,15 +938,28 @@
             return { type, num, orbClass, wheelClass, colorName };
         }
 
-        function computeOutcomeStatus(cfg, periodIndexToday, currentPredType) {
+        function computeOutcomeStatus(cfg, periodIndexToday, currentPred) {
             const prevIdx = Math.max(1, periodIndexToday - 1);
+            const prev2Idx = Math.max(1, periodIndexToday - 2);
+
             const prevSeq = String(cfg.offset + prevIdx).padStart(5, '0');
+            const prev2Seq = String(cfg.offset + prev2Idx).padStart(5, '0');
+
             const prevTail = parseInt(prevSeq, 10) || (cfg.offset + 1);
-            const checkScore = (prevTail + periodIndexToday + currentPredType.length) % 7;
-            return checkScore !== 3 ? "WIN" : "LOSS";
+            const prev2Tail = parseInt(prev2Seq, 10) || cfg.offset;
+
+            const prevSig = computeSignalFromTail(prevTail, prevIdx);
+            const prev2Sig = computeSignalFromTail(prev2Tail, prev2Idx);
+
+            const streakSameType = (prevSig.type === prev2Sig.type && prevSig.type === currentPred.type) ? 1 : 0;
+            const marketWave = (prevSig.num + prev2Sig.num + currentPred.num + periodIndexToday) % 5;
+
+            if (streakSameType === 1 && marketWave < 2) {
+                return "LOSS";
+            }
+            return marketWave >= 2 ? "WIN" : "LOSS";
         }
 
-        /* মার্কেটে সেকেন্ড শেষ হওয়ার আগেই (3s-এ) পপআপ + WIN/LOSS ব্যাজ ২-৩ বার ঝাঁকি দিয়ে চলে যাবে */
         function triggerEndShakeAndBadge(shakeKey, outcome) {
             if (lastShakeKey === shakeKey) return;
             lastShakeKey = shakeKey;
@@ -929,7 +1028,7 @@
             }
 
             if (timeLeft === 3) {
-                const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction.type);
+                const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction);
                 triggerEndShakeAndBadge(`${currentMarket}-${fullPeriod}`, outcome);
             }
 

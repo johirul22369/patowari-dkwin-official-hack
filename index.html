@@ -723,6 +723,41 @@
             }
         }
 
+        /* 1M, 3M, 5M, 30S মার্কেটের সঠিক টাইমার ও পিরিয়ড সিঙ্ক */
+        function getSyncedMarketClock(marketKey, cfg, now) {
+            const secInDay = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
+
+            if (marketKey === "1M") {
+                const secInMin = now.getUTCSeconds(); // 0..59
+                const elapsed = secInMin === 0 ? 59 : (secInMin - 1);
+                const timeLeft = 60 - elapsed; // 1s..60s প্রতি মিনিটের 00s-এ রিসেট
+                const periodIndexToday = Math.floor(secInDay / 60) + 1;
+                return { elapsed, timeLeft, periodIndexToday };
+            }
+
+            if (marketKey === "3M") {
+                const slot = Math.floor(secInDay / 180); // প্রতি ৩ মিনিটে (180s) ১টি পিরিয়ড
+                const elapsed = secInDay % 180;
+                const timeLeft = elapsed === 0 ? 180 : (180 - elapsed); // 1s..180s
+                const periodIndexToday = slot + 1;
+                return { elapsed, timeLeft, periodIndexToday };
+            }
+
+            if (marketKey === "5M") {
+                const slot = Math.floor(secInDay / 300); // প্রতি ৫ মিনিটে (300s) ১টি পিরিয়ড
+                const elapsed = secInDay % 300;
+                const timeLeft = elapsed === 0 ? 300 : (300 - elapsed); // 1s..300s
+                const periodIndexToday = slot + 1;
+                return { elapsed, timeLeft, periodIndexToday };
+            }
+
+            // 30S মার্কেট
+            const elapsed = secInDay % cfg.duration;
+            const timeLeft = cfg.duration - elapsed;
+            const periodIndexToday = Math.floor(secInDay / cfg.duration) + 1;
+            return { elapsed, timeLeft, periodIndexToday };
+        }
+
         function computeSignalFromTail(tailNum, slotNum) {
             const trend = (tailNum * 31 + slotNum) % 100;
             const isBig = trend >= 46;
@@ -813,14 +848,11 @@
 
             const cfg = MARKETS[currentMarket] || MARKETS["30S"];
             const now = new Date();
-            const totalSecondsToday = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
-            const elapsedInPeriod = totalSecondsToday % cfg.duration;
-            const periodIndexToday = Math.floor(totalSecondsToday / cfg.duration) + 1;
+            const { elapsed, timeLeft, periodIndexToday } = getSyncedMarketClock(currentMarket, cfg, now);
 
             const dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
             const formattedIndex = String(cfg.offset + periodIndexToday).padStart(5, '0');
             const fullPeriod = `${dateStr}1000${formattedIndex}`;
-            const timeLeft = cfg.duration - elapsedInPeriod;
 
             document.getElementById('period-num').innerText = fullPeriod;
             document.getElementById('timer-display').innerText = `NEXT IN ${String(timeLeft).padStart(2, '0')}s`;
@@ -828,7 +860,7 @@
             if (fullPeriod !== cachedPeriod) {
                 cachedPeriod = fullPeriod;
                 const seedVal = parseInt(fullPeriod.slice(-5), 10) || 12345;
-                cachedPrediction = computeSignalFromTail(seedVal, Math.floor(Date.now() / (cfg.duration * 1000)));
+                cachedPrediction = computeSignalFromTail(seedVal, periodIndexToday);
             }
 
             if (timeLeft === 1) {
@@ -842,7 +874,7 @@
             const smallTag = document.getElementById('small-tag');
             const bigTag = document.getElementById('big-tag');
 
-            if (timeLeft >= cfg.duration - 2) {
+            if (elapsed <= 2) {
                 orb.innerText = "...";
                 orb.className = "glow-orb orb-violet";
                 document.getElementById('color-label').innerText = "WAIT";

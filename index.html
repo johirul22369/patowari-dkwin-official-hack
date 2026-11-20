@@ -255,7 +255,7 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2.5px;
-            margin-bottom: 5px;
+            margin-bottom: 4.5px;
             background: rgba(4, 9, 19, 0.92);
             padding: 2px;
             border-radius: 7px;
@@ -279,6 +279,45 @@
             background: linear-gradient(135deg, #06b6d4, #2563eb);
             color: #ffffff;
             border-color: #a5f3fc;
+        }
+
+        /* প্রফেশনাল হ্যাকিং স্টাইল ডেকোরেটিভ টুলস স্ট্রিপ (কোনো বাড়তি ফাংশন নেই) */
+        .hack-tools-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px;
+            margin-bottom: 5px;
+        }
+
+        .hack-tool-chip {
+            font-family: 'Chakra Petch', sans-serif;
+            background: rgba(6, 14, 28, 0.94);
+            border: 1px solid rgba(34, 211, 238, 0.28);
+            border-radius: 5px;
+            padding: 2px 3px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.12);
+        }
+
+        .hack-tool-name {
+            font-size: 5.5px;
+            font-weight: 700;
+            color: #94a3b8;
+            letter-spacing: 0.3px;
+            line-height: 1.05;
+        }
+
+        .hack-tool-state {
+            font-size: 5.8px;
+            font-weight: 700;
+            color: #4ade80;
+            letter-spacing: 0.3px;
+            margin-top: 1px;
+        }
+
+        .hack-tool-chip.off-state .hack-tool-state {
+            color: #f87171;
         }
 
         /* বামে SMALL, মাঝে PERIOD + 3D ORB, ডানে BIG */
@@ -591,6 +630,22 @@
             <button type="button" class="market-btn" data-market="5M">5M</button>
         </div>
 
+        <!-- প্রফেশনাল হ্যাকিং স্টাইল ডেকোরেটিভ টুলস -->
+        <div class="hack-tools-bar">
+            <div class="hack-tool-chip" onclick="toggleDummyTool(this)">
+                <div class="hack-tool-name">SEED SYNC</div>
+                <div class="hack-tool-state">LOCKED</div>
+            </div>
+            <div class="hack-tool-chip" onclick="toggleDummyTool(this)">
+                <div class="hack-tool-name">ANTI-LAG</div>
+                <div class="hack-tool-state">ACTIVE</div>
+            </div>
+            <div class="hack-tool-chip" onclick="toggleDummyTool(this)">
+                <div class="hack-tool-name">NODE SCAN</div>
+                <div class="hack-tool-state">ONLINE</div>
+            </div>
+        </div>
+
         <div class="pred-grid">
             <div class="side-panel panel-small" id="small-panel">
                 <div>
@@ -654,6 +709,14 @@
         let signalTimerStarted = false;
         let lastShakeKey = "";
         let badgeHideTimeout = null;
+
+        /* ডেকোরেটিভ হ্যাকিং টুলস—শুধু ভিজ্যুয়াল স্ট্যাটাস বদলায়, কোনো বাড়তি কাজ করে না */
+        function toggleDummyTool(el) {
+            const stateEl = el.querySelector(".hack-tool-state");
+            if (!stateEl) return;
+            const isOff = el.classList.toggle("off-state");
+            stateEl.textContent = isOff ? "BYPASS" : "ACTIVE";
+        }
 
         document.querySelectorAll(".market-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
@@ -728,8 +791,8 @@
             const secInDay = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
 
             if (marketKey === "1M") {
-                const secInMin = now.getUTCSeconds(); // 0..59
-                const timeLeft = 60 - secInMin; // 60s -> 01s প্রতি মিনিটের 00s-এ রিসেট
+                const secInMin = now.getUTCSeconds();
+                const timeLeft = 60 - secInMin;
                 const elapsed = 60 - timeLeft;
                 const periodIndexToday = Math.floor(secInDay / 60) + 1;
                 return { elapsed, timeLeft, periodIndexToday };
@@ -738,7 +801,7 @@
             if (marketKey === "3M") {
                 const slot = Math.floor(secInDay / 180);
                 const rem = secInDay % 180;
-                const timeLeft = 180 - rem; // 180s -> 01s
+                const timeLeft = 180 - rem;
                 const elapsed = 180 - timeLeft;
                 const periodIndexToday = slot + 1;
                 return { elapsed, timeLeft, periodIndexToday };
@@ -747,15 +810,14 @@
             if (marketKey === "5M") {
                 const slot = Math.floor(secInDay / 300);
                 const rem = secInDay % 300;
-                const timeLeft = 300 - rem; // 300s -> 01s
+                const timeLeft = 300 - rem;
                 const elapsed = 300 - timeLeft;
                 const periodIndexToday = slot + 1;
                 return { elapsed, timeLeft, periodIndexToday };
             }
 
-            // 30S মার্কেট
             const rem = secInDay % 30;
-            const timeLeft = 30 - rem; // 30s -> 01s
+            const timeLeft = 30 - rem;
             const elapsed = 30 - timeLeft;
             const periodIndexToday = Math.floor(secInDay / 30) + 1;
             return { elapsed, timeLeft, periodIndexToday };
@@ -866,7 +928,6 @@
                 cachedPrediction = computeSignalFromTail(seedVal, periodIndexToday);
             }
 
-            /* সেকেন্ড শেষ হওয়ার আগেই (3 সেকেন্ডে) ঝাঁকি ও WIN/LOSS ব্যাজ */
             if (timeLeft === 3) {
                 const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction.type);
                 triggerEndShakeAndBadge(`${currentMarket}-${fullPeriod}`, outcome);

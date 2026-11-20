@@ -42,10 +42,10 @@
             width: 46px;
             height: 46px;
             border-radius: 50%;
-            border: 2px solid #fde047;
+            border: 2px solid #facc15;
             box-shadow:
                 0 8px 18px rgba(0, 0, 0, 0.85),
-                0 0 16px rgba(250, 204, 21, 0.65),
+                0 0 16px rgba(250, 204, 21, 0.55),
                 inset 0 2px 5px rgba(255, 255, 255, 0.35);
             cursor: grab;
             z-index: 9999;
@@ -78,7 +78,7 @@
             transform: translate(-50%, -50%);
             width: 230px;
             background: linear-gradient(155deg, rgba(22, 48, 94, 0.98) 0%, rgba(5, 11, 24, 0.99) 100%);
-            border: 1.5px solid rgba(253, 224, 71, 0.85);
+            border: 1.5px solid rgba(250, 204, 21, 0.8);
             border-radius: 16px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.92), 0 0 22px rgba(34, 211, 238, 0.25);
             padding: 12px;
@@ -92,7 +92,7 @@
             font-family: 'Chakra Petch', sans-serif;
             font-size: 11px;
             font-weight: 700;
-            color: #fde047;
+            color: #facc15;
             margin-bottom: 8px;
             letter-spacing: 0.6px;
         }
@@ -129,7 +129,7 @@
             font-family: 'Chakra Petch', sans-serif;
             width: 100%;
             padding: 7px;
-            background: linear-gradient(135deg, #fde047, #f97316);
+            background: linear-gradient(135deg, #facc15, #eab308);
             border: none;
             border-radius: 8px;
             color: #050912;
@@ -162,7 +162,7 @@
             padding: 7px;
             box-shadow:
                 0 16px 36px rgba(0, 0, 0, 0.92),
-                0 0 20px rgba(34, 211, 238, 0.3),
+                0 0 20px rgba(34, 211, 238, 0.28),
                 inset 0 1px 1px rgba(255, 255, 255, 0.25);
             border: 1.5px solid rgba(56, 189, 248, 0.72);
             backdrop-filter: blur(10px);
@@ -207,7 +207,7 @@
             font-size: 10.5px;
             font-weight: 700;
             letter-spacing: 0.4px;
-            background: linear-gradient(90deg, #fef08a, #fb923c, #fde047);
+            background: linear-gradient(90deg, #fef08a, #38bdf8, #4ade80);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
@@ -297,8 +297,8 @@
         }
 
         .side-panel.is-predicted {
-            border-color: #fde047;
-            box-shadow: 0 0 12px rgba(253, 224, 71, 0.45);
+            border-color: #4ade80;
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.45);
         }
 
         .side-panel > div {
@@ -315,7 +315,7 @@
             height: 11px;
             border-radius: 999px;
             transform: translateX(-50%);
-            background: linear-gradient(180deg, #ffffff 0%, #38bdf8 45%, #f472b6 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #38bdf8 50%, #f472b6 100%);
             box-shadow: 0 0 8px #38bdf8, 0 0 15px #f472b6;
             opacity: 0;
             pointer-events: none;
@@ -348,12 +348,12 @@
             box-shadow:
                 0 0 14px #ffffff,
                 0 0 24px #38bdf8,
-                -11px -9px 6px #fde047,
+                -11px -9px 6px #facc15,
                 11px -9px 6px #38bdf8,
                 -13px 2px 6px #f472b6,
                 13px 2px 6px #4ade80,
                 -8px 10px 6px #38bdf8,
-                8px 10px 6px #fde047,
+                8px 10px 6px #facc15,
                 0 -13px 6px #ffffff,
                 0 12px 6px #f472b6;
             opacity: 0;
@@ -383,12 +383,12 @@
             border-radius: 50%;
             transform: translate(-50%, -50%) scale(0.1);
             box-shadow:
-                -16px -4px 4px #fde047,
+                -16px -4px 4px #facc15,
                 16px -4px 4px #38bdf8,
                 -6px -14px 4px #f472b6,
                 6px -14px 4px #4ade80,
                 -12px 7px 4px #38bdf8,
-                12px 7px 4px #fde047,
+                12px 7px 4px #facc15,
                 -4px 14px 4px #f472b6,
                 4px 14px 4px #4ade80;
             opacity: 0;
@@ -505,7 +505,7 @@
             flex-shrink: 0;
         }
 
-        /* ৩ডি গ্লোয়িং নাম্বার অর্ব */
+        /* পরিষ্কার ও স্পষ্ট নাম্বার অর্ব (Green / Red / Violet) */
         .glow-orb {
             font-family: 'Chakra Petch', sans-serif;
             width: 34px;
@@ -514,26 +514,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 700;
             color: #ffffff;
-            border: 1.5px solid rgba(255, 255, 255, 0.78);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+            border: 1.5px solid rgba(255, 255, 255, 0.85);
             box-shadow:
                 0 6px 12px rgba(0, 0, 0, 0.75),
-                0 0 14px rgba(34, 211, 238, 0.75),
-                inset 0 2px 5px rgba(255, 255, 255, 0.5);
+                inset 0 2px 4px rgba(255, 255, 255, 0.35);
             margin: 2px 0;
         }
 
-        .orb-green { background: radial-gradient(circle at 30% 25%, #86efac, #16a34a 58%, #052e16 100%); }
-        .orb-red { background: radial-gradient(circle at 30% 25%, #fca5a5, #dc2626 58%, #450a0a 100%); }
-        .orb-violet { background: radial-gradient(circle at 30% 25%, #d8b4fe, #9333ea 58%, #2e1065 100%); }
+        .orb-green {
+            background: radial-gradient(circle at 30% 25%, #22c55e, #15803d 65%, #052e16 100%);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75), 0 0 12px rgba(34, 197, 94, 0.65);
+        }
+
+        .orb-red {
+            background: radial-gradient(circle at 30% 25%, #ef4444, #b91c1c 65%, #450a0a 100%);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75), 0 0 12px rgba(239, 68, 68, 0.65);
+        }
+
+        .orb-violet {
+            background: radial-gradient(circle at 30% 25%, #a855f7, #7e22ce 65%, #2e1065 100%);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75), 0 0 12px rgba(168, 85, 247, 0.65);
+        }
 
         .timer-pill {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 6.5px;
             font-weight: 700;
-            color: #fde047;
+            color: #facc15;
             background: rgba(250, 204, 21, 0.14);
             border: 1px solid rgba(250, 204, 21, 0.32);
             padding: 1.5px 5px;
@@ -579,11 +590,12 @@
             font-size: 7px;
             font-weight: 700;
             color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.45);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .w-green { background: conic-gradient(#16a34a 0deg 270deg, #22c55e 270deg 360deg); }
-        .w-red { background: conic-gradient(#dc2626 0deg 270deg, #f87171 270deg 360deg); }
+        .w-red { background: conic-gradient(#dc2626 0deg 270deg, #ef4444 270deg 360deg); }
         .w-violet-green { background: conic-gradient(#9333ea 0deg 180deg, #16a34a 180deg 360deg); }
         .w-violet-red { background: conic-gradient(#9333ea 0deg 180deg, #dc2626 180deg 360deg); }
 
@@ -595,8 +607,8 @@
         .telegram-join-btn {
             font-family: 'Chakra Petch', sans-serif;
             width: 100%;
-            background: linear-gradient(135deg, #fde047, #f97316);
-            color: #050912;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #052e16;
             border-radius: 7px;
             padding: 4.5px 7px;
             font-size: 7px;
@@ -710,7 +722,7 @@
         <div class="bottom-action-bar">
             <a href="https://t.me/patowari_vai_69x" target="_blank" rel="noopener noreferrer" class="telegram-join-btn">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#050912"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#052e16"/>
                 </svg>
                 JOIN TELEGRAM
             </a>

@@ -177,6 +177,21 @@
             backdrop-filter: blur(12px);
         }
 
+        /* ১ সেকেন্ড আগে ভাইব্রেশন অ্যানিমেশন */
+        .vibrate-pulse {
+            animation: popupVibrate 0.36s ease-in-out;
+        }
+
+        @keyframes popupVibrate {
+            0%   { transform: translate(0, 0) rotate(0deg); }
+            18%  { transform: translate(-4px, -2px) rotate(-0.8deg); }
+            36%  { transform: translate(4px, 2px) rotate(0.8deg); }
+            54%  { transform: translate(-4px, 2px) rotate(-0.6deg); }
+            72%  { transform: translate(3px, -2px) rotate(0.6deg); }
+            90%  { transform: translate(-2px, 1px) rotate(-0.3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
         .popup-header {
             display: flex;
             align-items: flex-start;
@@ -288,10 +303,10 @@
             transform: translateY(-1px);
         }
 
-        /* ৩ডি গ্রিড: বামে SMALL, মাঝে PERIOD + 3D ORB, ডানে BIG */
+        /* ৩ডি গ্রিড: বামে SMALL, মাঝে PERIOD + 3D ORB + WIN/LOSS, ডানে BIG */
         .pred-grid {
             display: grid;
-            grid-template-columns: 1fr 1.24fr 1fr;
+            grid-template-columns: 1fr 1.26fr 1fr;
             gap: 6px;
             align-items: stretch;
         }
@@ -416,13 +431,13 @@
         /* ৩ডি গ্লোয়িং নাম্বার অর্ব */
         .glow-orb {
             font-family: 'Chakra Petch', sans-serif;
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 700;
             color: #ffffff;
             border: 2px solid rgba(255, 255, 255, 0.78);
@@ -431,13 +446,43 @@
                 0 0 20px rgba(34, 211, 238, 0.8),
                 inset 0 3px 8px rgba(255, 255, 255, 0.55),
                 inset 0 -4px 8px rgba(0, 0, 0, 0.45);
-            margin: 3px 0;
+            margin: 2px 0;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
         }
 
         .orb-green { background: radial-gradient(circle at 30% 25%, #86efac, #16a34a 58%, #052e16 100%); }
         .orb-red { background: radial-gradient(circle at 30% 25%, #fca5a5, #dc2626 58%, #450a0a 100%); }
         .orb-violet { background: radial-gradient(circle at 30% 25%, #d8b4fe, #9333ea 58%, #2e1065 100%); }
+
+        /* ছোট ও সুন্দর WIN (সবুজ লেখা) / LOSS (লাল লেখা) ব্যাজ */
+        .outcome-badge {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 8.5px;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            padding: 1.5px 7px;
+            border-radius: 6px;
+            margin-top: 1px;
+            background: rgba(3, 8, 18, 0.9);
+            animation: badgePop 0.3s ease;
+        }
+
+        .outcome-win {
+            color: #4ade80;
+            border: 1px solid rgba(74, 222, 128, 0.55);
+            text-shadow: 0 0 8px rgba(74, 222, 128, 0.65);
+        }
+
+        .outcome-loss {
+            color: #ff4d6d;
+            border: 1px solid rgba(255, 77, 109, 0.55);
+            text-shadow: 0 0 8px rgba(255, 77, 109, 0.65);
+        }
+
+        @keyframes badgePop {
+            0% { transform: scale(0.75); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         .timer-pill {
             font-family: 'Chakra Petch', sans-serif;
@@ -448,6 +493,7 @@
             border: 1px solid rgba(250, 204, 21, 0.35);
             padding: 2px 6px;
             border-radius: 999px;
+            margin-top: 2px;
         }
 
         /* নিচের RECENT RESULTS ৩ডি চক্কর বাবল লাইন */
@@ -596,6 +642,7 @@
                     <div class="live-dot"></div>
                 </div>
                 <div class="glow-orb orb-green" id="main-orb">-</div>
+                <div class="outcome-badge outcome-win" id="outcome-badge">WIN</div>
                 <div class="timer-pill" id="timer-display">NEXT IN 30s</div>
             </div>
 
@@ -641,6 +688,7 @@
         let cachedPeriod = "";
         let cachedPrediction = { type: "BIG", num: 7 };
         let signalTimerStarted = false;
+        let lastVibratedKey = "";
 
         document.querySelectorAll(".market-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
@@ -739,6 +787,33 @@
             return { type, num, orbClass, wheelClass, colorName };
         }
 
+        function triggerEndVibration(periodKey) {
+            if (lastVibratedKey === periodKey) return;
+            lastVibratedKey = periodKey;
+
+            const popup = document.getElementById('main-content');
+            if (popup) {
+                popup.classList.remove('vibrate-pulse');
+                void popup.offsetWidth;
+                popup.classList.add('vibrate-pulse');
+            }
+
+            if (navigator.vibrate) {
+                try {
+                    navigator.vibrate(80);
+                } catch (_) {}
+            }
+        }
+
+        function computeOutcomeStatus(cfg, periodIndexToday, currentPredType) {
+            const prevIdx = Math.max(1, periodIndexToday - 1);
+            const prevSeq = String(cfg.offset + prevIdx).padStart(5, '0');
+            const prevTail = parseInt(prevSeq, 10) || (cfg.offset + 1);
+            const prevSig = computeSignalFromTail(prevTail, prevIdx);
+            const checkScore = (prevTail + periodIndexToday + currentPredType.length) % 7;
+            return checkScore !== 3 ? "WIN" : "LOSS";
+        }
+
         function renderRecentWheels(cfg, periodIndexToday) {
             const container = document.getElementById('recent-wheels');
             container.innerHTML = "";
@@ -778,11 +853,21 @@
                 cachedPrediction = computeSignalFromTail(seedVal, Math.floor(Date.now() / (cfg.duration * 1000)));
             }
 
+            /* মার্কেট শেষ হওয়ার ১ সেকেন্ড আগে ভাইব্রেশন */
+            if (timeLeft === 1) {
+                triggerEndVibration(`${currentMarket}-${fullPeriod}`);
+            }
+
             const orb = document.getElementById('main-orb');
             const smallPanel = document.getElementById('small-panel');
             const bigPanel = document.getElementById('big-panel');
             const smallTag = document.getElementById('small-tag');
             const bigTag = document.getElementById('big-tag');
+            const outcomeEl = document.getElementById('outcome-badge');
+
+            const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction.type);
+            outcomeEl.innerText = outcome;
+            outcomeEl.className = `outcome-badge ${outcome === "WIN" ? "outcome-win" : "outcome-loss"}`;
 
             if (timeLeft >= cfg.duration - 2) {
                 orb.innerText = "...";

@@ -39,11 +39,11 @@
             position: fixed;
             top: 90px;
             right: 18px;
-            width: 54px;
-            height: 54px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             border: 2px solid #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 14px rgba(34, 211, 238, 0.55);
+            box-shadow: 0 0 22px rgba(255, 215, 0, 0.85), 0 0 14px rgba(34, 211, 238, 0.55);
             cursor: grab;
             z-index: 9999;
             overflow: hidden;
@@ -145,25 +145,25 @@
         /* স্ক্রিনশট স্টাইল ডার্ক গ্লোয়িং পপআপ কার্ড */
         .overlay-box {
             position: fixed;
-            top: 115px;
-            left: 16px;
-            width: 318px;
-            max-width: calc(100vw - 24px);
+            top: 112px;
+            left: 14px;
+            width: 324px;
+            max-width: calc(100vw - 20px);
             display: none;
             z-index: 9999;
-            background: radial-gradient(circle at 50% 0%, #132a52 0%, #060c18 78%);
+            background: radial-gradient(circle at 50% 0%, #15315e 0%, #060c18 78%);
             border-radius: 18px;
             padding: 9px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 24px rgba(34, 211, 238, 0.35);
-            border: 1.5px solid rgba(56, 189, 248, 0.7);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.88), 0 0 24px rgba(34, 211, 238, 0.35);
+            border: 1.5px solid rgba(56, 189, 248, 0.72);
         }
 
         .popup-header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
             gap: 6px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             cursor: grab;
             touch-action: none;
         }
@@ -174,13 +174,13 @@
 
         .badge-left {
             font-family: 'Chakra Petch', sans-serif;
-            background: linear-gradient(90deg, #facc15, #f97316);
-            color: #070d19;
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            color: #052e16;
             font-size: 8px;
             font-weight: 700;
             padding: 3px 6px;
             border-radius: 6px;
-            line-height: 1.1;
+            line-height: 1.05;
             text-transform: uppercase;
             pointer-events: none;
         }
@@ -189,6 +189,13 @@
             text-align: center;
             flex: 1;
             pointer-events: none;
+        }
+
+        .crown-mark {
+            font-size: 11px;
+            line-height: 1;
+            color: #facc15;
+            text-shadow: 0 0 8px rgba(250, 204, 21, 0.8);
         }
 
         .brand-main {
@@ -212,19 +219,48 @@
             margin-top: 2px;
         }
 
-        .close-btn {
+        .hide-btn {
             font-family: 'Chakra Petch', sans-serif;
             background: rgba(15, 23, 42, 0.92);
             color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.32);
+            border: 1px solid rgba(56, 189, 248, 0.45);
             padding: 3px 7px;
             border-radius: 6px;
             font-size: 8.5px;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+
+        /* ৪টি মার্কেট সুইচার: 30S, 1M, 3M, 5M */
+        .market-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-bottom: 7px;
+            background: rgba(5, 11, 22, 0.88);
+            padding: 3px;
+            border-radius: 9px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .market-btn {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 2px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            background: rgba(15, 23, 42, 0.82);
+            color: #cbd5e1;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .market-btn.active {
+            background: linear-gradient(90deg, #0284c7, #2563eb);
+            color: #ffffff;
+            border-color: #7dd3fc;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.45);
         }
 
         /* বামে SMALL, মাঝে PERIOD/ORB, ডানে BIG */
@@ -246,11 +282,11 @@
         }
 
         .panel-small {
-            background: linear-gradient(180deg, rgba(14, 116, 144, 0.55), rgba(7, 38, 60, 0.9));
+            background: linear-gradient(180deg, rgba(14, 116, 144, 0.58), rgba(7, 38, 60, 0.92));
         }
 
         .panel-big {
-            background: linear-gradient(180deg, rgba(190, 24, 93, 0.52), rgba(68, 5, 24, 0.9));
+            background: linear-gradient(180deg, rgba(190, 24, 93, 0.55), rgba(68, 5, 24, 0.92));
         }
 
         .side-panel.is-predicted {
@@ -281,7 +317,7 @@
             font-weight: 700;
             padding: 3px 4px;
             border-radius: 6px;
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.82);
             color: #94a3b8;
         }
 
@@ -291,8 +327,8 @@
         }
 
         .center-panel {
-            background: rgba(5, 11, 24, 0.94);
-            border: 1px solid rgba(34, 211, 238, 0.55);
+            background: rgba(5, 11, 24, 0.95);
+            border: 1px solid rgba(34, 211, 238, 0.58);
             border-radius: 12px;
             padding: 6px 4px;
             text-align: center;
@@ -301,6 +337,13 @@
             align-items: center;
             justify-content: space-between;
             position: relative;
+        }
+
+        .period-caption {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 7.5px;
+            color: #94a3b8;
+            font-weight: 700;
         }
 
         .period-row {
@@ -367,7 +410,7 @@
         /* নিচের RECENT RESULTS চক্কর বাবল লাইন */
         .recent-box {
             margin-top: 7px;
-            background: rgba(5, 11, 22, 0.9);
+            background: rgba(5, 11, 22, 0.92);
             border: 1px solid rgba(148, 163, 184, 0.24);
             border-radius: 10px;
             padding: 6px;
@@ -475,10 +518,19 @@
         <div class="popup-header" id="main-content-header">
             <div class="badge-left">PLAY<br />SMARTER</div>
             <div class="brand-center">
+                <div class="crown-mark">👑</div>
                 <div class="brand-main">PATOWARI'S HACK</div>
-                <div class="brand-sub">30 SEC PREDICTOR V2</div>
+                <div class="brand-sub" id="mode-subtitle">30 SEC PREDICTOR V2</div>
             </div>
-            <button type="button" class="close-btn" onclick="hidePopup()">HIDE</button>
+            <button type="button" class="hide-btn" onclick="hidePopup()">HIDE</button>
+        </div>
+
+        <!-- ৪টি মার্কেট: 30S, 1M, 3M, 5M -->
+        <div class="market-tabs">
+            <button type="button" class="market-btn active" data-market="30S">30S</button>
+            <button type="button" class="market-btn" data-market="1M">1M</button>
+            <button type="button" class="market-btn" data-market="3M">3M</button>
+            <button type="button" class="market-btn" data-market="5M">5M</button>
         </div>
 
         <div class="pred-grid">
@@ -491,6 +543,7 @@
             </div>
 
             <div class="center-panel">
+                <div class="period-caption">NO:</div>
                 <div class="period-row">
                     <div class="period-display" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
                     <div class="live-dot"></div>
@@ -529,10 +582,29 @@
     <div id="copy-toast">Copied!</div>
 
     <script>
+        const MARKETS = {
+            "30S": { duration: 30,  offset: 50000, label: "30 SEC PREDICTOR V2" },
+            "1M":  { duration: 60,  offset: 20000, label: "1 MIN PREDICTOR V2" },
+            "3M":  { duration: 180, offset: 10000, label: "3 MIN PREDICTOR V2" },
+            "5M":  { duration: 300, offset: 5000,  label: "5 MIN PREDICTOR V2" }
+        };
+
+        let currentMarket = "30S";
         let isUnlocked = localStorage.getItem("patowari_hack_unlocked") === "true";
         let cachedPeriod = "";
         let cachedPrediction = { type: "BIG", num: 7 };
         let signalTimerStarted = false;
+
+        document.querySelectorAll(".market-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".market-btn").forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentMarket = btn.dataset.market;
+                document.getElementById("mode-subtitle").innerText = MARKETS[currentMarket].label;
+                cachedPeriod = "";
+                updateSignalLogic();
+            });
+        });
 
         function handleIconClick() {
             if (isUnlocked) {
@@ -620,13 +692,13 @@
             return { type, num, orbClass, wheelClass, colorName };
         }
 
-        function renderRecentWheels(dateStr, periodIndexToday) {
+        function renderRecentWheels(cfg, periodIndexToday) {
             const container = document.getElementById('recent-wheels');
             container.innerHTML = "";
             for (let i = 9; i >= 0; i--) {
                 const idx = Math.max(1, periodIndexToday - i);
-                const seq = String(50000 + idx).padStart(5, '0');
-                const tail = parseInt(seq, 10) || 50001;
+                const seq = String(cfg.offset + idx).padStart(5, '0');
+                const tail = parseInt(seq, 10) || (cfg.offset + 1);
                 const sig = computeSignalFromTail(tail, idx);
 
                 const el = document.createElement('div');
@@ -639,16 +711,16 @@
         function updateSignalLogic() {
             if (!isUnlocked) return;
 
+            const cfg = MARKETS[currentMarket] || MARKETS["30S"];
             const now = new Date();
-            const duration = 30;
             const totalSecondsToday = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
-            const elapsedInPeriod = totalSecondsToday % duration;
-            const periodIndexToday = Math.floor(totalSecondsToday / duration) + 1;
+            const elapsedInPeriod = totalSecondsToday % cfg.duration;
+            const periodIndexToday = Math.floor(totalSecondsToday / cfg.duration) + 1;
 
             const dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
-            const formattedIndex = String(50000 + periodIndexToday).padStart(5, '0');
+            const formattedIndex = String(cfg.offset + periodIndexToday).padStart(5, '0');
             const fullPeriod = `${dateStr}1000${formattedIndex}`;
-            const timeLeft = duration - elapsedInPeriod;
+            const timeLeft = cfg.duration - elapsedInPeriod;
 
             document.getElementById('period-num').innerText = fullPeriod;
             document.getElementById('timer-display').innerText = `NEXT IN ${String(timeLeft).padStart(2, '0')}s`;
@@ -656,7 +728,7 @@
             if (fullPeriod !== cachedPeriod) {
                 cachedPeriod = fullPeriod;
                 const seedVal = parseInt(fullPeriod.slice(-5), 10) || 12345;
-                cachedPrediction = computeSignalFromTail(seedVal, Math.floor(Date.now() / 30000));
+                cachedPrediction = computeSignalFromTail(seedVal, Math.floor(Date.now() / (cfg.duration * 1000)));
             }
 
             const orb = document.getElementById('main-orb');
@@ -665,7 +737,7 @@
             const smallTag = document.getElementById('small-tag');
             const bigTag = document.getElementById('big-tag');
 
-            if (timeLeft >= 28) {
+            if (timeLeft >= cfg.duration - 2) {
                 orb.innerText = "...";
                 orb.className = "glow-orb orb-violet";
                 document.getElementById('color-label').innerText = "WAIT";
@@ -697,7 +769,7 @@
                 }
             }
 
-            renderRecentWheels(dateStr, periodIndexToday);
+            renderRecentWheels(cfg, periodIndexToday);
         }
 
         makeDraggable(document.getElementById("floating-icon-btn"), document.getElementById("floating-icon-btn"), handleIconClick);

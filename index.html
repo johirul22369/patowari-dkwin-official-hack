@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>PATOWARI'S HACK - VIP Edition</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,700;1,700&family=Montserrat:wght@600;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             user-select: none;
             -webkit-user-select: none;
             -webkit-tap-highlight-color: transparent;
@@ -21,7 +21,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #03050b;
+            background-color: #03060f;
             color: #ffffff;
         }
 
@@ -42,8 +42,8 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            border: 2px solid #ffd700;
-            box-shadow: 0 0 22px rgba(255, 215, 0, 0.85), 0 0 14px rgba(34, 211, 238, 0.55);
+            border: 2px solid #facc15;
+            box-shadow: 0 0 22px rgba(250, 204, 21, 0.65), 0 0 14px rgba(56, 189, 248, 0.5);
             cursor: grab;
             z-index: 9999;
             overflow: hidden;
@@ -71,11 +71,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 280px;
-            background: linear-gradient(165deg, #102447 0%, #070e1c 100%);
-            border: 2px solid #ffd700;
+            width: 284px;
+            background: linear-gradient(165deg, #102447 0%, #060c18 100%);
+            border: 1.5px solid rgba(250, 204, 21, 0.85);
             border-radius: 18px;
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.55), 0 0 24px rgba(34, 211, 238, 0.25);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 24px rgba(56, 189, 248, 0.28);
             padding: 16px;
             display: none;
             z-index: 10000;
@@ -86,23 +86,23 @@
             font-family: 'Chakra Petch', sans-serif;
             font-size: 13px;
             font-weight: 700;
-            color: #ffd700;
+            color: #fde047;
             margin-bottom: 10px;
             letter-spacing: 0.7px;
         }
 
         .auth-input {
             width: 100%;
-            padding: 9px;
-            background: rgba(4, 9, 20, 0.9);
-            border: 1px solid #38bdf8;
-            border-radius: 9px;
-            color: #fff;
+            padding: 9px 11px;
+            background: rgba(4, 9, 20, 0.92);
+            border: 1px solid rgba(56, 189, 248, 0.65);
+            border-radius: 10px;
+            color: #ffffff;
             font-size: 12px;
             text-align: center;
             margin-bottom: 10px;
             outline: none;
-            font-weight: 800;
+            font-weight: 700;
             user-select: text;
             -webkit-user-select: text;
         }
@@ -112,21 +112,21 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            font-size: 10px;
+            font-size: 10.5px;
             color: #cbd5e1;
-            margin-bottom: 10px;
+            margin-bottom: 11px;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 600;
         }
 
         .auth-btn {
             font-family: 'Chakra Petch', sans-serif;
             width: 100%;
             padding: 9px;
-            background: linear-gradient(135deg, #ffd700, #f59e0b);
+            background: linear-gradient(135deg, #fde047, #f97316);
             border: none;
-            border-radius: 9px;
-            color: #060a14;
+            border-radius: 10px;
+            color: #060b14;
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
@@ -135,27 +135,27 @@
         }
 
         #error-msg {
-            color: #ff4d6d;
+            color: #fb7185;
             font-size: 10px;
             margin-top: 7px;
             display: none;
-            font-weight: 800;
+            font-weight: 700;
         }
 
-        /* স্ক্রিনশট স্টাইল ডার্ক গ্লোয়িং পপআপ কার্ড */
+        /* মূল ভিআইপি পপআপ কার্ড */
         .overlay-box {
             position: fixed;
-            top: 112px;
+            top: 110px;
             left: 14px;
-            width: 324px;
+            width: 326px;
             max-width: calc(100vw - 20px);
             display: none;
             z-index: 9999;
-            background: radial-gradient(circle at 50% 0%, #15315e 0%, #060c18 78%);
-            border-radius: 18px;
-            padding: 9px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.88), 0 0 24px rgba(34, 211, 238, 0.35);
-            border: 1.5px solid rgba(56, 189, 248, 0.72);
+            background: radial-gradient(circle at 50% 0%, #163363 0%, #060c18 78%);
+            border-radius: 19px;
+            padding: 10px;
+            box-shadow: 0 18px 44px rgba(0, 0, 0, 0.9), 0 0 26px rgba(56, 189, 248, 0.35);
+            border: 1.5px solid rgba(56, 189, 248, 0.75);
         }
 
         .popup-header {
@@ -163,7 +163,7 @@
             align-items: flex-start;
             justify-content: space-between;
             gap: 6px;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
             cursor: grab;
             touch-action: none;
         }
@@ -174,13 +174,13 @@
 
         .badge-left {
             font-family: 'Chakra Petch', sans-serif;
-            background: linear-gradient(90deg, #4ade80, #22c55e);
+            background: linear-gradient(135deg, #4ade80, #16a34a);
             color: #052e16;
             font-size: 8px;
             font-weight: 700;
             padding: 3px 6px;
-            border-radius: 6px;
-            line-height: 1.05;
+            border-radius: 7px;
+            line-height: 1.1;
             text-transform: uppercase;
             pointer-events: none;
         }
@@ -194,8 +194,8 @@
         .crown-mark {
             font-size: 11px;
             line-height: 1;
-            color: #facc15;
-            text-shadow: 0 0 8px rgba(250, 204, 21, 0.8);
+            color: #fde047;
+            text-shadow: 0 0 8px rgba(253, 224, 71, 0.8);
         }
 
         .brand-main {
@@ -222,45 +222,45 @@
         .hide-btn {
             font-family: 'Chakra Petch', sans-serif;
             background: rgba(15, 23, 42, 0.92);
-            color: #ffffff;
-            border: 1px solid rgba(56, 189, 248, 0.45);
+            color: #f8fafc;
+            border: 1px solid rgba(56, 189, 248, 0.48);
             padding: 3px 7px;
-            border-radius: 6px;
+            border-radius: 7px;
             font-size: 8.5px;
             font-weight: 700;
             cursor: pointer;
         }
 
-        /* ৪টি মার্কেট সুইচার: 30S, 1M, 3M, 5M */
+        /* ৪টি মার্কেট ট্যাব: 30S, 1M, 3M, 5M */
         .market-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 4px;
-            margin-bottom: 7px;
-            background: rgba(5, 11, 22, 0.88);
+            margin-bottom: 8px;
+            background: rgba(5, 11, 22, 0.9);
             padding: 3px;
-            border-radius: 9px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.32);
         }
 
         .market-btn {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 9px;
             font-weight: 700;
-            padding: 3px 2px;
-            border-radius: 6px;
+            padding: 4px 2px;
+            border-radius: 7px;
             border: 1px solid transparent;
-            background: rgba(15, 23, 42, 0.82);
+            background: rgba(15, 23, 42, 0.85);
             color: #cbd5e1;
             cursor: pointer;
             text-align: center;
         }
 
         .market-btn.active {
-            background: linear-gradient(90deg, #0284c7, #2563eb);
+            background: linear-gradient(135deg, #0ea5e9, #2563eb);
             color: #ffffff;
             border-color: #7dd3fc;
-            box-shadow: 0 0 8px rgba(56, 189, 248, 0.45);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
         }
 
         /* বামে SMALL, মাঝে PERIOD/ORB, ডানে BIG */
@@ -272,7 +272,7 @@
         }
 
         .side-panel {
-            border-radius: 12px;
+            border-radius: 13px;
             padding: 8px 5px;
             text-align: center;
             display: flex;
@@ -282,16 +282,16 @@
         }
 
         .panel-small {
-            background: linear-gradient(180deg, rgba(14, 116, 144, 0.58), rgba(7, 38, 60, 0.92));
+            background: linear-gradient(180deg, rgba(14, 116, 144, 0.6), rgba(7, 38, 60, 0.92));
         }
 
         .panel-big {
-            background: linear-gradient(180deg, rgba(190, 24, 93, 0.55), rgba(68, 5, 24, 0.92));
+            background: linear-gradient(180deg, rgba(190, 24, 93, 0.56), rgba(68, 5, 24, 0.92));
         }
 
         .side-panel.is-predicted {
             border-color: #fde047;
-            box-shadow: 0 0 14px rgba(253, 224, 71, 0.45);
+            box-shadow: 0 0 15px rgba(253, 224, 71, 0.45);
         }
 
         .panel-title {
@@ -317,7 +317,7 @@
             font-weight: 700;
             padding: 3px 4px;
             border-radius: 6px;
-            background: rgba(15, 23, 42, 0.82);
+            background: rgba(15, 23, 42, 0.85);
             color: #94a3b8;
         }
 
@@ -328,15 +328,14 @@
 
         .center-panel {
             background: rgba(5, 11, 24, 0.95);
-            border: 1px solid rgba(34, 211, 238, 0.58);
-            border-radius: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.58);
+            border-radius: 13px;
             padding: 6px 4px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            position: relative;
         }
 
         .period-caption {
@@ -388,8 +387,8 @@
             font-size: 20px;
             font-weight: 700;
             color: #ffffff;
-            border: 2px solid rgba(255, 255, 255, 0.68);
-            box-shadow: 0 0 16px rgba(34, 211, 238, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.35);
             margin: 3px 0;
         }
 
@@ -412,7 +411,7 @@
             margin-top: 7px;
             background: rgba(5, 11, 22, 0.92);
             border: 1px solid rgba(148, 163, 184, 0.24);
-            border-radius: 10px;
+            border-radius: 11px;
             padding: 6px;
         }
 
@@ -461,10 +460,10 @@
         .telegram-join-btn {
             font-family: 'Chakra Petch', sans-serif;
             width: 100%;
-            background: linear-gradient(135deg, #ffd700, #f59e0b);
-            color: #000;
-            border-radius: 9px;
-            padding: 6px 10px;
+            background: linear-gradient(135deg, #fde047, #f97316);
+            color: #060b14;
+            border-radius: 10px;
+            padding: 6.5px 10px;
             font-size: 9.5px;
             font-weight: 700;
             text-decoration: none;
@@ -484,7 +483,7 @@
             background: #22c55e;
             color: #ffffff;
             font-size: 10px;
-            font-weight: 900;
+            font-weight: 800;
             padding: 4px 10px;
             border-radius: 6px;
             display: none;
@@ -513,7 +512,7 @@
         <div id="error-msg">Wrong Password!</div>
     </div>
 
-    <!-- স্ক্রিনশট স্টাইল পপআপ উইন্ডো -->
+    <!-- ভিআইপি পপআপ উইন্ডো -->
     <div class="overlay-box" id="main-content">
         <div class="popup-header" id="main-content-header">
             <div class="badge-left">PLAY<br />SMARTER</div>
@@ -572,7 +571,7 @@
         <div class="bottom-action-bar">
             <a href="https://t.me/patowari_vai_69x" target="_blank" rel="noopener noreferrer" class="telegram-join-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#000"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#060b14"/>
                 </svg>
                 JOIN TELEGRAM
             </a>

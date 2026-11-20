@@ -13,21 +13,23 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    body {
-      min-height: 100vh;
+    html, body {
+      width: 100%;
+      height: 100%;
       font-family: "Segoe UI", Roboto, Arial, sans-serif;
       background: radial-gradient(circle at top, #132340 0%, #060b14 100%);
       color: #ffffff;
       overflow: hidden;
     }
 
-    /* শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন (ড্র্যাগেবল + ক্লিকেবল) */
+    /* শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন (মুভেবল + ক্লিকেবল) */
     .start-orb-btn {
       position: fixed;
       top: 120px;
       left: 20px;
       width: 64px;
       height: 64px;
+      padding: 0;
       border-radius: 50%;
       border: 2.5px solid #facc15;
       background: #081224;
@@ -50,13 +52,14 @@
       height: 100%;
       object-fit: cover;
       pointer-events: none;
+      display: block;
     }
 
-    /* আইকনে ক্লিক করলে ওপেন হওয়া পাসওয়ার্ড বক্স */
+    /* পাসওয়ার্ড বক্স মোডাল */
     .pass-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(5, 9, 18, 0.82);
+      background: rgba(5, 9, 18, 0.85);
       backdrop-filter: blur(6px);
       display: none;
       align-items: center;
@@ -122,8 +125,17 @@
       cursor: pointer;
     }
 
+    .reg-actions-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
     .ref-go-btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       text-align: center;
       text-decoration: none;
@@ -131,9 +143,21 @@
       color: #090d16;
       font-weight: 900;
       font-size: 12.5px;
-      padding: 10px 12px;
+      padding: 10px 10px;
       border-radius: 10px;
-      margin-bottom: 12px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .copy-ref-btn {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(250, 204, 21, 0.55);
+      color: #fde047;
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 0 10px;
+      border-radius: 10px;
+      cursor: pointer;
     }
 
     .pass-input {
@@ -146,6 +170,7 @@
       font-size: 14px;
       outline: none;
       margin-bottom: 10px;
+      user-select: text;
     }
 
     .unlock-btn {
@@ -462,24 +487,28 @@
       color: #94a3b8;
     }
 
-    .popup-footer a {
+    .popup-footer button {
+      background: none;
+      border: none;
       color: #fde047;
-      text-decoration: none;
+      font-size: 9.5px;
       font-weight: 800;
+      cursor: pointer;
+      padding: 0;
     }
   </style>
 </head>
 <body>
 
-  <!-- শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন ছবি (ক্লিক করলে পাসওয়ার্ড বক্স খুলবে) -->
-  <button type="button" class="start-orb-btn" id="startOrbBtn" title="Tap to Open Password Box">
+  <!-- শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন ছবি (মুভেবল + ট্যাপ করলে পাসওয়ার্ড বক্স) -->
+  <button type="button" class="start-orb-btn" id="startOrbBtn" title="Drag or Tap to Open Password Box">
     <img
       src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
       alt="PATOWARI'S HACK Icon"
     />
   </button>
 
-  <!-- আইকনে ক্লিক করার পর ওপেন হওয়া পাসওয়ার্ড বক্স -->
+  <!-- পাসওয়ার্ড বক্স মোডাল -->
   <div class="pass-modal-backdrop" id="passModal">
     <div class="pass-modal-card">
       <div class="pass-modal-top">
@@ -496,14 +525,14 @@
         <button type="button" class="close-pass-btn" id="closePassBtn">✕</button>
       </div>
 
-      <a
-        href="https://dkwin9.com/#/register?invitationCode=932152417441"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="ref-go-btn"
-      >
-        🔗 অফিশিয়াল রেজিস্ট্রেশন লিংক
-      </a>
+      <div class="reg-actions-row">
+        <button type="button" class="ref-go-btn" id="goRegisterBtn">
+          🔗 DK WIN রেজিস্ট্রেশন পেজে যান
+        </button>
+        <button type="button" class="copy-ref-btn" id="copyRefBtn" title="Copy Referral Link">
+          COPY
+        </button>
+      </div>
 
       <input
         type="password"
@@ -579,14 +608,14 @@
 
     <div class="popup-footer">
       <span>@patowari_vai_69x</span>
-      <a href="https://dkwin9.com/#/register?invitationCode=932152417441" target="_blank" rel="noopener noreferrer">
-        🔗 Register Now
-      </a>
+      <button type="button" id="popupRegBtn">🔗 Register Page</button>
     </div>
   </div>
 
   <script>
     const ACCESS_PASS = "Zahirul22369";
+    const REFERRAL_URL = "https://dkwin9.com/#/register?invitationCode=932152417441";
+
     const MODES = {
       "30S": { duration: 30,  offset: 50000, label: "30 SEC PREDICTOR V2" },
       "1M":  { duration: 60,  offset: 20000, label: "1 MIN PREDICTOR V2" },
@@ -604,12 +633,40 @@
     const errorMsg = document.getElementById("errorMsg");
     const hackPopup = document.getElementById("hackPopup");
     const hideBtn = document.getElementById("hideBtn");
+    const goRegisterBtn = document.getElementById("goRegisterBtn");
+    const copyRefBtn = document.getElementById("copyRefBtn");
+    const popupRegBtn = document.getElementById("popupRegBtn");
+
+    function openRegistrationPage() {
+      try {
+        if (window.top && window.top !== window) {
+          window.top.location.href = REFERRAL_URL;
+        } else {
+          window.location.href = REFERRAL_URL;
+        }
+      } catch (_) {
+        window.location.assign(REFERRAL_URL);
+      }
+    }
+
+    goRegisterBtn.addEventListener("click", openRegistrationPage);
+    popupRegBtn.addEventListener("click", openRegistrationPage);
+
+    copyRefBtn.addEventListener("click", () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(REFERRAL_URL).catch(() => {});
+      }
+      copyRefBtn.textContent = "COPIED";
+      setTimeout(() => {
+        copyRefBtn.textContent = "COPY";
+      }, 1500);
+    });
 
     function openPasswordBox() {
       errorMsg.textContent = "";
       passInput.value = "";
       passModal.style.display = "flex";
-      setTimeout(() => passInput.focus(), 50);
+      setTimeout(() => passInput.focus(), 60);
     }
 
     closePassBtn.addEventListener("click", () => {
@@ -747,84 +804,89 @@
       renderRecentWheels(info);
     }
 
-    function attachSmoothDrag(targetEl, handleEl, onTapCallback = null) {
-      let dragging = false;
-      let movedDistance = 0;
+    function enableFreeDrag(targetEl, handleEl, onTapCallback = null) {
+      let isDown = false;
+      let hasMoved = false;
       let startX = 0;
       let startY = 0;
-      let startLeft = 0;
-      let startTop = 0;
+      let origLeft = 0;
+      let origTop = 0;
 
-      function onStart(clientX, clientY) {
+      function beginDrag(x, y) {
         const rect = targetEl.getBoundingClientRect();
-        startLeft = rect.left;
-        startTop = rect.top;
-        startX = clientX;
-        startY = clientY;
-        movedDistance = 0;
-        dragging = true;
-        targetEl.style.left = `${startLeft}px`;
-        targetEl.style.top = `${startTop}px`;
+        origLeft = rect.left;
+        origTop = rect.top;
+        startX = x;
+        startY = y;
+        isDown = true;
+        hasMoved = false;
+        targetEl.style.left = `${origLeft}px`;
+        targetEl.style.top = `${origTop}px`;
         targetEl.style.right = "auto";
         targetEl.style.bottom = "auto";
         targetEl.style.transform = "none";
       }
 
-      function onMove(clientX, clientY) {
-        if (!dragging) return;
-        const dx = clientX - startX;
-        const dy = clientY - startY;
-        movedDistance = Math.hypot(dx, dy);
-
+      function moveDrag(x, y) {
+        if (!isDown) return;
+        const dx = x - startX;
+        const dy = y - startY;
+        if (Math.hypot(dx, dy) > 6) {
+          hasMoved = true;
+        }
         const maxLeft = Math.max(4, window.innerWidth - targetEl.offsetWidth - 4);
         const maxTop = Math.max(4, window.innerHeight - targetEl.offsetHeight - 4);
-
-        const nextLeft = Math.max(4, Math.min(maxLeft, startLeft + dx));
-        const nextTop = Math.max(4, Math.min(maxTop, startTop + dy));
-
+        const nextLeft = Math.max(4, Math.min(maxLeft, origLeft + dx));
+        const nextTop = Math.max(4, Math.min(maxTop, origTop + dy));
         targetEl.style.left = `${nextLeft}px`;
         targetEl.style.top = `${nextTop}px`;
       }
 
-      function onEnd() {
-        if (!dragging) return;
-        dragging = false;
-        if (typeof onTapCallback === "function" && movedDistance < 8) {
+      function endDrag() {
+        if (!isDown) return;
+        isDown = false;
+        if (!hasMoved && typeof onTapCallback === "function") {
           onTapCallback();
         }
       }
 
-      handleEl.addEventListener("pointerdown", (e) => {
-        if (e.target.closest("button") || e.target.closest("a")) return;
-        handleEl.setPointerCapture(e.pointerId);
-        onStart(e.clientX, e.clientY);
-      });
-
-      handleEl.addEventListener("pointermove", (e) => {
-        onMove(e.clientX, e.clientY);
-      });
-
-      handleEl.addEventListener("pointerup", onEnd);
-      handleEl.addEventListener("pointercancel", onEnd);
-
       handleEl.addEventListener("touchstart", (e) => {
         if (e.target.closest("button") || e.target.closest("a")) return;
         if (e.touches.length === 1) {
-          onStart(e.touches[0].clientX, e.touches[0].clientY);
+          beginDrag(e.touches[0].clientX, e.touches[0].clientY);
         }
       }, { passive: true });
 
       handleEl.addEventListener("touchmove", (e) => {
-        if (!dragging || e.touches.length !== 1) return;
+        if (!isDown || e.touches.length !== 1) return;
         e.preventDefault();
-        onMove(e.touches[0].clientX, e.touches[0].clientY);
+        moveDrag(e.touches[0].clientX, e.touches[0].clientY);
       }, { passive: false });
 
-      handleEl.addEventListener("touchend", onEnd);
+      handleEl.addEventListener("touchend", endDrag);
+      handleEl.addEventListener("touchcancel", endDrag);
+
+      handleEl.addEventListener("mousedown", (e) => {
+        if (e.button !== 0 || e.target.closest("button") || e.target.closest("a")) return;
+        beginDrag(e.clientX, e.clientY);
+
+        function onMouseMove(ev) {
+          moveDrag(ev.clientX, ev.clientY);
+        }
+
+        function onMouseUp() {
+          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener("mouseup", onMouseUp);
+          endDrag();
+        }
+
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      });
     }
 
-    attachSmoothDrag(startOrbBtn, startOrbBtn, openPasswordBox);
-    attachSmoothDrag(hackPopup, document.getElementById("dragHandle"));
+    enableFreeDrag(startOrbBtn, startOrbBtn, openPasswordBox);
+    enableFreeDrag(hackPopup, document.getElementById("dragHandle"));
 
     setInterval(syncAll, 1000);
     syncAll();

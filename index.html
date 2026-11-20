@@ -1,895 +1,558 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>PATOWARI'S HACK • PREDICTOR V2</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PATOWARI'S HACK - VIP Edition</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800;900&display=swap');
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(circle at top, #132340 0%, #060b14 100%);
-      color: #ffffff;
-      overflow: hidden;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-    /* শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন (মুভেবল + ক্লিকেবল) */
-    .start-orb-btn {
-      position: fixed;
-      top: 120px;
-      left: 20px;
-      width: 64px;
-      height: 64px;
-      padding: 0;
-      border-radius: 50%;
-      border: 2.5px solid #facc15;
-      background: #081224;
-      box-shadow: 0 0 24px rgba(34, 211, 238, 0.7), 0 0 12px rgba(250, 204, 21, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
-      touch-action: none;
-      z-index: 9500;
-      overflow: hidden;
-    }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #03050b;
+            user-select: none;
+            -webkit-user-select: none;
+        }
 
-    .start-orb-btn:active {
-      cursor: grabbing;
-    }
+        #game-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 1;
+            pointer-events: auto;
+        }
 
-    .start-orb-btn img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-      display: block;
-    }
+        /* ফ্লোটিং আইকন */
+        #floating-icon-btn {
+            position: fixed;
+            top: 40px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
+            cursor: move;
+            z-index: 9999;
+            overflow: hidden;
+            touch-action: none;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    /* পাসওয়ার্ড বক্স মোডাল */
-    .pass-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 9, 18, 0.85);
-      backdrop-filter: blur(6px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 9999;
-    }
+        #floating-icon-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
 
-    .pass-modal-card {
-      width: 100%;
-      max-width: 350px;
-      background: linear-gradient(165deg, #102447 0%, #070e1c 100%);
-      border: 1.5px solid rgba(56, 189, 248, 0.65);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 0 36px rgba(34, 211, 238, 0.28);
-    }
+        /* পাসওয়ার্ড পপআপ উইন্ডো */
+        #auth-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 270px;
+            background: rgba(8, 12, 24, 0.98);
+            border: 2px solid #ffd700;
+            border-radius: 16px;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.7);
+            padding: 16px;
+            display: none;
+            z-index: 10000;
+            text-align: center;
+        }
 
-    .pass-modal-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
+        .auth-title {
+            font-size: 11px;
+            font-weight: 900;
+            color: #ffd700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
 
-    .pass-modal-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        .auth-input {
+            width: 100%;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #ffd700;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 11px;
+            text-align: center;
+            margin-bottom: 10px;
+            outline: none;
+            font-weight: 800;
+        }
 
-    .pass-modal-brand img {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #facc15;
-    }
+        .remember-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 9px;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
 
-    .pass-title {
-      font-size: 14.5px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      background: linear-gradient(90deg, #fde047, #fb923c, #fde047);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .auth-btn {
+            width: 100%;
+            padding: 8px;
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-size: 10px;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-    .pass-sub {
-      font-size: 11px;
-      color: #94a3b8;
-      margin-top: 1px;
-    }
+        #error-msg {
+            color: #ff3366;
+            font-size: 9px;
+            margin-top: 6px;
+            display: none;
+            font-weight: 800;
+        }
 
-    .close-pass-btn {
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #e2e8f0;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 5px 9px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+        /* মূল পপআপ উইন্ডো (সম্পূর্ণ পপআপে ডার্ক ব্লার শ্যাডো সহ) */
+        .overlay-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 285px;
+            display: none;
+            z-index: 9999;
+            touch-action: none;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 18px;
+            padding: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            pointer-events: auto;
+        }
 
-    .reg-actions-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
+        .popup-relative-wrapper {
+            position: relative;
+            width: 100%;
+        }
 
-    .ref-go-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      background: linear-gradient(90deg, #facc15, #f97316);
-      color: #090d16;
-      font-weight: 900;
-      font-size: 12.5px;
-      padding: 10px 10px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-    }
+        .popup-main-bg-img {
+            width: 100%;
+            display: block;
+            pointer-events: none;
+            border-radius: 12px;
+        }
 
-    .copy-ref-btn {
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(250, 204, 21, 0.55);
-      color: #fde047;
-      font-weight: 800;
-      font-size: 11.5px;
-      padding: 0 10px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+        .close-btn {
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 900;
+            cursor: pointer;
+            z-index: 25;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 8px #ef4444;
+        }
 
-    .pass-input {
-      width: 100%;
-      padding: 11px 13px;
-      border-radius: 11px;
-      border: 1px solid rgba(56, 189, 248, 0.45);
-      background: #060c18;
-      color: #ffffff;
-      font-size: 14px;
-      outline: none;
-      margin-bottom: 10px;
-      user-select: text;
-    }
+        /* 🎯 প্রেডিকশন এরিয়া ওপরের দিকে এবং বাম দিকে শিফট করা */
+        .center-prediction-area {
+            position: absolute;
+            top: 122px;
+            left: 71.5%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            z-index: 10;
+            background: transparent;
+        }
 
-    .unlock-btn {
-      width: 100%;
-      padding: 11px;
-      border: none;
-      border-radius: 11px;
-      background: linear-gradient(90deg, #0ea5e9, #2563eb);
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 13.5px;
-      cursor: pointer;
-    }
+        .period-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
 
-    .error-msg {
-      color: #f87171;
-      font-size: 12px;
-      margin-top: 8px;
-      min-height: 16px;
-      text-align: center;
-    }
+        /* ✨ রুবি ফন্ট ও আরজিবি (RGB) লাইট অ্যানিমেশন টেক্সট */
+        .period-display {
+            font-size: 6px;
+            font-weight: 900;
+            animation: rgbGlowText 3s infinite;
+            letter-spacing: 0.1px;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+        }
 
-    /* মূল ভাসমান হ্যাক পপআপ কার্ড (ড্র্যাগেবল) */
-    .hack-popup {
-      position: fixed;
-      top: 100px;
-      left: 14px;
-      width: 334px;
-      max-width: calc(100vw - 20px);
-      background: radial-gradient(circle at 50% 0%, #152e59 0%, #070e1c 78%);
-      border: 1.5px solid rgba(56, 189, 248, 0.72);
-      border-radius: 20px;
-      padding: 11px;
-      color: #ffffff;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.72), 0 0 26px rgba(34, 211, 238, 0.28);
-      z-index: 9000;
-      display: none;
-    }
+        .live-dot {
+            width: 3px;
+            height: 3px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 5px #22c55e;
+            animation: liveBlink 1s infinite alternate;
+        }
 
-    .popup-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 7px;
-      cursor: grab;
-      touch-action: none;
-      padding: 2px 0;
-    }
+        @keyframes liveBlink {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.3); }
+        }
 
-    .popup-top-bar:active {
-      cursor: grabbing;
-    }
+        .timer-display {
+            font-size: 7px;
+            font-weight: 900;
+            animation: rgbGlowText 2.5s infinite;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 1px 5px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.4px;
+        }
 
-    .popup-badge-left {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(250, 204, 21, 0.45);
-      padding: 3px 6px 3px 4px;
-      border-radius: 999px;
-      pointer-events: none;
-    }
+        /* 🔥 বিগ / স্মল এর জন্য অলটাইম আরজিবি কালার মিক্স গ্লোয়িং ইফেক্ট */
+        .solid-big-small {
+            font-size: 14px;
+            font-weight: 900;
+            animation: rgbGlowText 2s infinite;
+            letter-spacing: 1.2px;
+            line-height: 1;
+            padding: 2px 6px;
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
 
-    .popup-badge-left img {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+        @keyframes rgbGlowText {
+            0% { color: #ff3366; text-shadow: 0 0 8px #ff3366, 0 0 15px #ff3366; }
+            20% { color: #ff9900; text-shadow: 0 0 8px #ff9900, 0 0 15px #ff9900; }
+            40% { color: #ffff00; text-shadow: 0 0 8px #ffff00, 0 0 15px #ffff00; }
+            60% { color: #00ff88; text-shadow: 0 0 8px #00ff88, 0 0 15px #00ff88; }
+            80% { color: #00ffff; text-shadow: 0 0 8px #00ffff, 0 0 15px #00ffff; }
+            100% { color: #da70d6; text-shadow: 0 0 8px #da70d6, 0 0 15px #da70d6; }
+        }
 
-    .popup-badge-txt {
-      font-size: 8px;
-      font-weight: 900;
-      color: #fde047;
-      line-height: 1.05;
-      text-transform: uppercase;
-    }
+        .official-num-badge {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px #000;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+        }
 
-    .popup-header-center {
-      text-align: center;
-      flex: 1;
-      pointer-events: none;
-    }
+        .bg-red { background: linear-gradient(135deg, #ef4444, #991b1b); border: 1.5px solid #fca5a5; }
+        .bg-green { background: linear-gradient(135deg, #22c55e, #15803d); border: 1.5px solid #86efac; }
+        .bg-violet { background: linear-gradient(135deg, #a855f7, #6b21a8); border: 1.5px solid #d8b4fe; }
 
-    .popup-brand-name {
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: 0.6px;
-      background: linear-gradient(90deg, #fde047, #fb923c, #fde047);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.15;
-    }
+        /* 🎯 টেলিগ্রাম লোগো বাটন পপআপের ভেতরে নির্দিষ্ট স্থানে সেট করা */
+        .bottom-action-bar {
+            margin-top: 6px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 25;
+        }
 
-    .popup-sub-mode {
-      font-size: 9px;
-      font-weight: 800;
-      color: #38bdf8;
-      letter-spacing: 0.4px;
-      margin-top: 2px;
-    }
+        .telegram-join-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            color: #000;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 9px;
+            font-weight: 900;
+            text-decoration: none;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
 
-    .hide-btn {
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #ffffff;
-      font-size: 9px;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 7px;
-      cursor: pointer;
-    }
-
-    /* ৪টি মার্কেট সুইচার: 30S, 1M, 3M, 5M */
-    .market-tabs-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px;
-      margin-bottom: 8px;
-      background: rgba(5, 11, 22, 0.85);
-      padding: 3px;
-      border-radius: 11px;
-      border: 1px solid rgba(56, 189, 248, 0.32);
-    }
-
-    .mode-pill {
-      font-size: 9.5px;
-      font-weight: 800;
-      padding: 4px 2px;
-      border-radius: 8px;
-      border: 1px solid transparent;
-      background: rgba(15, 23, 42, 0.8);
-      color: #cbd5e1;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .mode-pill.active {
-      background: linear-gradient(90deg, #0284c7, #2563eb);
-      color: #ffffff;
-      border-color: #7dd3fc;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.45);
-    }
-
-    /* দুই সাইডে SMALL ও BIG কার্ড, মাঝে পিরিয়ড ও গ্লোয়িং বাবল */
-    .pred-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr 1fr;
-      gap: 7px;
-      align-items: stretch;
-    }
-
-    .side-box {
-      border-radius: 13px;
-      padding: 8px 6px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .side-small {
-      background: linear-gradient(180deg, rgba(14, 116, 144, 0.58), rgba(7, 42, 66, 0.88));
-    }
-
-    .side-big {
-      background: linear-gradient(180deg, rgba(190, 24, 93, 0.56), rgba(71, 6, 25, 0.88));
-    }
-
-    .side-box.active-pick {
-      border-color: #fde047;
-      box-shadow: 0 0 15px rgba(253, 224, 71, 0.45);
-    }
-
-    .side-label {
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.4px;
-    }
-
-    .side-range {
-      font-size: 10px;
-      color: #e2e8f0;
-      opacity: 0.92;
-      margin-top: 1px;
-    }
-
-    .side-status-pill {
-      margin-top: 8px;
-      font-size: 8px;
-      font-weight: 800;
-      padding: 3px 4px;
-      border-radius: 6px;
-      background: rgba(15, 23, 42, 0.82);
-      color: #94a3b8;
-      text-transform: uppercase;
-    }
-
-    .side-status-pill.picked {
-      background: #22c55e;
-      color: #052e16;
-    }
-
-    .center-box {
-      background: rgba(6, 13, 28, 0.94);
-      border: 1px solid rgba(34, 211, 238, 0.55);
-      border-radius: 13px;
-      padding: 7px 5px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .period-caption {
-      font-size: 8px;
-      color: #94a3b8;
-      font-weight: 700;
-    }
-
-    .period-num {
-      font-size: 9.5px;
-      font-weight: 800;
-      color: #f8fafc;
-      letter-spacing: 0.2px;
-      margin-bottom: 4px;
-    }
-
-    .glow-orb {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 900;
-      color: #ffffff;
-      border: 2px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 0 18px rgba(34, 211, 238, 0.75), inset 0 0 10px rgba(255, 255, 255, 0.35);
-      margin: 2px 0;
-    }
-
-    .orb-green { background: radial-gradient(circle at 30% 30%, #4ade80, #15803d); }
-    .orb-red { background: radial-gradient(circle at 30% 30%, #f87171, #b91c1c); }
-    .orb-violet { background: radial-gradient(circle at 30% 30%, #c084fc, #6d28d9); }
-
-    .next-in-box {
-      margin-top: 4px;
-      font-size: 8.5px;
-      font-weight: 800;
-      color: #fde047;
-      background: rgba(250, 204, 21, 0.14);
-      padding: 2px 6px;
-      border-radius: 999px;
-    }
-
-    /* নিচের RECENT RESULTS চক্কর বাবল সেকশন */
-    .recent-section {
-      margin-top: 8px;
-      background: rgba(6, 12, 24, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.24);
-      border-radius: 11px;
-      padding: 6px 7px;
-    }
-
-    .recent-title {
-      font-size: 8.5px;
-      font-weight: 800;
-      color: #cbd5e1;
-      letter-spacing: 0.4px;
-      margin-bottom: 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .recent-bubbles {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 3px;
-      align-items: center;
-    }
-
-    .mini-wheel {
-      width: 23px;
-      height: 23px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 9.5px;
-      font-weight: 900;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.48);
-      box-shadow: 0 0 6px rgba(0, 0, 0, 0.45);
-    }
-
-    .w-green { background: conic-gradient(#16a34a 0deg 270deg, #22c55e 270deg 360deg); }
-    .w-red { background: conic-gradient(#dc2626 0deg 270deg, #f87171 270deg 360deg); }
-    .w-violet-green { background: conic-gradient(#9333ea 0deg 180deg, #16a34a 180deg 360deg); }
-    .w-violet-red { background: conic-gradient(#9333ea 0deg 180deg, #dc2626 180deg 360deg); }
-
-    .popup-footer {
-      margin-top: 7px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 9.5px;
-      color: #94a3b8;
-    }
-
-    .popup-footer button {
-      background: none;
-      border: none;
-      color: #fde047;
-      font-size: 9.5px;
-      font-weight: 800;
-      cursor: pointer;
-      padding: 0;
-    }
-  </style>
+        #copy-toast {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #22c55e;
+            color: #fff;
+            font-size: 7px;
+            font-weight: 900;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: none;
+            z-index: 30;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- শুরুতে স্ক্রিনে ভাসমান গোলাকার আইকন ছবি (মুভেবল + ট্যাপ করলে পাসওয়ার্ড বক্স) -->
-  <button type="button" class="start-orb-btn" id="startOrbBtn" title="Drag or Tap to Open Password Box">
-    <img
-      src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
-      alt="PATOWARI'S HACK Icon"
-    />
-  </button>
+    <!-- DKWIN গেম রেফারেল লিংক iframe -->
+    <iframe id="game-iframe" src="https://dkwin9.com/#/register?invitationCode=932152417441" loading="lazy" style="pointer-events: auto;"></iframe>
 
-  <!-- পাসওয়ার্ড বক্স মোডাল -->
-  <div class="pass-modal-backdrop" id="passModal">
-    <div class="pass-modal-card">
-      <div class="pass-modal-top">
-        <div class="pass-modal-brand">
-          <img
-            src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
-            alt="Icon"
-          />
-          <div>
-            <div class="pass-title">PATOWARI'S HACK</div>
-            <div class="pass-sub">@patowari_vai_69x</div>
-          </div>
+    <!-- ফ্লোটিং আইকন -->
+    <div id="floating-icon-btn" onclick="handleIconClick()">
+        <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon">
+    </div>
+
+    <!-- পাসওয়ার্ড পপআপ -->
+    <div id="auth-overlay">
+        <div class="auth-title">🔐 PATOWARI'S HACK</div>
+        <input type="password" id="pass-input" class="auth-input" placeholder="Enter Password">
+        <label class="remember-row">
+            <input type="checkbox" id="remember-pass"> Remember Password
+        </label>
+        <button class="auth-btn" onclick="checkPassword()">Submit</button>
+        <div id="error-msg">Wrong Password!</div>
+    </div>
+
+    <!-- মূল পপআপ উইন্ডো (সম্পূর্ণ বক্সে শ্যাডো সহ) -->
+    <div class="overlay-box" id="main-content">
+        <div class="popup-relative-wrapper">
+            <button class="close-btn" onclick="hidePopup()">×</button>
+
+            <!-- পপআপ ব্যাকগ্রাউন্ড ইমেজ -->
+            <img src="https://cdn.imageurlgenerator.com/uploads/de9a0e87-0c16-4ecf-8e65-14f1fc9e3d98.png" alt="VIP Popup" class="popup-main-bg-img">
+
+            <!-- ডান দিকের ফ্রেমে পিরিয়ড ও সিগন্যাল এরিয়া -->
+            <div class="center-prediction-area">
+                <div class="period-container">
+                    <div class="period-display" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
+                    <div class="live-dot"></div>
+                </div>
+                <!-- ৩০ সেকেন্ডের লাইভ টাইমার -->
+                <div class="timer-display" id="timer-display">TIME: 30s</div>
+                <div class="solid-big-small" id="res-size">WAITING...</div>
+                <div class="official-num-badge bg-green" id="official-num" style="display: none;">7</div>
+            </div>
+            <div id="copy-toast">Copied!</div>
         </div>
-        <button type="button" class="close-pass-btn" id="closePassBtn">✕</button>
-      </div>
 
-      <div class="reg-actions-row">
-        <button type="button" class="ref-go-btn" id="goRegisterBtn">
-          🔗 DK WIN রেজিস্ট্রেশন পেজে যান
-        </button>
-        <button type="button" class="copy-ref-btn" id="copyRefBtn" title="Copy Referral Link">
-          COPY
-        </button>
-      </div>
-
-      <input
-        type="password"
-        id="passInput"
-        class="pass-input"
-        placeholder="পাসওয়ার্ড লিখুন..."
-        autocomplete="off"
-      />
-      <button type="button" class="unlock-btn" id="unlockBtn">🔓 UNLOCK POPUP</button>
-      <div class="error-msg" id="errorMsg"></div>
-    </div>
-  </div>
-
-  <!-- মূল ভাসমান হ্যাক পপআপ কার্ড (ড্র্যাগেবল) -->
-  <div class="hack-popup" id="hackPopup">
-    <div class="popup-top-bar" id="dragHandle">
-      <div class="popup-badge-left">
-        <img
-          src="https://cdn.imageurlgenerator.com/uploads/49641014-9dfb-440e-ae20-83044883b063.jpg"
-          alt="Icon"
-        />
-        <div class="popup-badge-txt">PLAY<br />SMARTER</div>
-      </div>
-
-      <div class="popup-header-center">
-        <div class="popup-brand-name">PATOWARI'S HACK</div>
-        <div class="popup-sub-mode" id="modeSubtitle">30 SEC PREDICTOR V2</div>
-      </div>
-
-      <button type="button" class="hide-btn" id="hideBtn">▣ HIDE</button>
-    </div>
-
-    <!-- ৪টি মার্কেট: 30S, 1M, 3M, 5M -->
-    <div class="market-tabs-bar">
-      <button type="button" class="mode-pill active" data-mode="30S">30S</button>
-      <button type="button" class="mode-pill" data-mode="1M">1M</button>
-      <button type="button" class="mode-pill" data-mode="3M">3M</button>
-      <button type="button" class="mode-pill" data-mode="5M">5M</button>
-    </div>
-
-    <div class="pred-grid">
-      <div class="side-box side-small" id="smallCard">
-        <div>
-          <div class="side-label">SMALL</div>
-          <div class="side-range">0 - 4</div>
+        <!-- টেলিগ্রাম লোগো বাটন পপআপ ইমেজের ভেতরে নির্দিষ্ট স্থানে সেট করা -->
+        <div class="bottom-action-bar">
+            <a href="https://t.me/patowari_vai_69x" target="_blank" class="telegram-join-btn">
+                <!-- অফিশিয়াল টেলিগ্রাম এসভিজি লোগো -->
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#000"/>
+                </svg>
+                JOIN TELEGRAM
+            </a>
         </div>
-        <div class="side-status-pill" id="smallStatus">STANDBY</div>
-      </div>
-
-      <div class="center-box">
-        <div class="period-caption">NO:</div>
-        <div class="period-num" id="popupPeriod">---</div>
-        <div class="glow-orb orb-green" id="mainOrb">-</div>
-        <div class="next-in-box" id="nextInLabel">NEXT IN 00s</div>
-      </div>
-
-      <div class="side-box side-big" id="bigCard">
-        <div>
-          <div class="side-label">BIG</div>
-          <div class="side-range">5 - 9</div>
-        </div>
-        <div class="side-status-pill" id="bigStatus">STANDBY</div>
-      </div>
     </div>
 
-    <div class="recent-section">
-      <div class="recent-title">
-        <span>📈 RECENT RESULTS</span>
-        <span id="colorTag">GREEN</span>
-      </div>
-      <div class="recent-bubbles" id="recentBubbles"></div>
-    </div>
+    <script>
+        let isUnlocked = localStorage.getItem("patowari_hack_unlocked") === "true";
+        let cachedPeriod = "";
+        let cachedPrediction = { type: "BIG", num: 7 };
 
-    <div class="popup-footer">
-      <span>@patowari_vai_69x</span>
-      <button type="button" id="popupRegBtn">🔗 Register Page</button>
-    </div>
-  </div>
-
-  <script>
-    const ACCESS_PASS = "Zahirul22369";
-    const REFERRAL_URL = "https://dkwin9.com/#/register?invitationCode=932152417441";
-
-    const MODES = {
-      "30S": { duration: 30,  offset: 50000, label: "30 SEC PREDICTOR V2" },
-      "1M":  { duration: 60,  offset: 20000, label: "1 MIN PREDICTOR V2" },
-      "3M":  { duration: 180, offset: 10000, label: "3 MIN PREDICTOR V2" },
-      "5M":  { duration: 300, offset: 5000,  label: "5 MIN PREDICTOR V2" }
-    };
-
-    let currentMode = "30S";
-
-    const startOrbBtn = document.getElementById("startOrbBtn");
-    const passModal = document.getElementById("passModal");
-    const closePassBtn = document.getElementById("closePassBtn");
-    const passInput = document.getElementById("passInput");
-    const unlockBtn = document.getElementById("unlockBtn");
-    const errorMsg = document.getElementById("errorMsg");
-    const hackPopup = document.getElementById("hackPopup");
-    const hideBtn = document.getElementById("hideBtn");
-    const goRegisterBtn = document.getElementById("goRegisterBtn");
-    const copyRefBtn = document.getElementById("copyRefBtn");
-    const popupRegBtn = document.getElementById("popupRegBtn");
-
-    function openRegistrationPage() {
-      try {
-        if (window.top && window.top !== window) {
-          window.top.location.href = REFERRAL_URL;
-        } else {
-          window.location.href = REFERRAL_URL;
-        }
-      } catch (_) {
-        window.location.assign(REFERRAL_URL);
-      }
-    }
-
-    goRegisterBtn.addEventListener("click", openRegistrationPage);
-    popupRegBtn.addEventListener("click", openRegistrationPage);
-
-    copyRefBtn.addEventListener("click", () => {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(REFERRAL_URL).catch(() => {});
-      }
-      copyRefBtn.textContent = "COPIED";
-      setTimeout(() => {
-        copyRefBtn.textContent = "COPY";
-      }, 1500);
-    });
-
-    function openPasswordBox() {
-      errorMsg.textContent = "";
-      passInput.value = "";
-      passModal.style.display = "flex";
-      setTimeout(() => passInput.focus(), 60);
-    }
-
-    closePassBtn.addEventListener("click", () => {
-      passModal.style.display = "none";
-    });
-
-    function unlockPopup() {
-      const entered = passInput.value.trim();
-      if (entered === ACCESS_PASS) {
-        errorMsg.textContent = "";
-        passModal.style.display = "none";
-        startOrbBtn.style.display = "none";
-        hackPopup.style.display = "block";
-        syncAll();
-      } else {
-        errorMsg.textContent = "ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।";
-      }
-    }
-
-    unlockBtn.addEventListener("click", unlockPopup);
-    passInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") unlockPopup();
-    });
-
-    hideBtn.addEventListener("click", () => {
-      hackPopup.style.display = "none";
-      startOrbBtn.style.display = "flex";
-    });
-
-    document.querySelectorAll(".mode-pill").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".mode-pill").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentMode = btn.dataset.mode;
-        document.getElementById("modeSubtitle").textContent = MODES[currentMode].label;
-        syncAll();
-      });
-    });
-
-    function computePeriodInfo(modeKey) {
-      const cfg = MODES[modeKey];
-      const now = new Date();
-      const utcSecToday = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
-      const elapsed = utcSecToday % cfg.duration;
-      const indexToday = Math.floor(utcSecToday / cfg.duration) + 1;
-      const timeLeft = cfg.duration - elapsed;
-
-      const yyyy = now.getUTCFullYear();
-      const mm = String(now.getUTCMonth() + 1).padStart(2, "0");
-      const dd = String(now.getUTCDate()).padStart(2, "0");
-      const seq = String(cfg.offset + indexToday).padStart(5, "0");
-      const period = `${yyyy}${mm}${dd}1000${seq}`;
-
-      return { period, timeLeft, indexToday, yyyy, mm, dd, offset: cfg.offset };
-    }
-
-    function computeSignalForPeriod(periodStr, slotIndex) {
-      const tail = parseInt(periodStr.slice(-5), 10) || 12345;
-      const trend = (tail * 31 + slotIndex) % 100;
-      const isBig = trend >= 46;
-      const num = isBig
-        ? 5 + ((tail + slotIndex) % 5)
-        : (tail + slotIndex) % 5;
-
-      let colorName = "RED";
-      let orbClass = "orb-red";
-      let wheelClass = "w-red";
-
-      if (num === 0) {
-        colorName = "VIOLET + RED";
-        orbClass = "orb-violet";
-        wheelClass = "w-violet-red";
-      } else if (num === 5) {
-        colorName = "VIOLET + GREEN";
-        orbClass = "orb-violet";
-        wheelClass = "w-violet-green";
-      } else if ([1, 3, 7, 9].includes(num)) {
-        colorName = "GREEN";
-        orbClass = "orb-green";
-        wheelClass = "w-green";
-      }
-
-      return { isBig, num, colorName, orbClass, wheelClass };
-    }
-
-    function renderRecentWheels(info) {
-      const container = document.getElementById("recentBubbles");
-      container.innerHTML = "";
-      for (let i = 9; i >= 0; i--) {
-        const pastIdx = Math.max(1, info.indexToday - i);
-        const seq = String(info.offset + pastIdx).padStart(5, "0");
-        const pStr = `${info.yyyy}${info.mm}${info.dd}1000${seq}`;
-        const sig = computeSignalForPeriod(pStr, pastIdx);
-
-        const el = document.createElement("div");
-        el.className = `mini-wheel ${sig.wheelClass}`;
-        el.textContent = String(sig.num);
-        container.appendChild(el);
-      }
-    }
-
-    function syncAll() {
-      const info = computePeriodInfo(currentMode);
-      const sig = computeSignalForPeriod(info.period, info.indexToday);
-
-      document.getElementById("popupPeriod").textContent = info.period;
-      document.getElementById("nextInLabel").textContent = `NEXT IN ${String(info.timeLeft).padStart(2, "0")}s`;
-
-      const orb = document.getElementById("mainOrb");
-      orb.textContent = String(sig.num);
-      orb.className = `glow-orb ${sig.orbClass}`;
-      document.getElementById("colorTag").textContent = sig.colorName;
-
-      const smallCard = document.getElementById("smallCard");
-      const bigCard = document.getElementById("bigCard");
-      const smallStatus = document.getElementById("smallStatus");
-      const bigStatus = document.getElementById("bigStatus");
-
-      if (sig.isBig) {
-        bigCard.classList.add("active-pick");
-        smallCard.classList.remove("active-pick");
-        bigStatus.textContent = "PREDICTED";
-        bigStatus.className = "side-status-pill picked";
-        smallStatus.textContent = "SKIP";
-        smallStatus.className = "side-status-pill";
-      } else {
-        smallCard.classList.add("active-pick");
-        bigCard.classList.remove("active-pick");
-        smallStatus.textContent = "PREDICTED";
-        smallStatus.className = "side-status-pill picked";
-        bigStatus.textContent = "SKIP";
-        bigStatus.className = "side-status-pill";
-      }
-
-      renderRecentWheels(info);
-    }
-
-    function enableFreeDrag(targetEl, handleEl, onTapCallback = null) {
-      let isDown = false;
-      let hasMoved = false;
-      let startX = 0;
-      let startY = 0;
-      let origLeft = 0;
-      let origTop = 0;
-
-      function beginDrag(x, y) {
-        const rect = targetEl.getBoundingClientRect();
-        origLeft = rect.left;
-        origTop = rect.top;
-        startX = x;
-        startY = y;
-        isDown = true;
-        hasMoved = false;
-        targetEl.style.left = `${origLeft}px`;
-        targetEl.style.top = `${origTop}px`;
-        targetEl.style.right = "auto";
-        targetEl.style.bottom = "auto";
-        targetEl.style.transform = "none";
-      }
-
-      function moveDrag(x, y) {
-        if (!isDown) return;
-        const dx = x - startX;
-        const dy = y - startY;
-        if (Math.hypot(dx, dy) > 6) {
-          hasMoved = true;
-        }
-        const maxLeft = Math.max(4, window.innerWidth - targetEl.offsetWidth - 4);
-        const maxTop = Math.max(4, window.innerHeight - targetEl.offsetHeight - 4);
-        const nextLeft = Math.max(4, Math.min(maxLeft, origLeft + dx));
-        const nextTop = Math.max(4, Math.min(maxTop, origTop + dy));
-        targetEl.style.left = `${nextLeft}px`;
-        targetEl.style.top = `${nextTop}px`;
-      }
-
-      function endDrag() {
-        if (!isDown) return;
-        isDown = false;
-        if (!hasMoved && typeof onTapCallback === "function") {
-          onTapCallback();
-        }
-      }
-
-      handleEl.addEventListener("touchstart", (e) => {
-        if (e.target.closest("button") || e.target.closest("a")) return;
-        if (e.touches.length === 1) {
-          beginDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }
-      }, { passive: true });
-
-      handleEl.addEventListener("touchmove", (e) => {
-        if (!isDown || e.touches.length !== 1) return;
-        e.preventDefault();
-        moveDrag(e.touches[0].clientX, e.touches[0].clientY);
-      }, { passive: false });
-
-      handleEl.addEventListener("touchend", endDrag);
-      handleEl.addEventListener("touchcancel", endDrag);
-
-      handleEl.addEventListener("mousedown", (e) => {
-        if (e.button !== 0 || e.target.closest("button") || e.target.closest("a")) return;
-        beginDrag(e.clientX, e.clientY);
-
-        function onMouseMove(ev) {
-          moveDrag(ev.clientX, ev.clientY);
+        function handleIconClick() {
+            if (isUnlocked) {
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('floating-icon-btn').style.display = 'none';
+                startPeriodGenerator();
+            } else {
+                document.getElementById('auth-overlay').style.display = 'block';
+            }
         }
 
-        function onMouseUp() {
-          document.removeEventListener("mousemove", onMouseMove);
-          document.removeEventListener("mouseup", onMouseUp);
-          endDrag();
+        function checkPassword() {
+            const pass = document.getElementById('pass-input').value;
+            const rememberMe = document.getElementById('remember-pass').checked;
+
+            if (pass === "PATOWARI69") {
+                isUnlocked = true;
+                if (rememberMe) {
+                    localStorage.setItem("patowari_hack_unlocked", "true");
+                }
+                document.getElementById('auth-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.getElementById('floating-icon-btn').style.display = 'none';
+                startPeriodGenerator();
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+                document.getElementById('pass-input').value = "";
+            }
         }
 
-        document.addEventListener("mousemove", onMouseMove);
-        document.addEventListener("mouseup", onMouseUp);
-      });
-    }
+        function hidePopup() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('floating-icon-btn').style.display = 'flex';
+        }
 
-    enableFreeDrag(startOrbBtn, startOrbBtn, openPasswordBox);
-    enableFreeDrag(hackPopup, document.getElementById("dragHandle"));
+        function startPeriodGenerator() {
+            updateSignalLogic();
+            setInterval(updateSignalLogic, 1000);
+        }
 
-    setInterval(syncAll, 1000);
-    syncAll();
-  </script>
+        function copyPeriodNumber() {
+            const periodText = document.getElementById('period-num').innerText.replace("Period: ", "");
+            if (periodText && periodText !== "Loading...") {
+                navigator.clipboard.writeText(periodText).then(() => {
+                    let toast = document.getElementById('copy-toast');
+                    toast.style.display = 'block';
+                    setTimeout(() => {
+                        toast.style.display = 'none';
+                    }, 1200);
+                });
+            }
+        }
+
+        // WinGo 30 Seconds Fixed Signal Engine
+        function updateSignalLogic() {
+            if (!isUnlocked) return;
+
+            const now = new Date();
+            const duration = 30; // 30s Fixed
+
+            const totalSecondsToday = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
+            let elapsedInPeriod = totalSecondsToday % duration; 
+            let periodIndexToday = Math.floor(totalSecondsToday / duration) + 1;
+            
+            let dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
+            let formattedIndex = String(50000 + periodIndexToday).padStart(5, '0');
+            let fullPeriod = `Period: ${dateStr}1000${formattedIndex}`;
+            
+            let timeLeft = duration - elapsedInPeriod;
+
+            document.getElementById('period-num').innerText = fullPeriod;
+            document.getElementById('timer-display').innerText = `TIME: ${timeLeft < 10 ? '0' + timeLeft : timeLeft}s`;
+
+            let sizeEl = document.getElementById('res-size');
+            let numEl = document.getElementById('official-num');
+            
+            if (fullPeriod !== cachedPeriod) {
+                cachedPeriod = fullPeriod;
+                let rawPeriodNum = fullPeriod.replace("Period: ", "");
+                let seedVal = parseInt(rawPeriodNum.slice(-5)) || 12345;
+                let marketFlowTrend = (seedVal * 31 + Math.floor(Date.now() / 30000)) % 100;
+                
+                let isBig = marketFlowTrend >= 46;
+                let predType = isBig ? "BIG" : "SMALL";
+
+                let luckyNum;
+                if (isBig) {
+                    luckyNum = 5 + ((seedVal + marketFlowTrend) % 5);
+                } else {
+                    luckyNum = (seedVal + marketFlowTrend) % 5;
+                }
+
+                cachedPrediction = { type: predType, num: luckyNum };
+            }
+
+            if (timeLeft >= 28) {
+                sizeEl.innerText = "WAITING...";
+                sizeEl.style.fontSize = "9.5px";
+                numEl.style.display = "none";
+            } else {
+                sizeEl.style.fontSize = "14px";
+                sizeEl.innerText = cachedPrediction.type;
+
+                let luckyNum = cachedPrediction.num;
+                numEl.innerText = luckyNum;
+                numEl.className = "official-num-badge";
+
+                if (luckyNum === 0 || luckyNum === 5) {
+                    numEl.classList.add("bg-violet");
+                } else if (luckyNum === 1 || luckyNum === 3 || luckyNum === 7 || luckyNum === 9) {
+                    numEl.classList.add("bg-green");
+                } else {
+                    numEl.classList.add("bg-red");
+                }
+
+                numEl.style.display = "flex";
+            }
+        }
+
+        makeDraggable(document.getElementById("floating-icon-btn"));
+        makeDraggable(document.getElementById("main-content"));
+
+        function makeDraggable(elmnt) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            let header = document.getElementById(elmnt.id + "-header") || elmnt;
+            
+            header.onmousedown = dragMouseDown;
+            header.ontouchstart = dragMouseDown;
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                let clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+                let clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+                pos3 = clientX;
+                pos4 = clientY;
+                document.onmouseup = closeDragElement;
+                document.ontouchend = closeDragElement;
+                document.onmousemove = elementDrag;
+                document.ontouchmove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                let clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+                let clientY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+                pos1 = pos3 - clientX;
+                pos2 = pos4 - clientY;
+                pos3 = clientX;
+                pos4 = clientY;
+                elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                elmnt.style.transform = "none";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.ontouchend = null;
+                document.onmousemove = null;
+                document.ontouchmove = null;
+            }
+        }
+    </script>
 </body>
 </html>

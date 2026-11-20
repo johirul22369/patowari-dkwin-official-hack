@@ -798,7 +798,7 @@
             return checkScore !== 3 ? "WIN" : "LOSS";
         }
 
-        /* মার্কেট শেষ হওয়ার ১ সেকেন্ড আগে পপআপ + WIN/LOSS ব্যাজ ২-৩ বার ঝাঁকি দিয়ে চলে যাবে */
+        /* মার্কেটে সেকেন্ড শেষ হওয়ার আগেই (3s-এ) পপআপ + WIN/LOSS ব্যাজ ২-৩ বার ঝাঁকি দিয়ে চলে যাবে */
         function triggerEndShakeAndBadge(shakeKey, outcome) {
             if (lastShakeKey === shakeKey) return;
             lastShakeKey = shakeKey;
@@ -866,7 +866,8 @@
                 cachedPrediction = computeSignalFromTail(seedVal, periodIndexToday);
             }
 
-            if (timeLeft === 1) {
+            /* সেকেন্ড শেষ হওয়ার আগেই (3 সেকেন্ডে) ঝাঁকি ও WIN/LOSS ব্যাজ */
+            if (timeLeft === 3) {
                 const outcome = computeOutcomeStatus(cfg, periodIndexToday, cachedPrediction.type);
                 triggerEndShakeAndBadge(`${currentMarket}-${fullPeriod}`, outcome);
             }

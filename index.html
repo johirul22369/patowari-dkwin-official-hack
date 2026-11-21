@@ -34,7 +34,7 @@
             z-index: 1;
         }
 
-        /* ৩ডি ফ্লোটিং আইকন + নিয়ন রিং */
+        /* ৩ডি ফ্লোটিং আইকন */
         #floating-icon-btn {
             position: fixed;
             top: 80px;
@@ -42,11 +42,11 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            border: 2px solid #fde047;
+            border: 2.5px solid #fde047;
             box-shadow:
-                0 10px 22px rgba(0, 0, 0, 0.9),
-                0 0 18px rgba(250, 204, 21, 0.65),
-                0 0 28px rgba(56, 189, 248, 0.35),
+                0 0 0 2px #ef4444,
+                0 10px 24px rgba(0, 0, 0, 0.95),
+                0 0 22px rgba(250, 204, 21, 0.75),
                 inset 0 2px 6px rgba(255, 255, 255, 0.45);
             cursor: grab;
             z-index: 9999;
@@ -57,22 +57,6 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.16s ease;
-            animation: iconFloatGlow 2.4s ease-in-out infinite;
-        }
-
-        @keyframes iconFloatGlow {
-            0%, 100% {
-                box-shadow:
-                    0 10px 22px rgba(0, 0, 0, 0.9),
-                    0 0 16px rgba(250, 204, 21, 0.6),
-                    0 0 26px rgba(56, 189, 248, 0.28);
-            }
-            50% {
-                box-shadow:
-                    0 12px 24px rgba(0, 0, 0, 0.95),
-                    0 0 22px rgba(250, 204, 21, 0.9),
-                    0 0 34px rgba(34, 211, 238, 0.55);
-            }
         }
 
         #floating-icon-btn:active {
@@ -94,14 +78,14 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 234px;
-            background: linear-gradient(155deg, rgba(24, 56, 112, 0.98) 0%, rgba(7, 15, 32, 0.99) 55%, rgba(3, 7, 16, 1) 100%);
-            border: 1.5px solid rgba(250, 204, 21, 0.88);
+            background: linear-gradient(155deg, rgba(26, 58, 118, 0.99) 0%, rgba(7, 15, 32, 0.99) 60%, rgba(3, 7, 16, 1) 100%);
+            border: 1.5px solid rgba(250, 204, 21, 0.9);
             border-radius: 17px;
             box-shadow:
                 0 22px 44px rgba(0, 0, 0, 0.95),
-                0 0 24px rgba(250, 204, 21, 0.24),
-                0 0 28px rgba(34, 211, 238, 0.28),
-                inset 0 1px 1px rgba(255, 255, 255, 0.3);
+                0 0 26px rgba(239, 68, 68, 0.25),
+                0 0 28px rgba(34, 211, 238, 0.3),
+                inset 0 1px 1px rgba(255, 255, 255, 0.32);
             padding: 13px;
             display: none;
             z-index: 10000;
@@ -134,7 +118,6 @@
             font-weight: 700;
             user-select: text;
             -webkit-user-select: text;
-            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(56, 189, 248, 0.16);
         }
 
         .auth-input:focus {
@@ -167,7 +150,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.7px;
-            box-shadow: 0 4px 14px rgba(250, 204, 21, 0.4);
+            box-shadow: 0 4px 14px rgba(250, 204, 21, 0.45);
         }
 
         #error-msg {
@@ -178,48 +161,29 @@
             font-weight: 700;
         }
 
-        /* ছোট ও কমপ্যাক্ট ৩ডি VIP পপআপ কার্ড (~222px) */
+        /* গর্জিয়াস ৩ডি VIP পপআপ কার্ড (~224px) */
         .overlay-box {
             position: fixed;
             top: 95px;
             left: 12px;
-            width: 222px;
+            width: 224px;
             max-width: calc(100vw - 16px);
             display: none;
             z-index: 9999;
             background:
-                radial-gradient(circle at 50% -15%, rgba(56, 189, 248, 0.34) 0%, transparent 55%),
-                radial-gradient(circle at 12% 100%, rgba(236, 72, 153, 0.18) 0%, transparent 55%),
-                radial-gradient(circle at 88% 100%, rgba(34, 197, 94, 0.18) 0%, transparent 55%),
-                linear-gradient(170deg, #12284e 0%, #071124 52%, #030711 100%);
-            border-radius: 17px;
+                radial-gradient(circle at 50% -15%, rgba(56, 189, 248, 0.38) 0%, transparent 56%),
+                radial-gradient(circle at 8% 100%, rgba(239, 68, 68, 0.22) 0%, transparent 55%),
+                radial-gradient(circle at 92% 100%, rgba(34, 197, 94, 0.22) 0%, transparent 55%),
+                linear-gradient(170deg, #142c57 0%, #071226 52%, #030712 100%);
+            border-radius: 18px;
             padding: 7.5px;
             box-shadow:
-                0 18px 38px rgba(0, 0, 0, 0.95),
-                0 0 22px rgba(34, 211, 238, 0.32),
-                0 0 12px rgba(250, 204, 21, 0.16),
-                inset 0 1px 1px rgba(255, 255, 255, 0.3);
-            border: 1.5px solid rgba(103, 232, 249, 0.75);
+                0 20px 42px rgba(0, 0, 0, 0.96),
+                0 0 24px rgba(56, 189, 248, 0.38),
+                0 0 14px rgba(250, 204, 21, 0.22),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.35);
+            border: 1.5px solid rgba(125, 211, 252, 0.82);
             backdrop-filter: blur(12px);
-            animation: vipCardPulse 3.2s ease-in-out infinite;
-        }
-
-        @keyframes vipCardPulse {
-            0%, 100% {
-                border-color: rgba(103, 232, 249, 0.72);
-                box-shadow:
-                    0 18px 38px rgba(0, 0, 0, 0.95),
-                    0 0 20px rgba(34, 211, 238, 0.28),
-                    inset 0 1px 1px rgba(255, 255, 255, 0.28);
-            }
-            50% {
-                border-color: rgba(250, 204, 21, 0.85);
-                box-shadow:
-                    0 20px 42px rgba(0, 0, 0, 0.96),
-                    0 0 26px rgba(56, 189, 248, 0.42),
-                    0 0 14px rgba(250, 204, 21, 0.26),
-                    inset 0 1px 1px rgba(255, 255, 255, 0.36);
-            }
         }
 
         .popup-header {
@@ -230,8 +194,8 @@
             margin-bottom: 5.5px;
             cursor: grab;
             touch-action: none;
-            padding-bottom: 3px;
-            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+            padding-bottom: 3.5px;
+            border-bottom: 1px solid rgba(250, 204, 21, 0.22);
         }
 
         .popup-header:active {
@@ -249,7 +213,7 @@
             line-height: 1.05;
             text-transform: uppercase;
             pointer-events: none;
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.45);
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
         }
 
         .brand-center {
@@ -264,25 +228,25 @@
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.45px;
-            background: linear-gradient(90deg, #fef08a, #38bdf8, #4ade80, #fef08a);
-            background-size: 250% 100%;
+            background: linear-gradient(90deg, #fef08a, #38bdf8, #f87171, #4ade80, #fef08a);
+            background-size: 260% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.35));
-            animation: titleShimmer 3s linear infinite;
+            filter: drop-shadow(0 0 7px rgba(56, 189, 248, 0.42));
+            animation: titleShimmer 3.2s linear infinite;
         }
 
         @keyframes titleShimmer {
             0%   { background-position: 0% 50%; }
-            100% { background-position: 250% 50%; }
+            100% { background-position: 260% 50%; }
         }
 
         .brand-sub {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 6.5px;
             font-weight: 700;
-            color: #7dd3fc;
+            color: #fde047;
             letter-spacing: 0.35px;
             margin-top: 1px;
         }
@@ -291,16 +255,15 @@
             font-family: 'Chakra Petch', sans-serif;
             background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
             color: #f8fafc;
-            border: 1px solid rgba(125, 211, 252, 0.5);
+            border: 1px solid rgba(125, 211, 252, 0.55);
             padding: 2px 5px;
             border-radius: 5px;
             font-size: 6.5px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
         }
 
-        /* ৪টি মার্কেট ট্যাব: 30S, 1M, 3M, 5M */
+        /* ৪টি মার্কেট ট্যাব */
         .market-tabs {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -309,8 +272,7 @@
             background: rgba(3, 7, 16, 0.95);
             padding: 2.5px;
             border-radius: 8px;
-            border: 1px solid rgba(56, 189, 248, 0.34);
-            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.38);
         }
 
         .market-btn {
@@ -320,7 +282,7 @@
             padding: 2.8px 1px;
             border-radius: 5.5px;
             border: 1px solid transparent;
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(15, 23, 42, 0.88);
             color: #cbd5e1;
             cursor: pointer;
             text-align: center;
@@ -328,16 +290,16 @@
         }
 
         .market-btn.active {
-            background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
-            color: #ffffff;
-            border-color: #cffafe;
-            box-shadow: 0 0 10px rgba(34, 211, 238, 0.55);
+            background: linear-gradient(135deg, #ef4444 0%, #facc15 50%, #2563eb 100%);
+            color: #050912;
+            border-color: #ffffff;
+            box-shadow: 0 0 11px rgba(250, 204, 21, 0.5);
         }
 
-        /* বামে SMALL, মাঝে PERIOD + 3D ORB, ডানে BIG */
+        /* বামে SMALL, মাঝে PERIOD + FOOTBALL-RACK ORB, ডানে BIG */
         .pred-grid {
             display: grid;
-            grid-template-columns: 0.92fr 1.26fr 0.92fr;
+            grid-template-columns: 0.9fr 1.32fr 0.9fr;
             gap: 4px;
             align-items: stretch;
             position: relative;
@@ -350,8 +312,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.58), inset 0 1px 1px rgba(255, 255, 255, 0.24);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.25);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -363,16 +325,16 @@
         }
 
         .panel-big {
-            background: linear-gradient(165deg, rgba(236, 72, 153, 0.5) 0%, rgba(80, 7, 36, 0.95) 60%, rgba(36, 3, 18, 0.98) 100%);
+            background: linear-gradient(165deg, rgba(236, 72, 153, 0.52) 0%, rgba(80, 7, 36, 0.95) 60%, rgba(36, 3, 18, 0.98) 100%);
         }
 
         .side-panel.is-predicted {
             border-color: #4ade80;
             transform: translateY(-1px) scale(1.02);
             box-shadow:
-                0 0 15px rgba(74, 222, 128, 0.55),
-                0 8px 16px rgba(0, 0, 0, 0.75),
-                inset 0 1px 2px rgba(255, 255, 255, 0.4);
+                0 0 16px rgba(74, 222, 128, 0.6),
+                0 8px 16px rgba(0, 0, 0, 0.78),
+                inset 0 1px 2px rgba(255, 255, 255, 0.42);
         }
 
         .side-panel > div {
@@ -534,9 +496,9 @@
 
         .center-panel {
             background:
-                radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.16) 0%, transparent 70%),
-                linear-gradient(180deg, rgba(12, 27, 54, 0.97) 0%, rgba(4, 9, 20, 0.99) 100%);
-            border: 1px solid rgba(125, 211, 252, 0.65);
+                radial-gradient(circle at 50% 42%, rgba(250, 204, 21, 0.12) 0%, transparent 68%),
+                linear-gradient(180deg, rgba(13, 29, 58, 0.98) 0%, rgba(4, 9, 20, 0.99) 100%);
+            border: 1px solid rgba(125, 211, 252, 0.72);
             border-radius: 11px;
             padding: 4.5px 3.5px;
             text-align: center;
@@ -546,7 +508,7 @@
             justify-content: space-between;
             position: relative;
             z-index: 1;
-            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 6px 14px rgba(0, 0, 0, 0.65);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 6px 14px rgba(0, 0, 0, 0.68);
         }
 
         .period-row {
@@ -554,11 +516,11 @@
             align-items: center;
             justify-content: center;
             gap: 2.5px;
-            background: rgba(15, 23, 42, 0.92);
+            background: rgba(15, 23, 42, 0.94);
             padding: 1.5px 4px;
             border-radius: 4.5px;
             width: 100%;
-            border: 1px solid rgba(56, 189, 248, 0.22);
+            border: 1px solid rgba(56, 189, 248, 0.25);
         }
 
         .period-display {
@@ -589,7 +551,44 @@
             50% { opacity: 0.45; transform: scale(0.82); }
         }
 
+        /* ফুটবল-রেক + লাল-সাদা চক্কর রিং সহ মেইন অর্ব */
+        .football-orb-wrap {
+            position: relative;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2px 0;
+        }
+
+        /* বাইরের লাল-সাদা চক্কর (Checker / Red-White Racing Rack Ring) */
+        .red-white-rack-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: repeating-conic-gradient(
+                from 0deg,
+                #ef4444 0deg 22.5deg,
+                #ffffff 22.5deg 45deg
+            );
+            box-shadow:
+                0 0 12px rgba(239, 68, 68, 0.7),
+                0 0 16px rgba(255, 255, 255, 0.35),
+                0 6px 12px rgba(0, 0, 0, 0.85);
+            animation: rackSpinSlow 5s linear infinite;
+            -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4.5px), #000 calc(100% - 3.8px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 4.5px), #000 calc(100% - 3.8px));
+        }
+
+        @keyframes rackSpinSlow {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ভেতরের কালার-ম্যাচড ফুটবল প্যানেল-রেক অর্ব */
         .glow-orb {
+            position: relative;
             font-family: 'Chakra Petch', sans-serif;
             width: 36px;
             height: 36px;
@@ -600,30 +599,62 @@
             font-size: 15px;
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.95);
-            border: 1.5px solid rgba(255, 255, 255, 0.9);
-            margin: 2px 0;
-            animation: orbBreath 2s ease-in-out infinite;
+            text-shadow:
+                0 1px 2px rgba(0, 0, 0, 1),
+                0 0 8px rgba(0, 0, 0, 0.9);
+            border: 1.5px solid #ffffff;
+            overflow: hidden;
+            z-index: 2;
         }
 
-        @keyframes orbBreath {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
+        /* ফুটবলের মতো সেগমেন্ট/রেক ওভারলে */
+        .glow-orb::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background:
+                repeating-conic-gradient(
+                    from 15deg,
+                    rgba(255, 255, 255, 0.24) 0deg 14deg,
+                    transparent 14deg 60deg
+                ),
+                radial-gradient(circle at 50% 50%, transparent 32%, rgba(255, 255, 255, 0.34) 33.5%, transparent 35.5%),
+                radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.45), transparent 55%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glow-orb span {
+            position: relative;
+            z-index: 2;
         }
 
         .orb-green {
-            background: radial-gradient(circle at 30% 22%, #86efac, #22c55e 42%, #15803d 75%, #052e16 100%);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 0 0 16px rgba(34, 197, 94, 0.78), inset 0 2px 5px rgba(255, 255, 255, 0.45);
+            background:
+                radial-gradient(circle at 30% 22%, #86efac 0%, #22c55e 45%, #15803d 78%, #052e16 100%);
+            box-shadow:
+                0 5px 12px rgba(0, 0, 0, 0.85),
+                0 0 14px rgba(34, 197, 94, 0.85),
+                inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .orb-red {
-            background: radial-gradient(circle at 30% 22%, #fca5a5, #ef4444 42%, #b91c1c 75%, #450a0a 100%);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 0 0 16px rgba(239, 68, 68, 0.78), inset 0 2px 5px rgba(255, 255, 255, 0.45);
+            background:
+                radial-gradient(circle at 30% 22%, #fca5a5 0%, #ef4444 45%, #b91c1c 78%, #450a0a 100%);
+            box-shadow:
+                0 5px 12px rgba(0, 0, 0, 0.85),
+                0 0 14px rgba(239, 68, 68, 0.88),
+                inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .orb-violet {
-            background: radial-gradient(circle at 30% 22%, #e9d5ff, #a855f7 42%, #7e22ce 75%, #2e1065 100%);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 0 0 16px rgba(168, 85, 247, 0.78), inset 0 2px 5px rgba(255, 255, 255, 0.45);
+            background:
+                radial-gradient(circle at 30% 22%, #e9d5ff 0%, #a855f7 45%, #7e22ce 78%, #2e1065 100%);
+            box-shadow:
+                0 5px 12px rgba(0, 0, 0, 0.85),
+                0 0 14px rgba(168, 85, 247, 0.88),
+                inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .timer-pill {
@@ -631,22 +662,20 @@
             font-size: 6.2px;
             font-weight: 700;
             color: #fde047;
-            background: linear-gradient(90deg, rgba(250, 204, 21, 0.16), rgba(56, 189, 248, 0.14));
-            border: 1px solid rgba(250, 204, 21, 0.42);
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.24), rgba(250, 204, 21, 0.2));
+            border: 1px solid rgba(250, 204, 21, 0.48);
             padding: 1.5px 5.5px;
             border-radius: 999px;
             margin-top: 1px;
             white-space: nowrap;
-            box-shadow: 0 0 8px rgba(250, 204, 21, 0.18);
         }
 
         .recent-box {
             margin-top: 5.5px;
             background: linear-gradient(180deg, rgba(6, 15, 31, 0.96), rgba(3, 8, 17, 0.98));
-            border: 1px solid rgba(125, 211, 252, 0.28);
+            border: 1px solid rgba(125, 211, 252, 0.32);
             border-radius: 9px;
             padding: 4.5px;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .recent-head {
@@ -662,7 +691,6 @@
 
         .conf-badge {
             color: #4ade80;
-            text-shadow: 0 0 7px rgba(74, 222, 128, 0.5);
         }
 
         .wheel-strip {
@@ -672,10 +700,12 @@
             align-items: center;
         }
 
+        /* রিসেন্ট নাম্বারেও ফুটবল রেক + লাল-সাদা বর্ডার রিং ও কালার ম্যাচ */
         .color-wheel {
+            position: relative;
             font-family: 'Chakra Petch', sans-serif;
-            width: 15.5px;
-            height: 15.5px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -684,12 +714,33 @@
             font-weight: 700;
             color: #ffffff;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.65);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
+            border: 1.5px solid #ffffff;
+            box-shadow:
+                0 0 0 1px #ef4444,
+                0 2px 6px rgba(0, 0, 0, 0.8);
+            overflow: hidden;
         }
 
-        .w-green { background: conic-gradient(#16a34a 0deg 270deg, #4ade80 270deg 360deg); }
-        .w-red { background: conic-gradient(#dc2626 0deg 270deg, #f87171 270deg 360deg); }
+        .color-wheel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: repeating-conic-gradient(
+                from 0deg,
+                rgba(255, 255, 255, 0.25) 0deg 12deg,
+                transparent 12deg 72deg
+            );
+            pointer-events: none;
+        }
+
+        .color-wheel span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .w-green { background: radial-gradient(circle at 32% 28%, #4ade80, #16a34a 65%, #052e16 100%); }
+        .w-red { background: radial-gradient(circle at 32% 28%, #f87171, #dc2626 65%, #450a0a 100%); }
         .w-violet-green { background: conic-gradient(#a855f7 0deg 180deg, #22c55e 180deg 360deg); }
         .w-violet-red { background: conic-gradient(#a855f7 0deg 180deg, #ef4444 180deg 360deg); }
 
@@ -717,7 +768,7 @@
             justify-content: center;
             gap: 4px;
             text-transform: uppercase;
-            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.55);
         }
 
         .telegram-join-btn::after {
@@ -806,7 +857,12 @@
                     <div class="period-display" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
                     <div class="live-dot"></div>
                 </div>
-                <div class="glow-orb orb-green" id="main-orb">-</div>
+
+                <div class="football-orb-wrap">
+                    <div class="red-white-rack-ring"></div>
+                    <div class="glow-orb orb-green" id="main-orb"><span id="main-orb-text">-</span></div>
+                </div>
+
                 <div class="timer-pill" id="timer-display">NEXT IN 30s</div>
             </div>
 
@@ -1036,7 +1092,7 @@
 
                 const el = document.createElement('div');
                 el.className = `color-wheel ${sig.wheelClass}`;
-                el.textContent = String(sig.num);
+                el.innerHTML = `<span>${sig.num}</span>`;
                 container.appendChild(el);
             }
         }
@@ -1062,6 +1118,7 @@
             }
 
             const orb = document.getElementById('main-orb');
+            const orbText = document.getElementById('main-orb-text');
             const smallPanel = document.getElementById('small-panel');
             const bigPanel = document.getElementById('big-panel');
             const smallTag = document.getElementById('small-tag');
@@ -1069,7 +1126,7 @@
             const confLabel = document.getElementById('conf-label');
 
             if (elapsed <= 2) {
-                orb.innerText = "...";
+                orbText.innerText = "...";
                 orb.className = "glow-orb orb-violet";
                 document.getElementById('color-label').innerText = "SCANNING";
                 confLabel.innerText = "SYNC...";
@@ -1080,7 +1137,7 @@
                 smallTag.className = "panel-tag";
                 bigTag.className = "panel-tag";
             } else {
-                orb.innerText = String(cachedPrediction.num);
+                orbText.innerText = String(cachedPrediction.num);
                 orb.className = `glow-orb ${cachedPrediction.orbClass}`;
                 document.getElementById('color-label').innerText = cachedPrediction.colorName;
                 confLabel.innerText = `CONF ${cachedPrediction.confidence}%`;

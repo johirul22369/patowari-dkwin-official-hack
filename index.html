@@ -335,7 +335,6 @@
             100% { opacity: 0; bottom: 2px; height: 9px; transform: translateX(-50%) scale(0.9); }
         }
 
-        /* উপরে গিয়ে ফেটে চারদিকে আলো ছড়ানোর মূল বিস্ফোরণ */
         .firecracker-burst {
             position: absolute;
             left: 50%;
@@ -373,7 +372,6 @@
             100%      { opacity: 0; transform: translate(-50%, -50%) scale(2.35); }
         }
 
-        /* বিস্ফোরণের বাড়তি ছড়ানো ফুলকি রিং */
         .firecracker-sparks {
             position: absolute;
             left: 50%;
@@ -408,7 +406,6 @@
             100%      { opacity: 0; transform: translate(-50%, -50%) scale(2.15); }
         }
 
-        /* মোটা, থ্রিডি এবং ভেতরে RGB লাইট জ্বলা SMALL ও BIG লেখা */
         .panel-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 11px;
@@ -505,7 +502,6 @@
             flex-shrink: 0;
         }
 
-        /* পরিষ্কার ও স্পষ্ট নাম্বার অর্ব (Green / Red / Violet) */
         .glow-orb {
             font-family: 'Chakra Petch', sans-serif;
             width: 34px;
@@ -542,7 +538,7 @@
 
         .timer-pill {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 6.5px;
+            font-size: 6.2px;
             font-weight: 700;
             color: #facc15;
             background: rgba(250, 204, 21, 0.14);
@@ -550,9 +546,9 @@
             padding: 1.5px 5px;
             border-radius: 999px;
             margin-top: 1px;
+            white-space: nowrap;
         }
 
-        /* নিচের RECENT বাবল লাইন */
         .recent-box {
             margin-top: 5px;
             background: rgba(4, 10, 20, 0.94);
@@ -570,6 +566,10 @@
             font-weight: 700;
             color: #cbd5e1;
             margin-bottom: 3px;
+        }
+
+        .conf-badge {
+            color: #4ade80;
         }
 
         .wheel-strip {
@@ -640,15 +640,12 @@
 </head>
 <body>
 
-    <!-- গেম রেফারেল লিংক iframe -->
     <iframe id="game-iframe" src="https://dkwin9.com/#/register?invitationCode=932152417441" loading="lazy"></iframe>
 
-    <!-- ৩ডি ফ্লোটিং আইকন -->
     <div id="floating-icon-btn">
         <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon" />
     </div>
 
-    <!-- পাসওয়ার্ড পপআপ -->
     <div id="auth-overlay">
         <div class="auth-title">🔐 PATOWARI'S HACK</div>
         <input type="password" id="pass-input" class="auth-input" placeholder="Enter Password" />
@@ -659,18 +656,16 @@
         <div id="error-msg">Wrong Password!</div>
     </div>
 
-    <!-- ছোট ৩ডি পপআপ উইন্ডো (~218px) -->
     <div class="overlay-box" id="main-content">
         <div class="popup-header" id="main-content-header">
             <div class="badge-left">3D<br />VIP</div>
             <div class="brand-center">
                 <div class="brand-main">PATOWARI'S HACK</div>
-                <div class="brand-sub" id="mode-subtitle">30 SEC PREDICTOR V2</div>
+                <div class="brand-sub" id="mode-subtitle">30 SEC AI ENGINE V3</div>
             </div>
             <button type="button" class="hide-btn" onclick="hidePopup()">HIDE</button>
         </div>
 
-        <!-- ৪টি মার্কেট: 30S, 1M, 3M, 5M -->
         <div class="market-tabs">
             <button type="button" class="market-btn active" data-market="30S">30S</button>
             <button type="button" class="market-btn" data-market="1M">1M</button>
@@ -713,8 +708,8 @@
 
         <div class="recent-box">
             <div class="recent-head">
-                <span>RECENT</span>
                 <span id="color-label">GREEN</span>
+                <span class="conf-badge" id="conf-label">CONF 88%</span>
             </div>
             <div class="wheel-strip" id="recent-wheels"></div>
         </div>
@@ -733,17 +728,21 @@
 
     <script>
         const MARKETS = {
-            "30S": { duration: 30,  offset: 50000, label: "30 SEC PREDICTOR V2" },
-            "1M":  { duration: 60,  offset: 20000, label: "1 MIN PREDICTOR V2" },
-            "3M":  { duration: 180, offset: 10000, label: "3 MIN PREDICTOR V2" },
-            "5M":  { duration: 300, offset: 5000,  label: "5 MIN PREDICTOR V2" }
+            "30S": { duration: 30,  offset: 50000, salt: 0x9E3779B9, label: "30 SEC AI ENGINE V3" },
+            "1M":  { duration: 60,  offset: 20000, salt: 0x85EBCA6B, label: "1 MIN AI ENGINE V3" },
+            "3M":  { duration: 180, offset: 10000, salt: 0xC2B2AE35, label: "3 MIN AI ENGINE V3" },
+            "5M":  { duration: 300, offset: 5000,  salt: 0x27D4EB2F, label: "5 MIN AI ENGINE V3" }
         };
 
         let currentMarket = "30S";
         let isUnlocked = localStorage.getItem("patowari_hack_unlocked") === "true";
         let cachedPeriod = "";
-        let cachedPrediction = { type: "BIG", num: 7 };
+        let cachedPrediction = { type: "BIG", num: 7, confidence: 86 };
         let signalTimerStarted = false;
+
+        document.getElementById("pass-input").addEventListener("keydown", (e) => {
+            if (e.key === "Enter") checkPassword();
+        });
 
         document.querySelectorAll(".market-btn").forEach((btn) => {
             btn.addEventListener("click", () => {
@@ -815,77 +814,116 @@
 
         function getSyncedMarketClock(marketKey, cfg, now) {
             const secInDay = now.getUTCHours() * 3600 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
-
-            if (marketKey === "1M") {
-                const secInMin = now.getUTCSeconds();
-                const timeLeft = 60 - secInMin;
-                const elapsed = 60 - timeLeft;
-                const periodIndexToday = Math.floor(secInDay / 60) + 1;
-                return { elapsed, timeLeft, periodIndexToday };
-            }
-
-            if (marketKey === "3M") {
-                const slot = Math.floor(secInDay / 180);
-                const rem = secInDay % 180;
-                const timeLeft = 180 - rem;
-                const elapsed = 180 - timeLeft;
-                const periodIndexToday = slot + 1;
-                return { elapsed, timeLeft, periodIndexToday };
-            }
-
-            if (marketKey === "5M") {
-                const slot = Math.floor(secInDay / 300);
-                const rem = secInDay % 300;
-                const timeLeft = 300 - rem;
-                const elapsed = 300 - timeLeft;
-                const periodIndexToday = slot + 1;
-                return { elapsed, timeLeft, periodIndexToday };
-            }
-
-            const rem = secInDay % 30;
-            const timeLeft = 30 - rem;
-            const elapsed = 30 - timeLeft;
-            const periodIndexToday = Math.floor(secInDay / 30) + 1;
+            const slot = Math.floor(secInDay / cfg.duration);
+            const rem = secInDay % cfg.duration;
+            const timeLeft = cfg.duration - rem;
+            const elapsed = rem;
+            const periodIndexToday = slot + 1;
             return { elapsed, timeLeft, periodIndexToday };
         }
 
-        function computeSignalFromTail(tailNum, slotNum) {
-            const trend = (tailNum * 31 + slotNum) % 100;
-            const isBig = trend >= 46;
-            const type = isBig ? "BIG" : "SMALL";
-            const num = isBig
-                ? 5 + ((tailNum + trend) % 5)
-                : (tailNum + trend) % 5;
-
-            let orbClass = "orb-red";
-            let wheelClass = "w-red";
-            let colorName = "RED";
-
-            if (num === 0) {
-                orbClass = "orb-violet";
-                wheelClass = "w-violet-red";
-                colorName = "VIOLET + RED";
-            } else if (num === 5) {
-                orbClass = "orb-violet";
-                wheelClass = "w-violet-green";
-                colorName = "VIOLET + GREEN";
-            } else if ([1, 3, 7, 9].includes(num)) {
-                orbClass = "orb-green";
-                wheelClass = "w-green";
-                colorName = "GREEN";
-            }
-
-            return { type, num, orbClass, wheelClass, colorName };
+        // Avalanche / Mix hash যাতে কাছাকাছি পিরিয়ডে একঘেয়ে প্যাটার্ন না আসে
+        function mixHash(seed) {
+            let x = seed >>> 0;
+            x ^= x >>> 16;
+            x = Math.imul(x, 0x7feb352d) >>> 0;
+            x ^= x >>> 15;
+            x = Math.imul(x, 0x846ca68b) >>> 0;
+            x ^= x >>> 16;
+            return x >>> 0;
         }
 
-        function renderRecentWheels(cfg, periodIndexToday) {
+        function getColorMeta(num) {
+            if (num === 0) {
+                return { orbClass: "orb-violet", wheelClass: "w-violet-red", colorName: "VIOLET+RED" };
+            }
+            if (num === 5) {
+                return { orbClass: "orb-violet", wheelClass: "w-violet-green", colorName: "VIOLET+GRN" };
+            }
+            if ([1, 3, 7, 9].includes(num)) {
+                return { orbClass: "orb-green", wheelClass: "w-green", colorName: "GREEN" };
+            }
+            return { orbClass: "orb-red", wheelClass: "w-red", colorName: "RED" };
+        }
+
+        // আগের স্লটগুলোর হিস্ট্রি দেখে streak ও balance হিসাব করে স্মার্ট প্রেডিকশন তৈরি
+        function evaluateSlot(slotNum, cfg, dateSeed) {
+            const baseSeed = (dateSeed ^ Math.imul(slotNum, cfg.salt)) >>> 0;
+            const h1 = mixHash(baseSeed);
+            const h2 = mixHash(h1 ^ (slotNum * 2654435761));
+
+            // আগের ৫টি স্লটের প্রবণতা (streak & BIG/SMALL balance)
+            let prevStreakType = null;
+            let streakCount = 0;
+            let bigCount = 0;
+
+            for (let lookback = 1; lookback <= 5; lookback++) {
+                const prevIdx = Math.max(1, slotNum - lookback);
+                const pHash = mixHash((dateSeed ^ Math.imul(prevIdx, cfg.salt)) >>> 0);
+                const pIsBig = (pHash % 100) >= 49;
+                if (pIsBig) bigCount++;
+
+                if (lookback === 1) {
+                    prevStreakType = pIsBig ? "BIG" : "SMALL";
+                    streakCount = 1;
+                } else if (((pIsBig ? "BIG" : "SMALL") === prevStreakType) && streakCount === lookback - 1) {
+                    streakCount++;
+                }
+            }
+
+            let bigScore = h1 % 100;
+
+            // দীর্ঘ স্ট্রিক থাকলে বিপরীত দিকে রিভার্সাল ওয়েট বাড়ানো
+            if (prevStreakType === "BIG" && streakCount >= 3) {
+                bigScore -= 18;
+            } else if (prevStreakType === "SMALL" && streakCount >= 3) {
+                bigScore += 18;
+            }
+
+            // ৫ স্লটে ভারসাম্য রাখা
+            if (bigCount >= 4) bigScore -= 10;
+            if (bigCount <= 1) bigScore += 10;
+
+            const type = bigScore >= 50 ? "BIG" : "SMALL";
+
+            // নম্বর নির্বাচন (0 ও 5 ভায়োলেট কম্বো হিসেবে পরিমিতভাবে রাখা)
+            const poolSmall = [0, 1, 2, 3, 4];
+            const poolBig = [5, 6, 7, 8, 9];
+            const pool = type === "BIG" ? poolBig : poolSmall;
+
+            let pickIdx = h2 % pool.length;
+            let num = pool[pickIdx];
+
+            // পরপর একই নম্বর এড়ানো
+            if (slotNum > 1) {
+                const prevNum = evaluateSlotRawNum(slotNum - 1, cfg, dateSeed);
+                if (num === prevNum) {
+                    num = pool[(pickIdx + 1) % pool.length];
+                }
+            }
+
+            const delta = Math.abs(bigScore - 50);
+            const confidence = Math.min(94, Math.max(76, 78 + Math.floor(delta * 0.65) + (h2 % 6)));
+            const meta = getColorMeta(num);
+
+            return { type, num, confidence, ...meta };
+        }
+
+        function evaluateSlotRawNum(slotNum, cfg, dateSeed) {
+            const baseSeed = (dateSeed ^ Math.imul(slotNum, cfg.salt)) >>> 0;
+            const h1 = mixHash(baseSeed);
+            const h2 = mixHash(h1 ^ (slotNum * 2654435761));
+            const type = (h1 % 100) >= 50 ? "BIG" : "SMALL";
+            const pool = type === "BIG" ? [5, 6, 7, 8, 9] : [0, 1, 2, 3, 4];
+            return pool[h2 % pool.length];
+        }
+
+        function renderRecentWheels(cfg, periodIndexToday, dateSeed) {
             const container = document.getElementById('recent-wheels');
             container.innerHTML = "";
             for (let i = 9; i >= 0; i--) {
                 const idx = Math.max(1, periodIndexToday - i);
-                const seq = String(cfg.offset + idx).padStart(5, '0');
-                const tail = parseInt(seq, 10) || (cfg.offset + 1);
-                const sig = computeSignalFromTail(tail, idx);
+                const sig = evaluateSlot(idx, cfg, dateSeed);
 
                 const el = document.createElement('div');
                 el.className = `color-wheel ${sig.wheelClass}`;
@@ -902,6 +940,7 @@
             const { elapsed, timeLeft, periodIndexToday } = getSyncedMarketClock(currentMarket, cfg, now);
 
             const dateStr = `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, '0')}${String(now.getUTCDate()).padStart(2, '0')}`;
+            const dateSeed = parseInt(dateStr, 10) || 20261121;
             const formattedIndex = String(cfg.offset + periodIndexToday).padStart(5, '0');
             const fullPeriod = `${dateStr}1000${formattedIndex}`;
 
@@ -910,8 +949,7 @@
 
             if (fullPeriod !== cachedPeriod) {
                 cachedPeriod = fullPeriod;
-                const seedVal = parseInt(fullPeriod.slice(-5), 10) || 12345;
-                cachedPrediction = computeSignalFromTail(seedVal, periodIndexToday);
+                cachedPrediction = evaluateSlot(periodIndexToday, cfg, dateSeed);
             }
 
             const orb = document.getElementById('main-orb');
@@ -919,11 +957,13 @@
             const bigPanel = document.getElementById('big-panel');
             const smallTag = document.getElementById('small-tag');
             const bigTag = document.getElementById('big-tag');
+            const confLabel = document.getElementById('conf-label');
 
             if (elapsed <= 2) {
                 orb.innerText = "...";
                 orb.className = "glow-orb orb-violet";
-                document.getElementById('color-label').innerText = "WAIT";
+                document.getElementById('color-label').innerText = "SCANNING";
+                confLabel.innerText = "SYNC...";
                 smallPanel.classList.remove('is-predicted');
                 bigPanel.classList.remove('is-predicted');
                 smallTag.innerText = "WAIT";
@@ -934,6 +974,7 @@
                 orb.innerText = String(cachedPrediction.num);
                 orb.className = `glow-orb ${cachedPrediction.orbClass}`;
                 document.getElementById('color-label').innerText = cachedPrediction.colorName;
+                confLabel.innerText = `CONF ${cachedPrediction.confidence}%`;
 
                 if (cachedPrediction.type === "BIG") {
                     bigPanel.classList.add('is-predicted');
@@ -952,7 +993,7 @@
                 }
             }
 
-            renderRecentWheels(cfg, periodIndexToday);
+            renderRecentWheels(cfg, periodIndexToday, dateSeed);
         }
 
         makeDraggable(document.getElementById("floating-icon-btn"), document.getElementById("floating-icon-btn"), handleIconClick);

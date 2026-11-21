@@ -34,33 +34,50 @@
             z-index: 1;
         }
 
-        /* ৩ডি ফ্লোটিং আইকন */
+        /* ৩ডি ফ্লোটিং আইকন + নিয়ন রিং */
         #floating-icon-btn {
             position: fixed;
             top: 80px;
             right: 14px;
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            border: 2px solid #facc15;
+            border: 2px solid #fde047;
             box-shadow:
-                0 8px 18px rgba(0, 0, 0, 0.85),
-                0 0 16px rgba(250, 204, 21, 0.55),
-                inset 0 2px 5px rgba(255, 255, 255, 0.35);
+                0 10px 22px rgba(0, 0, 0, 0.9),
+                0 0 18px rgba(250, 204, 21, 0.65),
+                0 0 28px rgba(56, 189, 248, 0.35),
+                inset 0 2px 6px rgba(255, 255, 255, 0.45);
             cursor: grab;
             z-index: 9999;
             overflow: hidden;
             touch-action: none;
-            background: radial-gradient(circle at 30% 25%, #1e3a8a, #050a14);
+            background: radial-gradient(circle at 30% 25%, #2563eb, #050a14);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.16s ease;
+            animation: iconFloatGlow 2.4s ease-in-out infinite;
+        }
+
+        @keyframes iconFloatGlow {
+            0%, 100% {
+                box-shadow:
+                    0 10px 22px rgba(0, 0, 0, 0.9),
+                    0 0 16px rgba(250, 204, 21, 0.6),
+                    0 0 26px rgba(56, 189, 248, 0.28);
+            }
+            50% {
+                box-shadow:
+                    0 12px 24px rgba(0, 0, 0, 0.95),
+                    0 0 22px rgba(250, 204, 21, 0.9),
+                    0 0 34px rgba(34, 211, 238, 0.55);
+            }
         }
 
         #floating-icon-btn:active {
             cursor: grabbing;
-            transform: scale(0.95);
+            transform: scale(0.94);
         }
 
         #floating-icon-btn img {
@@ -76,32 +93,38 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 230px;
-            background: linear-gradient(155deg, rgba(22, 48, 94, 0.98) 0%, rgba(5, 11, 24, 0.99) 100%);
-            border: 1.5px solid rgba(250, 204, 21, 0.8);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.92), 0 0 22px rgba(34, 211, 238, 0.25);
-            padding: 12px;
+            width: 234px;
+            background: linear-gradient(155deg, rgba(24, 56, 112, 0.98) 0%, rgba(7, 15, 32, 0.99) 55%, rgba(3, 7, 16, 1) 100%);
+            border: 1.5px solid rgba(250, 204, 21, 0.88);
+            border-radius: 17px;
+            box-shadow:
+                0 22px 44px rgba(0, 0, 0, 0.95),
+                0 0 24px rgba(250, 204, 21, 0.24),
+                0 0 28px rgba(34, 211, 238, 0.28),
+                inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            padding: 13px;
             display: none;
             z-index: 10000;
             text-align: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .auth-title {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 700;
-            color: #facc15;
+            background: linear-gradient(90deg, #fef08a, #38bdf8, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 8px;
-            letter-spacing: 0.6px;
+            letter-spacing: 0.7px;
         }
 
         .auth-input {
             width: 100%;
             padding: 7px 9px;
-            background: rgba(3, 8, 18, 0.92);
-            border: 1px solid rgba(56, 189, 248, 0.7);
+            background: rgba(3, 8, 18, 0.94);
+            border: 1px solid rgba(56, 189, 248, 0.78);
             border-radius: 8px;
             color: #ffffff;
             font-size: 11px;
@@ -111,6 +134,12 @@
             font-weight: 700;
             user-select: text;
             -webkit-user-select: text;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(56, 189, 248, 0.16);
+        }
+
+        .auth-input:focus {
+            border-color: #facc15;
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.35);
         }
 
         .remember-row {
@@ -129,7 +158,7 @@
             font-family: 'Chakra Petch', sans-serif;
             width: 100%;
             padding: 7px;
-            background: linear-gradient(135deg, #facc15, #eab308);
+            background: linear-gradient(135deg, #fef08a 0%, #facc15 50%, #eab308 100%);
             border: none;
             border-radius: 8px;
             color: #050912;
@@ -138,6 +167,7 @@
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.7px;
+            box-shadow: 0 4px 14px rgba(250, 204, 21, 0.4);
         }
 
         #error-msg {
@@ -148,24 +178,48 @@
             font-weight: 700;
         }
 
-        /* ছোট ও কমপ্যাক্ট ৩ডি পপআপ কার্ড (~218px) */
+        /* ছোট ও কমপ্যাক্ট ৩ডি VIP পপআপ কার্ড (~222px) */
         .overlay-box {
             position: fixed;
             top: 95px;
             left: 12px;
-            width: 218px;
+            width: 222px;
             max-width: calc(100vw - 16px);
             display: none;
             z-index: 9999;
-            background: radial-gradient(circle at 50% -10%, #1d4282 0%, #09152b 52%, #040914 100%);
-            border-radius: 16px;
-            padding: 7px;
+            background:
+                radial-gradient(circle at 50% -15%, rgba(56, 189, 248, 0.34) 0%, transparent 55%),
+                radial-gradient(circle at 12% 100%, rgba(236, 72, 153, 0.18) 0%, transparent 55%),
+                radial-gradient(circle at 88% 100%, rgba(34, 197, 94, 0.18) 0%, transparent 55%),
+                linear-gradient(170deg, #12284e 0%, #071124 52%, #030711 100%);
+            border-radius: 17px;
+            padding: 7.5px;
             box-shadow:
-                0 16px 36px rgba(0, 0, 0, 0.92),
-                0 0 20px rgba(34, 211, 238, 0.28),
-                inset 0 1px 1px rgba(255, 255, 255, 0.25);
-            border: 1.5px solid rgba(56, 189, 248, 0.72);
-            backdrop-filter: blur(10px);
+                0 18px 38px rgba(0, 0, 0, 0.95),
+                0 0 22px rgba(34, 211, 238, 0.32),
+                0 0 12px rgba(250, 204, 21, 0.16),
+                inset 0 1px 1px rgba(255, 255, 255, 0.3);
+            border: 1.5px solid rgba(103, 232, 249, 0.75);
+            backdrop-filter: blur(12px);
+            animation: vipCardPulse 3.2s ease-in-out infinite;
+        }
+
+        @keyframes vipCardPulse {
+            0%, 100% {
+                border-color: rgba(103, 232, 249, 0.72);
+                box-shadow:
+                    0 18px 38px rgba(0, 0, 0, 0.95),
+                    0 0 20px rgba(34, 211, 238, 0.28),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.28);
+            }
+            50% {
+                border-color: rgba(250, 204, 21, 0.85);
+                box-shadow:
+                    0 20px 42px rgba(0, 0, 0, 0.96),
+                    0 0 26px rgba(56, 189, 248, 0.42),
+                    0 0 14px rgba(250, 204, 21, 0.26),
+                    inset 0 1px 1px rgba(255, 255, 255, 0.36);
+            }
         }
 
         .popup-header {
@@ -173,9 +227,11 @@
             align-items: center;
             justify-content: space-between;
             gap: 4px;
-            margin-bottom: 5px;
+            margin-bottom: 5.5px;
             cursor: grab;
             touch-action: none;
+            padding-bottom: 3px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.16);
         }
 
         .popup-header:active {
@@ -184,15 +240,16 @@
 
         .badge-left {
             font-family: 'Chakra Petch', sans-serif;
-            background: linear-gradient(135deg, #4ade80, #16a34a);
+            background: linear-gradient(135deg, #fde047 0%, #4ade80 55%, #16a34a 100%);
             color: #042812;
             font-size: 6.5px;
             font-weight: 700;
-            padding: 2px 4px;
+            padding: 2px 4.5px;
             border-radius: 5px;
             line-height: 1.05;
             text-transform: uppercase;
             pointer-events: none;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.45);
         }
 
         .brand-center {
@@ -204,34 +261,43 @@
         .brand-main {
             font-family: 'Chakra Petch', sans-serif;
             font-style: italic;
-            font-size: 10.5px;
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 0.4px;
-            background: linear-gradient(90deg, #fef08a, #38bdf8, #4ade80);
+            letter-spacing: 0.45px;
+            background: linear-gradient(90deg, #fef08a, #38bdf8, #4ade80, #fef08a);
+            background-size: 250% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.35));
+            animation: titleShimmer 3s linear infinite;
+        }
+
+        @keyframes titleShimmer {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 250% 50%; }
         }
 
         .brand-sub {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 6.5px;
             font-weight: 700;
-            color: #38bdf8;
-            letter-spacing: 0.3px;
+            color: #7dd3fc;
+            letter-spacing: 0.35px;
             margin-top: 1px;
         }
 
         .hide-btn {
             font-family: 'Chakra Petch', sans-serif;
-            background: rgba(15, 23, 42, 0.92);
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
             color: #f8fafc;
-            border: 1px solid rgba(56, 189, 248, 0.45);
+            border: 1px solid rgba(125, 211, 252, 0.5);
             padding: 2px 5px;
             border-radius: 5px;
             font-size: 6.5px;
             font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
         }
 
         /* ৪টি মার্কেট ট্যাব: 30S, 1M, 3M, 5M */
@@ -239,30 +305,33 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2.5px;
-            margin-bottom: 5px;
-            background: rgba(4, 9, 19, 0.92);
-            padding: 2px;
-            border-radius: 7px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            margin-bottom: 5.5px;
+            background: rgba(3, 7, 16, 0.95);
+            padding: 2.5px;
+            border-radius: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.34);
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.85);
         }
 
         .market-btn {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 7px;
             font-weight: 700;
-            padding: 2.5px 1px;
-            border-radius: 5px;
+            padding: 2.8px 1px;
+            border-radius: 5.5px;
             border: 1px solid transparent;
             background: rgba(15, 23, 42, 0.85);
             color: #cbd5e1;
             cursor: pointer;
             text-align: center;
+            transition: all 0.15s ease;
         }
 
         .market-btn.active {
-            background: linear-gradient(135deg, #06b6d4, #2563eb);
+            background: linear-gradient(135deg, #22d3ee 0%, #2563eb 100%);
             color: #ffffff;
-            border-color: #a5f3fc;
+            border-color: #cffafe;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.55);
         }
 
         /* বামে SMALL, মাঝে PERIOD + 3D ORB, ডানে BIG */
@@ -275,30 +344,35 @@
         }
 
         .side-panel {
-            border-radius: 10px;
-            padding: 5px 3px;
+            border-radius: 11px;
+            padding: 5.5px 3px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.58), inset 0 1px 1px rgba(255, 255, 255, 0.24);
             position: relative;
             overflow: hidden;
             z-index: 1;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .panel-small {
-            background: linear-gradient(165deg, rgba(14, 165, 233, 0.45) 0%, rgba(7, 38, 60, 0.95) 100%);
+            background: linear-gradient(165deg, rgba(14, 165, 233, 0.52) 0%, rgba(8, 47, 73, 0.95) 60%, rgba(4, 20, 36, 0.98) 100%);
         }
 
         .panel-big {
-            background: linear-gradient(165deg, rgba(236, 72, 153, 0.42) 0%, rgba(68, 5, 24, 0.95) 100%);
+            background: linear-gradient(165deg, rgba(236, 72, 153, 0.5) 0%, rgba(80, 7, 36, 0.95) 60%, rgba(36, 3, 18, 0.98) 100%);
         }
 
         .side-panel.is-predicted {
             border-color: #4ade80;
-            box-shadow: 0 0 12px rgba(74, 222, 128, 0.45);
+            transform: translateY(-1px) scale(1.02);
+            box-shadow:
+                0 0 15px rgba(74, 222, 128, 0.55),
+                0 8px 16px rgba(0, 0, 0, 0.75),
+                inset 0 1px 2px rgba(255, 255, 255, 0.4);
         }
 
         .side-panel > div {
@@ -434,7 +508,7 @@
             font-family: 'Chakra Petch', sans-serif;
             font-size: 7px;
             color: #e2e8f0;
-            opacity: 0.9;
+            opacity: 0.92;
             margin-top: 1.5px;
             font-weight: 700;
         }
@@ -445,21 +519,26 @@
             font-size: 6px;
             font-weight: 700;
             padding: 2px 2px;
-            border-radius: 4px;
-            background: rgba(15, 23, 42, 0.88);
+            border-radius: 4.5px;
+            background: rgba(15, 23, 42, 0.92);
             color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.15);
         }
 
         .panel-tag.active-tag {
-            background: linear-gradient(135deg, #4ade80, #16a34a);
+            background: linear-gradient(135deg, #86efac 0%, #22c55e 50%, #15803d 100%);
             color: #052e16;
+            border-color: #dcfce7;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.65);
         }
 
         .center-panel {
-            background: linear-gradient(180deg, rgba(10, 22, 44, 0.96) 0%, rgba(4, 9, 20, 0.98) 100%);
-            border: 1px solid rgba(56, 189, 248, 0.65);
-            border-radius: 10px;
-            padding: 4px 3px;
+            background:
+                radial-gradient(circle at 50% 35%, rgba(56, 189, 248, 0.16) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(12, 27, 54, 0.97) 0%, rgba(4, 9, 20, 0.99) 100%);
+            border: 1px solid rgba(125, 211, 252, 0.65);
+            border-radius: 11px;
+            padding: 4.5px 3.5px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -467,17 +546,19 @@
             justify-content: space-between;
             position: relative;
             z-index: 1;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18), 0 6px 14px rgba(0, 0, 0, 0.65);
         }
 
         .period-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2px;
-            background: rgba(15, 23, 42, 0.85);
+            gap: 2.5px;
+            background: rgba(15, 23, 42, 0.92);
             padding: 1.5px 4px;
-            border-radius: 4px;
+            border-radius: 4.5px;
             width: 100%;
+            border: 1px solid rgba(56, 189, 248, 0.22);
         }
 
         .period-display {
@@ -494,67 +575,78 @@
         }
 
         .live-dot {
-            width: 4px;
-            height: 4px;
+            width: 4.5px;
+            height: 4.5px;
             background-color: #22c55e;
             border-radius: 50%;
-            box-shadow: 0 0 5px #22c55e;
+            box-shadow: 0 0 6px #22c55e, 0 0 10px #4ade80;
             flex-shrink: 0;
+            animation: liveBlink 1.2s ease-in-out infinite;
+        }
+
+        @keyframes liveBlink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(0.82); }
         }
 
         .glow-orb {
             font-family: 'Chakra Petch', sans-serif;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14.5px;
+            font-size: 15px;
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
-            border: 1.5px solid rgba(255, 255, 255, 0.85);
-            box-shadow:
-                0 6px 12px rgba(0, 0, 0, 0.75),
-                inset 0 2px 4px rgba(255, 255, 255, 0.35);
+            text-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.95);
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
             margin: 2px 0;
+            animation: orbBreath 2s ease-in-out infinite;
+        }
+
+        @keyframes orbBreath {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
         }
 
         .orb-green {
-            background: radial-gradient(circle at 30% 25%, #22c55e, #15803d 65%, #052e16 100%);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75), 0 0 12px rgba(34, 197, 94, 0.65);
+            background: radial-gradient(circle at 30% 22%, #86efac, #22c55e 42%, #15803d 75%, #052e16 100%);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 0 0 16px rgba(34, 197, 94, 0.78), inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .orb-red {
-            background: radial-gradient(circle at 30% 25%, #ef4444, #b91c1c 65%, #450a0a 100%);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75), 0 0 12px rgba(239, 68, 68, 0.65);
+            background: radial-gradient(circle at 30% 22%, #fca5a5, #ef4444 42%, #b91c1c 75%, #450a0a 100%);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 0 0 16px rgba(239, 68, 68, 0.78), inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .orb-violet {
-            background: radial-gradient(circle at 30% 25%, #a855f7, #7e22ce 65%, #2e1065 100%);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.75), 0 0 12px rgba(168, 85, 247, 0.65);
+            background: radial-gradient(circle at 30% 22%, #e9d5ff, #a855f7 42%, #7e22ce 75%, #2e1065 100%);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 0 0 16px rgba(168, 85, 247, 0.78), inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .timer-pill {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 6.2px;
             font-weight: 700;
-            color: #facc15;
-            background: rgba(250, 204, 21, 0.14);
-            border: 1px solid rgba(250, 204, 21, 0.32);
-            padding: 1.5px 5px;
+            color: #fde047;
+            background: linear-gradient(90deg, rgba(250, 204, 21, 0.16), rgba(56, 189, 248, 0.14));
+            border: 1px solid rgba(250, 204, 21, 0.42);
+            padding: 1.5px 5.5px;
             border-radius: 999px;
             margin-top: 1px;
             white-space: nowrap;
+            box-shadow: 0 0 8px rgba(250, 204, 21, 0.18);
         }
 
         .recent-box {
-            margin-top: 5px;
-            background: rgba(4, 10, 20, 0.94);
-            border: 1px solid rgba(148, 163, 184, 0.24);
-            border-radius: 8px;
-            padding: 4px;
+            margin-top: 5.5px;
+            background: linear-gradient(180deg, rgba(6, 15, 31, 0.96), rgba(3, 8, 17, 0.98));
+            border: 1px solid rgba(125, 211, 252, 0.28);
+            border-radius: 9px;
+            padding: 4.5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .recent-head {
@@ -564,12 +656,13 @@
             align-items: center;
             font-size: 6.2px;
             font-weight: 700;
-            color: #cbd5e1;
-            margin-bottom: 3px;
+            color: #e2e8f0;
+            margin-bottom: 3.5px;
         }
 
         .conf-badge {
             color: #4ade80;
+            text-shadow: 0 0 7px rgba(74, 222, 128, 0.5);
         }
 
         .wheel-strip {
@@ -581,8 +674,8 @@
 
         .color-wheel {
             font-family: 'Chakra Petch', sans-serif;
-            width: 15px;
-            height: 15px;
+            width: 15.5px;
+            height: 15.5px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -590,36 +683,58 @@
             font-size: 7px;
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.65);
         }
 
-        .w-green { background: conic-gradient(#16a34a 0deg 270deg, #22c55e 270deg 360deg); }
-        .w-red { background: conic-gradient(#dc2626 0deg 270deg, #ef4444 270deg 360deg); }
-        .w-violet-green { background: conic-gradient(#9333ea 0deg 180deg, #16a34a 180deg 360deg); }
-        .w-violet-red { background: conic-gradient(#9333ea 0deg 180deg, #dc2626 180deg 360deg); }
+        .w-green { background: conic-gradient(#16a34a 0deg 270deg, #4ade80 270deg 360deg); }
+        .w-red { background: conic-gradient(#dc2626 0deg 270deg, #f87171 270deg 360deg); }
+        .w-violet-green { background: conic-gradient(#a855f7 0deg 180deg, #22c55e 180deg 360deg); }
+        .w-violet-red { background: conic-gradient(#a855f7 0deg 180deg, #ef4444 180deg 360deg); }
 
         .bottom-action-bar {
-            margin-top: 5px;
+            margin-top: 5.5px;
             width: 100%;
         }
 
         .telegram-join-btn {
             font-family: 'Chakra Petch', sans-serif;
+            position: relative;
+            overflow: hidden;
             width: 100%;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 55%, #16a34a 100%);
             color: #052e16;
-            border-radius: 7px;
-            padding: 4.5px 7px;
-            font-size: 7px;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 5px 7px;
+            font-size: 7.2px;
             font-weight: 700;
             text-decoration: none;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.45px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
             text-transform: uppercase;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.42), inset 0 1px 1px rgba(255, 255, 255, 0.55);
+        }
+
+        .telegram-join-btn::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -75%;
+            width: 45%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+            transform: skewX(-24deg);
+            animation: btnSheen 3.2s ease-in-out infinite;
+        }
+
+        @keyframes btnSheen {
+            0% { left: -75%; }
+            55%, 100% { left: 135%; }
         }
 
         #copy-toast {
@@ -627,14 +742,15 @@
             bottom: 14px;
             left: 50%;
             transform: translateX(-50%);
-            background: #22c55e;
-            color: #ffffff;
+            background: linear-gradient(135deg, #4ade80, #16a34a);
+            color: #052e16;
             font-size: 9px;
             font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 5px;
+            padding: 3.5px 9px;
+            border-radius: 6px;
             display: none;
             z-index: 10002;
+            box-shadow: 0 4px 14px rgba(34, 197, 94, 0.5);
         }
     </style>
 </head>
@@ -822,7 +938,6 @@
             return { elapsed, timeLeft, periodIndexToday };
         }
 
-        // Avalanche / Mix hash যাতে কাছাকাছি পিরিয়ডে একঘেয়ে প্যাটার্ন না আসে
         function mixHash(seed) {
             let x = seed >>> 0;
             x ^= x >>> 16;
@@ -846,13 +961,11 @@
             return { orbClass: "orb-red", wheelClass: "w-red", colorName: "RED" };
         }
 
-        // আগের স্লটগুলোর হিস্ট্রি দেখে streak ও balance হিসাব করে স্মার্ট প্রেডিকশন তৈরি
         function evaluateSlot(slotNum, cfg, dateSeed) {
             const baseSeed = (dateSeed ^ Math.imul(slotNum, cfg.salt)) >>> 0;
             const h1 = mixHash(baseSeed);
             const h2 = mixHash(h1 ^ (slotNum * 2654435761));
 
-            // আগের ৫টি স্লটের প্রবণতা (streak & BIG/SMALL balance)
             let prevStreakType = null;
             let streakCount = 0;
             let bigCount = 0;
@@ -873,20 +986,17 @@
 
             let bigScore = h1 % 100;
 
-            // দীর্ঘ স্ট্রিক থাকলে বিপরীত দিকে রিভার্সাল ওয়েট বাড়ানো
             if (prevStreakType === "BIG" && streakCount >= 3) {
                 bigScore -= 18;
             } else if (prevStreakType === "SMALL" && streakCount >= 3) {
                 bigScore += 18;
             }
 
-            // ৫ স্লটে ভারসাম্য রাখা
             if (bigCount >= 4) bigScore -= 10;
             if (bigCount <= 1) bigScore += 10;
 
             const type = bigScore >= 50 ? "BIG" : "SMALL";
 
-            // নম্বর নির্বাচন (0 ও 5 ভায়োলেট কম্বো হিসেবে পরিমিতভাবে রাখা)
             const poolSmall = [0, 1, 2, 3, 4];
             const poolBig = [5, 6, 7, 8, 9];
             const pool = type === "BIG" ? poolBig : poolSmall;
@@ -894,7 +1004,6 @@
             let pickIdx = h2 % pool.length;
             let num = pool[pickIdx];
 
-            // পরপর একই নম্বর এড়ানো
             if (slotNum > 1) {
                 const prevNum = evaluateSlotRawNum(slotNum - 1, cfg, dateSeed);
                 if (num === prevNum) {

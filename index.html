@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>PATOWARI'S HACK - 3D VIP Edition</title>
+    <title>PATOWARI'S HACK - 3D Wing VIP Edition</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
 
         * {
             box-sizing: border-box;
@@ -34,11 +34,67 @@
             z-index: 1;
         }
 
-        /* ৩ডি ফ্লোটিং আইকন */
+        /* কমন 3D টেক্সট স্টাইল */
+        .text-3d {
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            text-shadow:
+                0 1px 0 #091326,
+                0 2px 0 #050a14,
+                0 3px 6px rgba(0, 0, 0, 0.95),
+                0 0 10px rgba(56, 189, 248, 0.45);
+        }
+
+        /* বড় 3D ডানা (Left & Right Wings) */
+        .wing-pair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .wing-3d {
+            position: absolute;
+            top: 50%;
+            transform-origin: center center;
+            filter:
+                drop-shadow(0 6px 12px rgba(0, 0, 0, 0.92))
+                drop-shadow(0 0 14px rgba(56, 189, 248, 0.55));
+        }
+
+        .wing-left {
+            right: 100%;
+            margin-right: -4px;
+            transform: translateY(-52%) rotateY(18deg);
+            animation: flapLeftWing 2.2s ease-in-out infinite;
+        }
+
+        .wing-right {
+            left: 100%;
+            margin-left: -4px;
+            transform: translateY(-52%) rotateY(-18deg);
+            animation: flapRightWing 2.2s ease-in-out infinite;
+        }
+
+        @keyframes flapLeftWing {
+            0%, 100% { transform: translateY(-52%) rotate(-6deg) scaleX(1); }
+            50%      { transform: translateY(-58%) rotate(11deg) scaleX(1.06); }
+        }
+
+        @keyframes flapRightWing {
+            0%, 100% { transform: translateY(-52%) rotate(6deg) scaleX(1); }
+            50%      { transform: translateY(-58%) rotate(-11deg) scaleX(1.06); }
+        }
+
+        /* ৩ডি ফ্লোটিং আইকন + বড় ডানা */
         #floating-icon-btn {
             position: fixed;
-            top: 80px;
-            right: 14px;
+            top: 86px;
+            right: 46px;
             width: 48px;
             height: 48px;
             border-radius: 50%;
@@ -46,11 +102,11 @@
             box-shadow:
                 0 0 0 2px #ef4444,
                 0 10px 24px rgba(0, 0, 0, 0.95),
-                0 0 22px rgba(250, 204, 21, 0.75),
+                0 0 22px rgba(250, 204, 21, 0.8),
                 inset 0 2px 6px rgba(255, 255, 255, 0.45);
             cursor: grab;
             z-index: 9999;
-            overflow: hidden;
+            overflow: visible;
             touch-action: none;
             background: radial-gradient(circle at 30% 25%, #2563eb, #050a14);
             display: flex;
@@ -61,7 +117,17 @@
 
         #floating-icon-btn:active {
             cursor: grabbing;
-            transform: scale(0.94);
+            transform: scale(0.95);
+        }
+
+        .icon-circle-clip {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #floating-icon-btn img {
@@ -77,14 +143,13 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 234px;
+            width: 236px;
             background: linear-gradient(155deg, rgba(26, 58, 118, 0.99) 0%, rgba(7, 15, 32, 0.99) 60%, rgba(3, 7, 16, 1) 100%);
             border: 1.5px solid rgba(250, 204, 21, 0.9);
             border-radius: 17px;
             box-shadow:
                 0 22px 44px rgba(0, 0, 0, 0.95),
-                0 0 26px rgba(239, 68, 68, 0.25),
-                0 0 28px rgba(34, 211, 238, 0.3),
+                0 0 26px rgba(56, 189, 248, 0.32),
                 inset 0 1px 1px rgba(255, 255, 255, 0.32);
             padding: 13px;
             display: none;
@@ -94,9 +159,7 @@
         }
 
         .auth-title {
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: 11.5px;
-            font-weight: 700;
+            font-size: 12px;
             background: linear-gradient(90deg, #fef08a, #38bdf8, #4ade80);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -120,11 +183,6 @@
             -webkit-user-select: text;
         }
 
-        .auth-input:focus {
-            border-color: #facc15;
-            box-shadow: 0 0 12px rgba(250, 204, 21, 0.35);
-        }
-
         .remember-row {
             display: flex;
             align-items: center;
@@ -138,7 +196,6 @@
         }
 
         .auth-btn {
-            font-family: 'Chakra Petch', sans-serif;
             width: 100%;
             padding: 7px;
             background: linear-gradient(135deg, #fef08a 0%, #facc15 50%, #eab308 100%);
@@ -146,7 +203,6 @@
             border-radius: 8px;
             color: #050912;
             font-size: 10.5px;
-            font-weight: 700;
             cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 0.7px;
@@ -161,28 +217,28 @@
             font-weight: 700;
         }
 
-        /* গর্জিয়াস ৩ডি VIP পপআপ কার্ড (~224px) */
+        /* গর্জিয়াস ৩ডি VIP পপআপ কার্ড + বড় 3D ডানা */
         .overlay-box {
             position: fixed;
-            top: 95px;
-            left: 12px;
+            top: 108px;
+            left: 56px;
             width: 224px;
-            max-width: calc(100vw - 16px);
+            max-width: calc(100vw - 110px);
             display: none;
             z-index: 9999;
             background:
-                radial-gradient(circle at 50% -15%, rgba(56, 189, 248, 0.38) 0%, transparent 56%),
-                radial-gradient(circle at 8% 100%, rgba(239, 68, 68, 0.22) 0%, transparent 55%),
-                radial-gradient(circle at 92% 100%, rgba(34, 197, 94, 0.22) 0%, transparent 55%),
-                linear-gradient(170deg, #142c57 0%, #071226 52%, #030712 100%);
+                radial-gradient(circle at 50% -15%, rgba(56, 189, 248, 0.4) 0%, transparent 56%),
+                radial-gradient(circle at 8% 100%, rgba(239, 68, 68, 0.24) 0%, transparent 55%),
+                radial-gradient(circle at 92% 100%, rgba(34, 197, 94, 0.24) 0%, transparent 55%),
+                linear-gradient(170deg, #152e5c 0%, #071226 52%, #030712 100%);
             border-radius: 18px;
             padding: 7.5px;
             box-shadow:
                 0 20px 42px rgba(0, 0, 0, 0.96),
-                0 0 24px rgba(56, 189, 248, 0.38),
-                0 0 14px rgba(250, 204, 21, 0.22),
-                inset 0 1px 1.5px rgba(255, 255, 255, 0.35);
-            border: 1.5px solid rgba(125, 211, 252, 0.82);
+                0 0 24px rgba(56, 189, 248, 0.42),
+                0 0 14px rgba(250, 204, 21, 0.25),
+                inset 0 1px 1.5px rgba(255, 255, 255, 0.36);
+            border: 1.5px solid rgba(125, 211, 252, 0.85);
             backdrop-filter: blur(12px);
         }
 
@@ -190,12 +246,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 4px;
-            margin-bottom: 5.5px;
+            gap: 3px;
+            margin-bottom: 5px;
             cursor: grab;
             touch-action: none;
             padding-bottom: 3.5px;
-            border-bottom: 1px solid rgba(250, 204, 21, 0.22);
+            border-bottom: 1px solid rgba(250, 204, 21, 0.24);
         }
 
         .popup-header:active {
@@ -203,17 +259,16 @@
         }
 
         .badge-left {
-            font-family: 'Chakra Petch', sans-serif;
             background: linear-gradient(135deg, #fde047 0%, #4ade80 55%, #16a34a 100%);
             color: #042812;
             font-size: 6.5px;
-            font-weight: 700;
-            padding: 2px 4.5px;
+            padding: 2px 4px;
             border-radius: 5px;
             line-height: 1.05;
             text-transform: uppercase;
             pointer-events: none;
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+            text-shadow: none;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.55);
         }
 
         .brand-center {
@@ -223,17 +278,14 @@
         }
 
         .brand-main {
-            font-family: 'Chakra Petch', sans-serif;
             font-style: italic;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.45px;
+            font-size: 10.5px;
+            letter-spacing: 0.4px;
             background: linear-gradient(90deg, #fef08a, #38bdf8, #f87171, #4ade80, #fef08a);
             background-size: 260% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
-            filter: drop-shadow(0 0 7px rgba(56, 189, 248, 0.42));
             animation: titleShimmer 3.2s linear infinite;
         }
 
@@ -243,23 +295,46 @@
         }
 
         .brand-sub {
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: 6.5px;
-            font-weight: 700;
+            font-size: 6.2px;
             color: #fde047;
-            letter-spacing: 0.35px;
+            letter-spacing: 0.3px;
             margin-top: 1px;
         }
 
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 2.5px;
+        }
+
+        /* বাংলা ভয়েস ON / OFF বাটন */
+        .voice-toggle-btn {
+            font-size: 6.2px;
+            padding: 2px 4.5px;
+            border-radius: 5px;
+            border: 1px solid rgba(74, 222, 128, 0.75);
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            color: #052e16;
+            cursor: pointer;
+            text-shadow: none;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.45);
+            transition: all 0.15s ease;
+        }
+
+        .voice-toggle-btn.is-off {
+            background: linear-gradient(135deg, #334155, #0f172a);
+            color: #fca5a5;
+            border-color: rgba(248, 113, 113, 0.55);
+            box-shadow: none;
+        }
+
         .hide-btn {
-            font-family: 'Chakra Petch', sans-serif;
             background: linear-gradient(180deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
             color: #f8fafc;
             border: 1px solid rgba(125, 211, 252, 0.55);
-            padding: 2px 5px;
+            padding: 2px 4.5px;
             border-radius: 5px;
-            font-size: 6.5px;
-            font-weight: 700;
+            font-size: 6.2px;
             cursor: pointer;
         }
 
@@ -276,9 +351,7 @@
         }
 
         .market-btn {
-            font-family: 'Chakra Petch', sans-serif;
             font-size: 7px;
-            font-weight: 700;
             padding: 2.8px 1px;
             border-radius: 5.5px;
             border: 1px solid transparent;
@@ -293,6 +366,7 @@
             background: linear-gradient(135deg, #ef4444 0%, #facc15 50%, #2563eb 100%);
             color: #050912;
             border-color: #ffffff;
+            text-shadow: none;
             box-shadow: 0 0 11px rgba(250, 204, 21, 0.5);
         }
 
@@ -442,6 +516,7 @@
             100%      { opacity: 0; transform: translate(-50%, -50%) scale(2.15); }
         }
 
+        /* 3D SMALL ও BIG নাম */
         .panel-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 11px;
@@ -467,19 +542,15 @@
         }
 
         .panel-range {
-            font-family: 'Chakra Petch', sans-serif;
             font-size: 7px;
             color: #e2e8f0;
             opacity: 0.92;
             margin-top: 1.5px;
-            font-weight: 700;
         }
 
         .panel-tag {
-            font-family: 'Chakra Petch', sans-serif;
             margin-top: 5px;
             font-size: 6px;
-            font-weight: 700;
             padding: 2px 2px;
             border-radius: 4.5px;
             background: rgba(15, 23, 42, 0.92);
@@ -491,6 +562,7 @@
             background: linear-gradient(135deg, #86efac 0%, #22c55e 50%, #15803d 100%);
             color: #052e16;
             border-color: #dcfce7;
+            text-shadow: none;
             box-shadow: 0 0 10px rgba(74, 222, 128, 0.65);
         }
 
@@ -524,9 +596,7 @@
         }
 
         .period-display {
-            font-family: 'Chakra Petch', sans-serif;
             font-size: 6.2px;
-            font-weight: 700;
             color: #f8fafc;
             cursor: pointer;
             text-decoration: underline;
@@ -562,7 +632,6 @@
             margin: 2px 0;
         }
 
-        /* বাইরের লাল-সাদা চক্কর (Checker / Red-White Racing Rack Ring) */
         .red-white-rack-ring {
             position: absolute;
             inset: 0;
@@ -586,7 +655,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* ভেতরের কালার-ম্যাচড ফুটবল প্যানেল-রেক অর্ব */
         .glow-orb {
             position: relative;
             font-family: 'Chakra Petch', sans-serif;
@@ -601,13 +669,13 @@
             color: #ffffff;
             text-shadow:
                 0 1px 2px rgba(0, 0, 0, 1),
-                0 0 8px rgba(0, 0, 0, 0.9);
+                0 2px 0 #090d16,
+                0 0 8px rgba(0, 0, 0, 0.95);
             border: 1.5px solid #ffffff;
             overflow: hidden;
             z-index: 2;
         }
 
-        /* ফুটবলের মতো সেগমেন্ট/রেক ওভারলে */
         .glow-orb::before {
             content: "";
             position: absolute;
@@ -616,10 +684,10 @@
             background:
                 repeating-conic-gradient(
                     from 15deg,
-                    rgba(255, 255, 255, 0.24) 0deg 14deg,
+                    rgba(255, 255, 255, 0.25) 0deg 14deg,
                     transparent 14deg 60deg
                 ),
-                radial-gradient(circle at 50% 50%, transparent 32%, rgba(255, 255, 255, 0.34) 33.5%, transparent 35.5%),
+                radial-gradient(circle at 50% 50%, transparent 32%, rgba(255, 255, 255, 0.36) 33.5%, transparent 35.5%),
                 radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.45), transparent 55%);
             pointer-events: none;
             z-index: 1;
@@ -631,36 +699,22 @@
         }
 
         .orb-green {
-            background:
-                radial-gradient(circle at 30% 22%, #86efac 0%, #22c55e 45%, #15803d 78%, #052e16 100%);
-            box-shadow:
-                0 5px 12px rgba(0, 0, 0, 0.85),
-                0 0 14px rgba(34, 197, 94, 0.85),
-                inset 0 2px 5px rgba(255, 255, 255, 0.45);
+            background: radial-gradient(circle at 30% 22%, #86efac 0%, #22c55e 45%, #15803d 78%, #052e16 100%);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.85), 0 0 14px rgba(34, 197, 94, 0.85), inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .orb-red {
-            background:
-                radial-gradient(circle at 30% 22%, #fca5a5 0%, #ef4444 45%, #b91c1c 78%, #450a0a 100%);
-            box-shadow:
-                0 5px 12px rgba(0, 0, 0, 0.85),
-                0 0 14px rgba(239, 68, 68, 0.88),
-                inset 0 2px 5px rgba(255, 255, 255, 0.45);
+            background: radial-gradient(circle at 30% 22%, #fca5a5 0%, #ef4444 45%, #b91c1c 78%, #450a0a 100%);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.85), 0 0 14px rgba(239, 68, 68, 0.88), inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .orb-violet {
-            background:
-                radial-gradient(circle at 30% 22%, #e9d5ff 0%, #a855f7 45%, #7e22ce 78%, #2e1065 100%);
-            box-shadow:
-                0 5px 12px rgba(0, 0, 0, 0.85),
-                0 0 14px rgba(168, 85, 247, 0.88),
-                inset 0 2px 5px rgba(255, 255, 255, 0.45);
+            background: radial-gradient(circle at 30% 22%, #e9d5ff 0%, #a855f7 45%, #7e22ce 78%, #2e1065 100%);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.85), 0 0 14px rgba(168, 85, 247, 0.88), inset 0 2px 5px rgba(255, 255, 255, 0.45);
         }
 
         .timer-pill {
-            font-family: 'Chakra Petch', sans-serif;
             font-size: 6.2px;
-            font-weight: 700;
             color: #fde047;
             background: linear-gradient(90deg, rgba(239, 68, 68, 0.24), rgba(250, 204, 21, 0.2));
             border: 1px solid rgba(250, 204, 21, 0.48);
@@ -679,12 +733,10 @@
         }
 
         .recent-head {
-            font-family: 'Chakra Petch', sans-serif;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 6.2px;
-            font-weight: 700;
             color: #e2e8f0;
             margin-bottom: 3.5px;
         }
@@ -700,7 +752,6 @@
             align-items: center;
         }
 
-        /* রিসেন্ট নাম্বারেও ফুটবল রেক + লাল-সাদা বর্ডার রিং ও কালার ম্যাচ */
         .color-wheel {
             position: relative;
             font-family: 'Chakra Petch', sans-serif;
@@ -750,7 +801,6 @@
         }
 
         .telegram-join-btn {
-            font-family: 'Chakra Petch', sans-serif;
             position: relative;
             overflow: hidden;
             width: 100%;
@@ -760,7 +810,6 @@
             border-radius: 8px;
             padding: 5px 7px;
             font-size: 7.2px;
-            font-weight: 700;
             text-decoration: none;
             letter-spacing: 0.45px;
             display: inline-flex;
@@ -768,6 +817,7 @@
             justify-content: center;
             gap: 4px;
             text-transform: uppercase;
+            text-shadow: none;
             box-shadow: 0 4px 14px rgba(34, 197, 94, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.55);
         }
 
@@ -809,35 +859,100 @@
 
     <iframe id="game-iframe" src="https://dkwin9.com/#/register?invitationCode=932152417441" loading="lazy"></iframe>
 
+    <!-- ৩ডি ফ্লোটিং আইকন + বড় ডানা -->
     <div id="floating-icon-btn">
-        <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon" />
+        <div class="wing-pair">
+            <!-- বামের বড় 3D ডানা -->
+            <svg class="wing-3d wing-left" width="44" height="44" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="wingGradL" x1="75" y1="15" x2="5" y2="65" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#fef08a"/>
+                        <stop offset="45%" stop-color="#38bdf8"/>
+                        <stop offset="100%" stop-color="#1d4ed8"/>
+                    </linearGradient>
+                </defs>
+                <path d="M74 34C56 16 28 10 6 16C16 25 22 33 24 40C14 43 9 50 7 58C20 56 31 53 39 48C35 57 34 65 36 72C48 63 62 50 74 34Z" fill="url(#wingGradL)" stroke="#ffffff" stroke-width="2"/>
+                <path d="M68 35C52 24 32 21 15 24" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+            <!-- ডানের বড় 3D ডানা -->
+            <svg class="wing-3d wing-right" width="44" height="44" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="wingGradR" x1="5" y1="15" x2="75" y2="65" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#fef08a"/>
+                        <stop offset="45%" stop-color="#38bdf8"/>
+                        <stop offset="100%" stop-color="#1d4ed8"/>
+                    </linearGradient>
+                </defs>
+                <path d="M6 34C24 16 52 10 74 16C64 25 58 33 56 40C66 43 71 50 73 58C60 56 49 53 41 48C45 57 46 65 44 72C32 63 18 50 6 34Z" fill="url(#wingGradR)" stroke="#ffffff" stroke-width="2"/>
+                <path d="M12 35C28 24 48 21 65 24" stroke="#ef4444" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="icon-circle-clip">
+            <img src="https://cdn.imageurlgenerator.com/uploads/5f242846-c36b-4437-8bbd-8fab060a831d.jpg" alt="Patowari Icon" />
+        </div>
     </div>
 
+    <!-- পাসওয়ার্ড পপআপ -->
     <div id="auth-overlay">
-        <div class="auth-title">🔐 PATOWARI'S HACK</div>
+        <div class="auth-title text-3d">🔐 PATOWARI'S HACK</div>
         <input type="password" id="pass-input" class="auth-input" placeholder="Enter Password" />
         <label class="remember-row">
             <input type="checkbox" id="remember-pass" /> Remember Password
         </label>
-        <button type="button" class="auth-btn" onclick="checkPassword()">Submit</button>
+        <button type="button" class="auth-btn text-3d" onclick="checkPassword()">Submit</button>
         <div id="error-msg">Wrong Password!</div>
     </div>
 
+    <!-- গর্জিয়াস ৩ডি VIP পপআপ উইন্ডো + বড় 3D ডানা -->
     <div class="overlay-box" id="main-content">
+        <div class="wing-pair">
+            <!-- বামের বিশাল 3D ডানা -->
+            <svg class="wing-3d wing-left" width="56" height="110" viewBox="0 0 90 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bigWingL" x1="85" y1="20" x2="8" y2="140" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#fef08a"/>
+                        <stop offset="42%" stop-color="#38bdf8"/>
+                        <stop offset="78%" stop-color="#2563eb"/>
+                        <stop offset="100%" stop-color="#ef4444"/>
+                    </linearGradient>
+                </defs>
+                <path d="M84 58C60 24 30 12 6 18C18 32 26 46 28 60C15 64 8 74 5 86C20 82 34 77 45 68C38 84 36 100 39 116C52 104 64 92 72 80C66 98 65 116 68 134C78 112 83 86 84 58Z" fill="url(#bigWingL)" stroke="#ffffff" stroke-width="2.2"/>
+                <path d="M76 62C54 38 30 30 12 31" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+                <path d="M72 78C50 64 30 62 14 68" stroke="#fde047" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <!-- ডানের বিশাল 3D ডানা -->
+            <svg class="wing-3d wing-right" width="56" height="110" viewBox="0 0 90 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bigWingR" x1="5" y1="20" x2="82" y2="140" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#fef08a"/>
+                        <stop offset="42%" stop-color="#38bdf8"/>
+                        <stop offset="78%" stop-color="#2563eb"/>
+                        <stop offset="100%" stop-color="#ef4444"/>
+                    </linearGradient>
+                </defs>
+                <path d="M6 58C30 24 60 12 84 18C72 32 64 46 62 60C75 64 82 74 85 86C70 82 56 77 45 68C52 84 54 100 51 116C38 104 26 92 18 80C24 98 25 116 22 134C12 112 7 86 6 58Z" fill="url(#bigWingR)" stroke="#ffffff" stroke-width="2.2"/>
+                <path d="M14 62C36 38 60 30 78 31" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+                <path d="M18 78C40 64 60 62 76 68" stroke="#fde047" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+        </div>
+
         <div class="popup-header" id="main-content-header">
-            <div class="badge-left">3D<br />VIP</div>
+            <div class="badge-left text-3d">3D<br />VIP</div>
             <div class="brand-center">
-                <div class="brand-main">PATOWARI'S HACK</div>
-                <div class="brand-sub" id="mode-subtitle">30 SEC AI ENGINE V3</div>
+                <div class="brand-main text-3d">PATOWARI'S HACK</div>
+                <div class="brand-sub text-3d" id="mode-subtitle">30 SEC 3D ENGINE</div>
             </div>
-            <button type="button" class="hide-btn" onclick="hidePopup()">HIDE</button>
+            <div class="header-controls">
+                <button type="button" class="voice-toggle-btn text-3d" id="voice-toggle-btn" onclick="toggleVoice()" title="Bangla Male Voice ON/OFF">🔊 ON</button>
+                <button type="button" class="hide-btn text-3d" onclick="hidePopup()">HIDE</button>
+            </div>
         </div>
 
         <div class="market-tabs">
-            <button type="button" class="market-btn active" data-market="30S">30S</button>
-            <button type="button" class="market-btn" data-market="1M">1M</button>
-            <button type="button" class="market-btn" data-market="3M">3M</button>
-            <button type="button" class="market-btn" data-market="5M">5M</button>
+            <button type="button" class="market-btn text-3d active" data-market="30S">30S</button>
+            <button type="button" class="market-btn text-3d" data-market="1M">1M</button>
+            <button type="button" class="market-btn text-3d" data-market="3M">3M</button>
+            <button type="button" class="market-btn text-3d" data-market="5M">5M</button>
         </div>
 
         <div class="pred-grid">
@@ -847,14 +962,14 @@
                 <span class="firecracker-sparks"></span>
                 <div>
                     <div class="panel-title">SMALL</div>
-                    <div class="panel-range">0 - 4</div>
+                    <div class="panel-range text-3d">0 - 4</div>
                 </div>
-                <div class="panel-tag" id="small-tag">STANDBY</div>
+                <div class="panel-tag text-3d" id="small-tag">STANDBY</div>
             </div>
 
             <div class="center-panel">
                 <div class="period-row">
-                    <div class="period-display" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
+                    <div class="period-display text-3d" id="period-num" onclick="copyPeriodNumber()" title="Click to Copy Period">Loading...</div>
                     <div class="live-dot"></div>
                 </div>
 
@@ -863,7 +978,7 @@
                     <div class="glow-orb orb-green" id="main-orb"><span id="main-orb-text">-</span></div>
                 </div>
 
-                <div class="timer-pill" id="timer-display">NEXT IN 30s</div>
+                <div class="timer-pill text-3d" id="timer-display">NEXT IN 30s</div>
             </div>
 
             <div class="side-panel panel-big" id="big-panel">
@@ -872,14 +987,14 @@
                 <span class="firecracker-sparks"></span>
                 <div>
                     <div class="panel-title">BIG</div>
-                    <div class="panel-range">5 - 9</div>
+                    <div class="panel-range text-3d">5 - 9</div>
                 </div>
-                <div class="panel-tag" id="big-tag">STANDBY</div>
+                <div class="panel-tag text-3d" id="big-tag">STANDBY</div>
             </div>
         </div>
 
         <div class="recent-box">
-            <div class="recent-head">
+            <div class="recent-head text-3d">
                 <span id="color-label">GREEN</span>
                 <span class="conf-badge" id="conf-label">CONF 88%</span>
             </div>
@@ -887,7 +1002,7 @@
         </div>
 
         <div class="bottom-action-bar">
-            <a href="https://t.me/patowari_vai_69x" target="_blank" rel="noopener noreferrer" class="telegram-join-btn">
+            <a href="https://t.me/patowari_vai_69x" target="_blank" rel="noopener noreferrer" class="telegram-join-btn text-3d">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-752-.244-1.349-.374-1.297-.789.027-.216.324-.437.893-.663 3.498-1.524 5.83-2.529 6.996-3.014 3.333-1.386 4.025-1.627 4.479-1.635.099-.002.321.023.465.14.12.098.153.228.166.32.013.092.028.301.012.463z" fill="#052e16"/>
                 </svg>
@@ -900,17 +1015,23 @@
 
     <script>
         const MARKETS = {
-            "30S": { duration: 30,  offset: 50000, salt: 0x9E3779B9, label: "30 SEC AI ENGINE V3" },
-            "1M":  { duration: 60,  offset: 20000, salt: 0x85EBCA6B, label: "1 MIN AI ENGINE V3" },
-            "3M":  { duration: 180, offset: 10000, salt: 0xC2B2AE35, label: "3 MIN AI ENGINE V3" },
-            "5M":  { duration: 300, offset: 5000,  salt: 0x27D4EB2F, label: "5 MIN AI ENGINE V3" }
+            "30S": { duration: 30,  offset: 50000, salt: 0x9E3779B9, label: "30 SEC 3D ENGINE", bnName: "ত্রিশ সেকেন্ড" },
+            "1M":  { duration: 60,  offset: 20000, salt: 0x85EBCA6B, label: "1 MIN 3D ENGINE",  bnName: "এক মিনিট" },
+            "3M":  { duration: 180, offset: 10000, salt: 0xC2B2AE35, label: "3 MIN 3D ENGINE",  bnName: "তিন মিনিট" },
+            "5M":  { duration: 300, offset: 5000,  salt: 0x27D4EB2F, label: "5 MIN 3D ENGINE",  bnName: "পাঁচ মিনিট" }
         };
+
+        const BANGLA_DIGITS = ["শূন্য", "এক", "দুই", "তিন", "চার", "পাঁচ", "ছয়", "সাত", "আট", "নয়"];
 
         let currentMarket = "30S";
         let isUnlocked = localStorage.getItem("patowari_hack_unlocked") === "true";
+        let voiceEnabled = localStorage.getItem("patowari_voice_enabled") !== "false";
         let cachedPeriod = "";
-        let cachedPrediction = { type: "BIG", num: 7, confidence: 86 };
+        let lastSpokenPeriod = "";
+        let cachedPrediction = { type: "BIG", num: 7, confidence: 86, colorName: "GREEN" };
         let signalTimerStarted = false;
+
+        updateVoiceButtonUI();
 
         document.getElementById("pass-input").addEventListener("keydown", (e) => {
             if (e.key === "Enter") checkPassword();
@@ -923,15 +1044,93 @@
                 currentMarket = btn.dataset.market;
                 document.getElementById("mode-subtitle").innerText = MARKETS[currentMarket].label;
                 cachedPeriod = "";
+                lastSpokenPeriod = "";
                 updateSignalLogic();
+                if (voiceEnabled) {
+                    speakBangla(`${MARKETS[currentMarket].bnName} মার্কেট চালু হলো।`);
+                }
             });
         });
+
+        function updateVoiceButtonUI() {
+            const btn = document.getElementById("voice-toggle-btn");
+            if (!btn) return;
+            if (voiceEnabled) {
+                btn.textContent = "🔊 ON";
+                btn.classList.remove("is-off");
+            } else {
+                btn.textContent = "🔇 OFF";
+                btn.classList.add("is-off");
+            }
+        }
+
+        function toggleVoice() {
+            voiceEnabled = !voiceEnabled;
+            localStorage.setItem("patowari_voice_enabled", String(voiceEnabled));
+            updateVoiceButtonUI();
+
+            if (!voiceEnabled && "speechSynthesis" in window) {
+                window.speechSynthesis.cancel();
+            } else if (voiceEnabled) {
+                speakBangla("ভয়েস চালু করা হয়েছে।");
+            }
+        }
+
+        function pickMaleBanglaVoice() {
+            if (!("speechSynthesis" in window)) return null;
+            const voices = window.speechSynthesis.getVoices() || [];
+            const banglaVoices = voices.filter((v) => /bn/i.test(v.lang) || /bangla|bengali/i.test(v.name));
+            const maleKeywords = /male|man|rishi|prabhat|tariq|hasan|karim|bd/i;
+
+            const banglaMale = banglaVoices.find((v) => maleKeywords.test(v.name));
+            if (banglaMale) return banglaMale;
+            if (banglaVoices.length > 0) return banglaVoices[0];
+
+            const anyMale = voices.find((v) => maleKeywords.test(v.name));
+            return anyMale || null;
+        }
+
+        function speakBangla(text) {
+            if (!voiceEnabled || !("speechSynthesis" in window) || !text) return;
+            try {
+                window.speechSynthesis.cancel();
+                const utter = new SpeechSynthesisUtterance(text);
+                const chosenVoice = pickMaleBanglaVoice();
+                if (chosenVoice) {
+                    utter.voice = chosenVoice;
+                }
+                utter.lang = "bn-BD";
+                // পুরুষালি ও গম্ভীর টোনের জন্য পিচ সামান্য নিচে রাখা হয়েছে
+                utter.pitch = 0.78;
+                utter.rate = 0.98;
+                utter.volume = 1;
+                window.speechSynthesis.speak(utter);
+            } catch (_) {}
+        }
+
+        function announcePredictionBangla(pred) {
+            if (!voiceEnabled) return;
+            const sideBn = pred.type === "BIG" ? "বিগ" : "স্মল";
+            const numBn = BANGLA_DIGITS[pred.num] ?? pred.num;
+            let colorBn = "গ্রিন";
+            if (pred.colorName.includes("RED") && pred.colorName.includes("VIOLET")) {
+                colorBn = "ভায়োলেট ও রেড";
+            } else if (pred.colorName.includes("GRN") && pred.colorName.includes("VIOLET")) {
+                colorBn = "ভায়োলেট ও গ্রিন";
+            } else if (pred.colorName.includes("RED")) {
+                colorBn = "রেড";
+            }
+            speakBangla(`${sideBn} প্রেডিকশন, নম্বর ${numBn}, ${colorBn}।`);
+        }
 
         function handleIconClick() {
             if (isUnlocked) {
                 document.getElementById('main-content').style.display = 'block';
                 document.getElementById('floating-icon-btn').style.display = 'none';
                 startPeriodGenerator();
+                if (voiceEnabled) {
+                    speakBangla("পটোয়ারী ভিআইপি প্যানেল ওপেন হয়েছে।");
+                }
             } else {
                 document.getElementById('error-msg').style.display = 'none';
                 document.getElementById('auth-overlay').style.display = 'block';
@@ -952,6 +1151,9 @@
                 document.getElementById('main-content').style.display = 'block';
                 document.getElementById('floating-icon-btn').style.display = 'none';
                 startPeriodGenerator();
+                if (voiceEnabled) {
+                    speakBangla("স্বাগতম, প্যানেল আনলক হয়েছে।");
+                }
             } else {
                 document.getElementById('error-msg').style.display = 'block';
                 document.getElementById('pass-input').value = "";
@@ -961,6 +1163,9 @@
         function hidePopup() {
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('floating-icon-btn').style.display = 'flex';
+            if (voiceEnabled) {
+                speakBangla("প্যানেল হাইড করা হলো।");
+            }
         }
 
         function startPeriodGenerator() {
@@ -980,6 +1185,9 @@
                     setTimeout(() => {
                         toast.style.display = 'none';
                     }, 1200);
+                    if (voiceEnabled) {
+                        speakBangla("পিরিয়ড নম্বর কপি হয়েছে।");
+                    }
                 }).catch(() => {});
             }
         }
@@ -1134,8 +1342,8 @@
                 bigPanel.classList.remove('is-predicted');
                 smallTag.innerText = "WAIT";
                 bigTag.innerText = "WAIT";
-                smallTag.className = "panel-tag";
-                bigTag.className = "panel-tag";
+                smallTag.className = "panel-tag text-3d";
+                bigTag.className = "panel-tag text-3d";
             } else {
                 orbText.innerText = String(cachedPrediction.num);
                 orb.className = `glow-orb ${cachedPrediction.orbClass}`;
@@ -1146,20 +1354,31 @@
                     bigPanel.classList.add('is-predicted');
                     smallPanel.classList.remove('is-predicted');
                     bigTag.innerText = "PREDICTED";
-                    bigTag.className = "panel-tag active-tag";
+                    bigTag.className = "panel-tag text-3d active-tag";
                     smallTag.innerText = "SKIP";
-                    smallTag.className = "panel-tag";
+                    smallTag.className = "panel-tag text-3d";
                 } else {
                     smallPanel.classList.add('is-predicted');
                     bigPanel.classList.remove('is-predicted');
                     smallTag.innerText = "PREDICTED";
-                    smallTag.className = "panel-tag active-tag";
+                    smallTag.className = "panel-tag text-3d active-tag";
                     bigTag.innerText = "SKIP";
-                    bigTag.className = "panel-tag";
+                    bigTag.className = "panel-tag text-3d";
+                }
+
+                if (lastSpokenPeriod !== fullPeriod) {
+                    lastSpokenPeriod = fullPeriod;
+                    announcePredictionBangla(cachedPrediction);
                 }
             }
 
             renderRecentWheels(cfg, periodIndexToday, dateSeed);
+        }
+
+        if ("speechSynthesis" in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                pickMaleBanglaVoice();
+            };
         }
 
         makeDraggable(document.getElementById("floating-icon-btn"), document.getElementById("floating-icon-btn"), handleIconClick);
